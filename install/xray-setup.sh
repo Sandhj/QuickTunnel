@@ -19,7 +19,7 @@ apt clean all && apt update
 apt install -y curl socat gnupg gnupg2 gnupg1
 apt install nginx -y
 # Paket tambahan/pendukung
-apt install -y iptables iptables-persistent chrony apt-transport-https dnsutils lsb-release ntpdate zip pwgen openssl netcat cron bash-completion xz-utils wget
+apt install -y iptables iptables-persistent chrony apt-transport-https dnsutils lsb-release ntpdate zip pwgen openssl netcat-openbsd cron bash-completion xz-utils wget
 # Setting NTP
 timedatectl set-ntp true
 ntpdate pool.ntp.org
