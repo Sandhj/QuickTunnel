@@ -18,7 +18,7 @@ CONFIG_FILE="/etc/xray/config.json"
 NEW_UUID=$(uuidgen | tr '[:upper:]' '[:lower:]')
 
 # Tambahkan Client Ke Config.json
-NEW_ENTRY='{"id": "'"$NEW_UUID"'", "alterId": 0, "email": "'"$user"'", "expired": "'"$exp"'"},'
+NEW_ENTRY='{"id": "'"$NEW_UUID"'", "email": "'"$user"'", "expired": "'"$exp"'"},'
 
 # Escape karakter khusus untuk digunakan dalam perintah sed
 ESCAPED_ENTRY=$(echo "$NEW_ENTRY" | sed 's/[&/\]/\\&/g')
