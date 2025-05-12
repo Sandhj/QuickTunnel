@@ -13,24 +13,23 @@ CREDITS="${green} ـــــــــــــــﮩ٨ـ QuickTunnel ${NC}"
 domain=$(cat /root/domain)
 
 # ==== Install Paket Yang Dibutuhkan
-apt install iptables iptables-persistent -y
+# Bersihkan cache dan update
+apt clean all && apt update
+# Paket utama untuk Xray
+apt install -y curl socat gnupg gnupg2 gnupg1
+# Paket tambahan/pendukung
+apt install -y iptables iptables-persistent chrony apt-transport-https dnsutils lsb-release ntpdate zip pwgen openssl netcat cron bash-completion xz-utils wget
+# Setting NTP
 timedatectl set-ntp true
-systemctl enable chronyd
-systemctl restart chronyd
+ntpdate pool.ntp.org
 systemctl enable chrony
 systemctl restart chrony
+# Cek status chrony
 chronyc sourcestats -v
 chronyc tracking -v
-apt clean all && apt update
-apt install curl socat xz-utils wget apt-transport-https gnupg gnupg2 gnupg1 dnsutils lsb-release -y 
-apt install socat cron bash-completion ntpdate -y
-ntpdate pool.ntp.org
-apt -y install chrony
-apt install zip -y
-apt install curl pwgen openssl netcat cron -y
 
 # ==== Set Timezone
-timedatectl set-timezone Asia/Kuala_Lumpur
+timedatectl set-timezone Asia/Makassar
 
 # ==== Configurasi Socket
 domainSock_dir="/run/xray";! [ -d $domainSock_dir ] && mkdir  $domainSock_dir
