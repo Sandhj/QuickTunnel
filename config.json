@@ -21,7 +21,7 @@
         "decryption": "none",
         "clients": [
 // VLESS
-          {"id": "b94e8235-0000-467a-b044-1234567890ab", "email": "user@example.com"}
+          {"id": "b94e8235-0000-467a-b044-1234567890ab", "email": "client1@example.com"}
         ]
       },
       "streamSettings": {
@@ -37,7 +37,7 @@
       "settings": {
         "clients": [
 // VMESS
-          {"id": "11223344-5566-7788-99aa-bbaa99887766", "alterId": 0, "email": "client3@example.com"}
+          {"id": "11223344-5566-7788-99aa-bbaa99887766", "alterId": 0, "email": "client2@example.com"}
         ]
       },
       "streamSettings": {
@@ -54,7 +54,7 @@
         "decryption": "none",
         "clients": [
 // TROJAN
-          {"password": "b94e8235-0000-467a-b044-1234567890ab", "email": "user@example.com"}
+          {"password": "b94e8235-0000-467a-b044-1234567890ab", "email": "client3@example.com"}
         ],
         "udp": true
       },
@@ -89,7 +89,7 @@
         "decryption": "none",
         "clients": [
 // VLESS-GRPC
-          {"id": "b94e8235-0000-467a-b044-1234567890ab", "email": "user@example.com"}
+          {"id": "b94e8235-0000-467a-b044-1234567890ab", "email": "client1@example.com"}
         ]
       },
       "streamSettings": {
@@ -105,7 +105,7 @@
       "settings": {
         "clients": [
 // VMESS-GRPC
-          {"id": "11223344-5566-7788-99aa-bbaa99887766", "alterId": 0, "email": "user@example.com"}
+          {"id": "11223344-5566-7788-99aa-bbaa99887766", "alterId": 0, "email": "client2@example.com"}
         ]
       },
       "streamSettings": {
@@ -122,7 +122,7 @@
         "decryption": "none",
         "clients": [
 // TROJAN-GRPC
-          {"password": "b94e8235-0000-467a-b044-1234567890ab", "email": "user@example.com"}
+          {"password": "b94e8235-0000-467a-b044-1234567890ab", "email": "client3@example.com"}
         ]
       },
       "streamSettings": {
