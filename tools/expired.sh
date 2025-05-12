@@ -1,4 +1,6 @@
 #!/bin/bash
+
+# // AUTO DELETE EXPIRED XRAY ACCOUNT 
 CONFIG_FILE="/etc/xray/config.json"
 today=$(date +%F)
 
@@ -20,3 +22,5 @@ grep -E '"expired":\s*"[0-9]{4}-[0-9]{2}-[0-9]{2}"' "$CONFIG_FILE" | while read 
     echo "Tetap aktif: $expired_date"
   fi
 done
+
+systemctl restart xray
