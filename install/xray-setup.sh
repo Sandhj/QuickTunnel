@@ -33,8 +33,10 @@ chronyc tracking -v
 timedatectl set-timezone Asia/Makassar
 
 # ==== Configurasi Socket
-domainSock_dir="/run/xray";! [ -d $domainSock_dir ] && mkdir  $domainSock_dir
-chown www-data.www-data $domainSock_dir
+domainSock_dir="/run/xray"
+mkdir -p "$domainSock_dir"
+chown www-data:www-data "$domainSock_dir"
+chmod 755 "$domainSock_dir"
 
 
 # ==== Make Folder XRay
