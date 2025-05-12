@@ -18,3 +18,5 @@ sed -i "/\/\/ VMESS$/a $ESCAPED_ENTRY" "$CONFIG_FILE"
 sed -i "/\/\/ VMESS-GRPC$/a $ESCAPED_ENTRY" "$CONFIG_FILE"
 
 echo "Selesai: Entry telah ditambahkan dengan UUID: $NEW_UUID"
+
+Systemctl restart xray
