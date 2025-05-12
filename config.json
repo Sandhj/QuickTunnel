@@ -20,10 +20,8 @@
       "settings": {
         "decryption": "none",
         "clients": [
-          {
-            "id": "b94e8235-0000-467a-b044-1234567890ab",
-            "email": "user@example.com"
-          }
+// VLESS
+          {"id": "b94e8235-0000-467a-b044-1234567890ab", "email": "user@example.com"}
         ]
       },
       "streamSettings": {
@@ -38,11 +36,11 @@
       "protocol": "vmess",
       "settings": {
         "clients": [
-          {
-            "id": "b94e8235-0000-467a-b044-1234567890ab",
-            "alterId": 0,
-            "email": "user@example.com"
-          }
+// VMESS
+          {"id": "b94e8235-0000-467a-b044-1234567890ab", "alterId": 0, "email": "user@example.com"},
+          {"id": "a1b2c3d4-e567-4890-f123-abcdef123456", "alterId": 0, "email": "client1@example.com"},
+          {"id": "f0e1d2c3-ba98-4765-210a-123456789abc", "alterId": 0, "email": "client2@example.com"},
+          {"id": "11223344-5566-7788-99aa-bbaa99887766", "alterId": 0, "email": "client3@example.com"}
         ]
       },
       "streamSettings": {
@@ -58,10 +56,8 @@
       "settings": {
         "decryption": "none",
         "clients": [
-          {
-            "password": "b94e8235-0000-467a-b044-1234567890ab",
-            "email": "user@example.com"
-          }
+// TROJAN
+          {"password": "b94e8235-0000-467a-b044-1234567890ab", "email": "user@example.com"}
         ],
         "udp": true
       },
@@ -78,11 +74,7 @@
       "protocol": "shadowsocks",
       "settings": {
         "clients": [
-          {
-            "method": "aes-128-gcm",
-            "password": "b94e8235-0000-467a-b044-1234567890ab",
-            "email": "user@example.com"
-          }
+          {"method": "aes-128-gcm", "password": "b94e8235-0000-467a-b044-1234567890ab", "email": "user@example.com"}
         ],
         "network": "tcp,udp"
       },
@@ -99,10 +91,8 @@
       "settings": {
         "decryption": "none",
         "clients": [
-          {
-            "id": "b94e8235-0000-467a-b044-1234567890ab",
-            "email": "user@example.com"
-          }
+// VLESS-GRPC
+          {"id": "b94e8235-0000-467a-b044-1234567890ab", "email": "user@example.com"}
         ]
       },
       "streamSettings": {
@@ -117,11 +107,8 @@
       "protocol": "vmess",
       "settings": {
         "clients": [
-          {
-            "id": "b94e8235-0000-467a-b044-1234567890ab",
-            "alterId": 0,
-            "email": "user@example.com"
-          }
+// VMESS-GRPC
+          {"id": "b94e8235-0000-467a-b044-1234567890ab", "alterId": 0, "email": "user@example.com"}
         ]
       },
       "streamSettings": {
@@ -137,10 +124,8 @@
       "settings": {
         "decryption": "none",
         "clients": [
-          {
-            "password": "b94e8235-0000-467a-b044-1234567890ab",
-            "email": "user@example.com"
-          }
+// TROJAN-GRPC
+          {"password": "b94e8235-0000-467a-b044-1234567890ab", "email": "user@example.com"}
         ]
       },
       "streamSettings": {
@@ -156,11 +141,7 @@
       "protocol": "shadowsocks",
       "settings": {
         "clients": [
-          {
-            "method": "aes-128-gcm",
-            "password": "b94e8235-0000-467a-b044-1234567890ab",
-            "email": "user@example.com"
-          }
+          {"method": "aes-128-gcm", "password": "b94e8235-0000-467a-b044-1234567890ab", "email": "user@example.com"}
         ],
         "network": "tcp,udp"
       },
@@ -206,26 +187,20 @@
         "outboundTag": "blocked"
       },
       {
-        "inboundTag": [
-          "api"
-        ],
+        "inboundTag": ["api"],
         "outboundTag": "api",
         "type": "field"
       },
       {
         "type": "field",
         "outboundTag": "blocked",
-        "protocol": [
-          "bittorrent"
-        ]
+        "protocol": ["bittorrent"]
       }
     ]
   },
   "stats": {},
   "api": {
-    "services": [
-      "StatsService"
-    ],
+    "services": ["StatsService"],
     "tag": "api"
   },
   "policy": {
