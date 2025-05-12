@@ -1,6 +1,16 @@
 #!/bin/bash
 read -p "Masukkan Username :" user
+read -p "Masukkan jumlah hari: " jumlah_hari
 
+# Memastikan input adalah angka positif
+if ! [[ "$jumlah_hari" =~ ^[0-9]+$ ]]; then
+  echo "Input harus berupa angka positif."
+  exit 1
+fi
+
+# Menghitung tanggal mendatang menggunakan date
+tanggal_sekarang=$(date +"%Y-%m-%d")
+exp=$(date -d "$tanggal_sekarang + $jumlah_hari days" +"%Y-%m-%d")
 
 CONFIG_FILE="/etc/xray/config.json"
 
