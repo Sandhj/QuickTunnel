@@ -24,8 +24,8 @@ NEW_ENTRY='{"id": "'"$NEW_UUID"'", "email": "'"$user"'", "expired": "'"$exp"'"},
 ESCAPED_ENTRY=$(echo "$NEW_ENTRY" | sed 's/[&/\]/\\&/g')
 
 # Sisipkan setelah baris yang mengandung "// VMESS" atau "// VMESS-GRPC"
-sed -i "/\/\/ VMESS$/a $ESCAPED_ENTRY" "$CONFIG_FILE"
-sed -i "/\/\/ VMESS-GRPC$/a $ESCAPED_ENTRY" "$CONFIG_FILE"
+sed -i "/\/\/ VLESS$/a $ESCAPED_ENTRY" "$CONFIG_FILE"
+sed -i "/\/\/ VLESS-GRPC$/a $ESCAPED_ENTRY" "$CONFIG_FILE"
 
 echo "Selesai: Entry telah ditambahkan dengan UUID: $NEW_UUID"
 
