@@ -48,9 +48,7 @@ touch /var/log/xray/error2.log
 
 
 # ==== Install Xray Core
-# Eksport
 latest_version="$(curl -s https://api.github.com/repos/XTLS/Xray-core/releases | grep tag_name | sed -E 's/.*"v(.*)".*/\1/' | head -n 1)"
-# Install
 bash -c "$(curl -L https://github.com/XTLS/Xray-install/raw/main/install-release.sh)" @ install -u www-data --version $latest_version
 
 # ==== Cert Domain Dengan Acme
