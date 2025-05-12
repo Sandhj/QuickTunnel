@@ -65,13 +65,22 @@ chmod +x /root/.acme.sh/acme.sh
 ~/.acme.sh/acme.sh --installcert -d $domain --fullchainpath /etc/xray/xray.crt --keypath /etc/xray/xray.key --ecc
 
 # ==== Renew SSL
-echo -n '#!/bin/bash
-/etc/init.d/nginx stop
+cat > /usr/local/bin/ssl_renew.sh << 'EOF'
+#!/bin/bash
+set -e
+# Stop Nginx dengan systemctl
+systemctl stop nginx
+# Jalankan auto-renewal cert
 "/root/.acme.sh"/acme.sh --cron --home "/root/.acme.sh" &> /root/renew_ssl.log
-/etc/init.d/nginx start
-' > /usr/local/bin/ssl_renew.sh
+# Restart Nginx
+systemctl start nginx
+EOF
 chmod +x /usr/local/bin/ssl_renew.sh
-if ! grep -q 'ssl_renew.sh' /var/spool/cron/crontabs/root;then (crontab -l;echo "15 03 */3 * * /usr/local/bin/ssl_renew.sh") | crontab;fi
+# Tambahkan cron job jika belum ada
+if ! crontab -l 2>/dev/null | grep -q 'ssl_renew.sh'; then
+    (crontab -l 2>/dev/null; echo "15 03 */3 * * /usr/local/bin/ssl_renew.sh") | crontab -
+fi
+# Buat folder dummy untuk challenge HTTP (opsional)
 mkdir -p /home/vps/public_html
 
 # ==== Export UUID
