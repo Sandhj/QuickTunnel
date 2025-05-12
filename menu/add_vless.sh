@@ -18,7 +18,7 @@ CONFIG_FILE="/etc/xray/config.json"
 NEW_UUID=$(uuidgen | tr '[:upper:]' '[:lower:]')
 
 # Tambahkan Client Ke Config.json
-NEW_ENTRY='{"id": "'"$NEW_UUID"'", "email": "'"$user"'", "expired": "'"$exp"'"},'
+NEW_ENTRY='{"id": "'"$NEW_UUID"'", "email": "'"$user"'", "expired": "'"$exp"'", "kode": "#!"},'
 
 # Escape karakter khusus untuk digunakan dalam perintah sed
 ESCAPED_ENTRY=$(echo "$NEW_ENTRY" | sed 's/[&/\]/\\&/g')
@@ -29,4 +29,4 @@ sed -i "/\/\/ VLESS-GRPC$/a $ESCAPED_ENTRY" "$CONFIG_FILE"
 
 echo "Selesai: Entry telah ditambahkan dengan UUID: $NEW_UUID"
 
-Systemctl restart xray
+systemctl restart xray
