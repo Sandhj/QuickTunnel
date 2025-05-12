@@ -105,7 +105,7 @@
       "settings": {
         "clients": [
 // VMESS-GRPC
-          {"id": "b94e8235-0000-467a-b044-1234567890ab", "alterId": 0, "email": "user@example.com"}
+          {"id": "11223344-5566-7788-99aa-bbaa99887766", "alterId": 0, "email": "user@example.com"}
         ]
       },
       "streamSettings": {
