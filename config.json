@@ -37,9 +37,6 @@
       "settings": {
         "clients": [
 // VMESS
-          {"id": "b94e8235-0000-467a-b044-1234567890ab", "alterId": 0, "email": "user@example.com"},
-          {"id": "a1b2c3d4-e567-4890-f123-abcdef123456", "alterId": 0, "email": "client1@example.com"},
-          {"id": "f0e1d2c3-ba98-4765-210a-123456789abc", "alterId": 0, "email": "client2@example.com"},
           {"id": "11223344-5566-7788-99aa-bbaa99887766", "alterId": 0, "email": "client3@example.com"}
         ]
       },
