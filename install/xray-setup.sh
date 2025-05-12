@@ -17,6 +17,7 @@ domain=$(cat /root/domain)
 apt clean all && apt update
 # Paket utama untuk Xray
 apt install -y curl socat gnupg gnupg2 gnupg1
+apt install nginx -y
 # Paket tambahan/pendukung
 apt install -y iptables iptables-persistent chrony apt-transport-https dnsutils lsb-release ntpdate zip pwgen openssl netcat cron bash-completion xz-utils wget
 # Setting NTP
