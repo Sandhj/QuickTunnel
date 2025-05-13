@@ -44,6 +44,7 @@ link_tls=$(build_vmess "TLS" '{
   "host": "'"${HOST}"'",
   "path": "/vmess",
   "tls": "tls"
+  "sni": "'"${HOST}"'"
 }')
 
 link_ws=$(build_vmess "WS" '{
@@ -72,6 +73,7 @@ link_grpc=$(build_vmess "gRPC" '{
   "host": "'"${HOST}"'",
   "path": "/vmess-grpc",
   "tls": "tls"
+  "sni": "'"${HOST}"'"
 }')
 
 clear
