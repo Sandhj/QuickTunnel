@@ -23,7 +23,7 @@ sed -i "/\/\/ VMESS-GRPC$/a $COMMENT_LINE\n$NEW_ENTRY" "$CONFIG_FILE"
 
 # ==== Fungsi Create Link
 UUID=$(cat /proc/sys/kernel/random/uuid)
-HOST=$(cat /root/xray/domain)
+HOST=$(cat /root/etc/xray/domain)
 
 # Fungsi buat JSON VMess
 build_vmess() {
