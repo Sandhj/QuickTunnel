@@ -9,27 +9,16 @@ if ! [[ "$jumlah_hari" =~ ^[0-9]+$ ]]; then
   exit 1
 fi
 
-# Menghitung tanggal expired
+CONFIG_FILE="/etc/xray/config.json"
+NEW_UUID=$(uuidgen | tr '[:upper:]' '[:lower:]')
 tanggal_sekarang=$(date +"%Y-%m-%d")
 exp=$(date -d "$tanggal_sekarang + $jumlah_hari days" +"%Y-%m-%d")
-
-CONFIG_FILE="/etc/xray/config.json"
-
-# Generate UUID otomatis
-NEW_UUID=$(uuidgen | tr '[:upper:]' '[:lower:]')
-
-# Tambahkan Client Ke Config.json
-NEW_ENTRY='{"id": "'"$NEW_UUID"'", "alterId": 0, "email": "'"$user"'", "expired": "'"$exp"'", "kode": "##"},'
-
-# Baris tambahan di atas entry
+NEW_ENTRY='{"id": "'"$NEW_UUID"'", "alterId": 0, "email": "'"$user"'"},'
 COMMENT_LINE="## $user $exp"
-
-# Escape karakter khusus untuk digunakan dalam perintah sed
 ESCAPED_ENTRY=$(echo "$COMMENT_LINE\n$NEW_ENTRY" | sed 's/[&/\]/\\&/g')
 
 # Sisipkan setelah baris yang mengandung "// VMESS" atau "// VMESS-GRPC"
 sed -i "/\/\/ VMESS$/a $COMMENT_LINE\n$NEW_ENTRY" "$CONFIG_FILE"
 sed -i "/\/\/ VMESS-GRPC$/a $COMMENT_LINE\n$NEW_ENTRY" "$CONFIG_FILE"
 
-echo "Selesai: Entry telah ditambahkan dengan UUID: $NEW_UUID"
 systemctl restart xray
