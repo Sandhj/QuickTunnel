@@ -3,8 +3,11 @@
 # Gunakan associative array untuk menyimpan username yang sudah muncul
 declare -A seen_users
 
-echo "User              | Expired Date"
-echo "------------------|--------------"
+# Inisialisasi nomor urut
+counter=1
+
+echo "No. | User              | Expired Date"
+echo "----|-------------------|--------------"
 
 # Baca setiap baris yang mengandung '##' dari file config.json
 grep '##' /etc/xray/config.json | while read -r line; do
@@ -15,6 +18,7 @@ grep '##' /etc/xray/config.json | while read -r line; do
     # Cek apakah user sudah pernah ditampilkan
     if [[ -z "${seen_users[$user]}" ]]; then
         seen_users[$user]=1  # Tandai bahwa user ini sudah ditampilkan
-        printf "%-17s | %-12s\n" "$user" "$expired"
+        printf "%-3s | %-17s | %-12s\n" "$counter" "$user" "$expired"
+        ((counter++))
     fi
 done
