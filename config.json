@@ -95,7 +95,7 @@
       "streamSettings": {
         "network": "grpc",
         "grpcSettings": {
-          "serviceName": "vless-grpc"
+          "serviceName": "/vless-grpc"
         }
       }
     },
@@ -111,7 +111,7 @@
       "streamSettings": {
         "network": "grpc",
         "grpcSettings": {
-          "serviceName": "vmess-grpc"
+          "serviceName": "/vmess-grpc"
         }
       }
     },
@@ -128,7 +128,7 @@
       "streamSettings": {
         "network": "grpc",
         "grpcSettings": {
-          "serviceName": "trojan-grpc"
+          "serviceName": "/trojan-grpc"
         }
       }
     },
