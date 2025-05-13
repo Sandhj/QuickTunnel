@@ -30,9 +30,9 @@ remark_ws="${USERNAME}-WS"
 remark_grpc="${USERNAME}-gRPC"
 
 # --- Buat 3 jenis link ---
-link_tls="vless://${UUID}@${HOST}:443?path=/vless&security=tls&encryption=none&type=ws#${remark_tls}"
-link_ws="vless://${UUID}@${HOST}:80?path=/vless&security=none&encryption=none&type=ws#${remark_ws}"
-link_grpc="vless://${UUID}@${HOST}:443?mode=gun&security=tls&encryption=none&type=grpc&serviceName=/vless-grpc#${remark_grpc}"
+link_tls="vless://${NEW_UUID}@${HOST}:443?path=/vless&security=tls&encryption=none&type=ws#${remark_tls}"
+link_ws="vless://${NEW_UUID}@${HOST}:80?path=/vless&security=none&encryption=none&type=ws#${remark_ws}"
+link_grpc="vless://${NEW_UUID}@${HOST}:443?mode=gun&security=tls&encryption=none&type=grpc&serviceName=/vless-grpc#${remark_grpc}"
 
 clear
 # Tampilkan hasil
