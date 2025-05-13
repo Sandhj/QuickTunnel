@@ -21,4 +21,40 @@ ESCAPED_ENTRY=$(echo "$COMMENT_LINE\n$NEW_ENTRY" | sed 's/[&/\]/\\&/g')
 sed -i "/\/\/ TROJAN$/a $COMMENT_LINE\n$NEW_ENTRY" "$CONFIG_FILE"
 sed -i "/\/\/ TROJAN-GRPC$/a $COMMENT_LINE\n$NEW_ENTRY" "$CONFIG_FILE"
 
+# ==== Create Link Trojan
+HOST=$(cat /etc/xray/domain)
+
+# Parameter umum
+PORT=443
+SECURITY="tls"
+SNI_PARAM="sni=${HOST}"
+HOST_PARAM="host=${HOST}"
+
+# --- WebSocket + TLS ---
+PATH_WS="/trojan"
+PARAMS_WS="type=ws&${HOST_PARAM}&path=${PATH_WS}&security=${SECURITY}&${SNI_PARAM}"
+LINK_WS="trojan://${NEW_UUID}@${HOST}:${PORT}?${PARAMS_WS}#${USERNAME}-TLS"
+
+# --- gRPC ---
+PATH_GRPC="/trojan-grpc"
+PARAMS_GRPC="type=grpc&${HOST_PARAM}&serviceName=${PATH_GRPC}&security=${SECURITY}&${SNI_PARAM}"
+LINK_GRPC="trojan://${NEW_UUID}@${HOST}:${PORT}?${PARAMS_GRPC}#${USERNAME}-gRPC"
+
+clear
+# Tampilkan hasil
+echo "✅ Account Trojan Berhasil Dibuat" 
+echo "Username     : $user"
+echo "Expired      : $exp"
+echo "-----------------------------------------------"
+echo "UUID         : $NEW_UUID"
+echo "Host/SNI     : $HOST"
+echo "Port         : $PORT"
+echo "-----------------------------------------------"
+echo "1. WebSocket + TLS"
+echo "$LINK_WS"
+echo
+echo "2. gRPC"
+echo "$LINK_GRPC"
+echo "-----------------------------------------------"
+
 systemctl restart xray
