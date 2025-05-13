@@ -75,6 +75,7 @@ link_grpc=$(build_vmess "gRPC" '{
   "tls": "tls"
 }')
 
+clear
 # Tampilkan hasil
 echo "✅ VMess Account Berhasil Dibuat"
 echo " Username: $user"
