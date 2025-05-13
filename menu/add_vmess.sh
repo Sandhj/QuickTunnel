@@ -43,7 +43,7 @@ link_tls=$(build_vmess "TLS" '{
   "type": "none",
   "host": "'"${HOST}"'",
   "path": "/vmess",
-  "tls": "tls"
+  "tls": "tls",
   "sni": "'"${HOST}"'"
 }')
 
@@ -72,7 +72,7 @@ link_grpc=$(build_vmess "gRPC" '{
   "type": "gun",
   "host": "'"${HOST}"'",
   "path": "/vmess-grpc",
-  "tls": "tls"
+  "tls": "tls",
   "sni": "'"${HOST}"'"
 }')
 
