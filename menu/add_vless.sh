@@ -22,12 +22,12 @@ sed -i "/\/\/ VLESS$/a $COMMENT_LINE\n$NEW_ENTRY" "$CONFIG_FILE"
 sed -i "/\/\/ VLESS-GRPC$/a $COMMENT_LINE\n$NEW_ENTRY" "$CONFIG_FILE"
 
 # === Create Link Vmess
-HOST=(cat /etc/xray/domain)
+HOST=$(cat /etc/xray/domain)
 
 # Buat remark
-remark_tls="${USERNAME}-TLS"
-remark_ws="${USERNAME}-WS"
-remark_grpc="${USERNAME}-gRPC"
+remark_tls="${user}-TLS"
+remark_ws="${user}-WS"
+remark_grpc="${user}-gRPC"
 
 # --- Buat 3 jenis link ---
 link_tls="vless://${NEW_UUID}@${HOST}:443?path=/vless&security=tls&encryption=none&type=ws#${remark_tls}"
