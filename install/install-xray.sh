@@ -12,6 +12,7 @@ CREDITS="${green} ـــــــــــــــﮩ٨ـ QuickTunnel ${NC}"
 # ==== Export Domain
 domain=$(cat /root/domain)
 
+echo -e "$CREDITS"
 # ==== Install Paket Yang Dibutuhkan
 # Bersihkan cache dan update
 apt clean all && apt update
@@ -49,11 +50,12 @@ touch /var/log/xray/error.log
 touch /var/log/xray/access2.log
 touch /var/log/xray/error2.log
 
-
+echo -e "$CREDITS"
 # ==== Install Xray Core
 latest_version="$(curl -s https://api.github.com/repos/XTLS/Xray-core/releases | grep tag_name | sed -E 's/.*"v(.*)".*/\1/' | head -n 1)"
 bash -c "$(curl -L https://github.com/XTLS/Xray-install/raw/main/install-release.sh)" @ install -u www-data --version $latest_version
 
+echo -e "$CREDITS"
 # ==== Cert Domain Dengan Acme
 systemctl stop nginx
 mkdir /root/.acme.sh
