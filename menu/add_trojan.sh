@@ -31,7 +31,7 @@ SNI_PARAM="sni=${HOST}"
 HOST_PARAM="host=${HOST}"
 
 # --- WebSocket + TLS ---
-PATH_WS="/trojan"
+PATH_WS="/trojan-ws"
 PARAMS_WS="type=ws&${HOST_PARAM}&path=${PATH_WS}&security=${SECURITY}&${SNI_PARAM}"
 LINK_WS="trojan://${NEW_UUID}@${HOST}:${PORT}?${PARAMS_WS}#${USERNAME}-TLS"
 
