@@ -1,26 +1,72 @@
 #!/bin/bash
 
-# // AUTO DELETE EXPIRED XRAY ACCOUNT 
-CONFIG_FILE="/etc/xray/config.json"
-today=$(date +%F)
+# Export File tujuan
+FILE="/etc/xray/config.json"
 
-cp "$CONFIG_FILE" "${CONFIG_FILE}.bak"
+# === Vmess Expired
+grep -n '##' "$FILE" | while IFS=: read -r line_num comment; do
+    # Ambil kata ke-3 sebagai tanggal
+    expiry_date=$(echo "$comment" | awk '{print $3}')
+    
+    # Validasi apakah tanggal sesuai format YYYY-MM-DD
+    if [[ "$expiry_date" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]]; then
+        # Bandingkan tanggal dengan hari ini
+        today=$(date +%F)
+        if [[ "$expiry_date" < "$today" ]]; then
+            echo "Tanggal expired ditemukan di baris $line_num: $comment"
+            echo "Menghapus baris $line_num dan $((line_num + 1))..."
 
-# Cari semua baris yang mengandung "expired": "YYYY-MM-DD"
-grep -E '"expired":\s*"[0-9]{4}-[0-9]{2}-[0-9]{2}"' "$CONFIG_FILE" | while read -r line; do
-  # Ekstrak tanggal expired
-  expired_date=$(echo "$line" | sed -E 's/.*"([0-9]{4}-[0-9]{2}-[0-9]{2})".*/\1/')
+            # Hapus baris tersebut dan baris berikutnya secara aman
+            sed -i "${line_num}d" "$FILE"
+            sed -i "${line_num}d" "$FILE"
+        fi
+    else
+        echo "Format tanggal tidak valid pada baris $line_num: $comment"
+    fi
+done
 
-  # Bandingkan tanggal
-  if [[ "$expired_date" < "$today" ]]; then
-    echo "Menghapus baris: $line"
-    # Escape karakter khusus agar aman untuk dipakai di sed
-    escaped_line=$(echo "$line" | sed 's/[&/\]/\\&/g')
-    # Hapus baris dari file
-    sed -i "\|$escaped_line|d" "$CONFIG_FILE"
-  else
-    echo "Tetap aktif: $expired_date"
-  fi
+# === Vless Expired
+grep -n '#?' "$FILE" | while IFS=: read -r line_num comment; do
+    # Ambil kata ke-3 sebagai tanggal
+    expiry_date=$(echo "$comment" | awk '{print $3}')
+    
+    # Validasi apakah tanggal sesuai format YYYY-MM-DD
+    if [[ "$expiry_date" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]]; then
+        # Bandingkan tanggal dengan hari ini
+        today=$(date +%F)
+        if [[ "$expiry_date" < "$today" ]]; then
+            echo "Tanggal expired ditemukan di baris $line_num: $comment"
+            echo "Menghapus baris $line_num dan $((line_num + 1))..."
+
+            # Hapus baris tersebut dan baris berikutnya secara aman
+            sed -i "${line_num}d" "$FILE"
+            sed -i "${line_num}d" "$FILE"
+        fi
+    else
+        echo "Format tanggal tidak valid pada baris $line_num: $comment"
+    fi
+done
+
+# === Trojan Expired
+grep -n '#!' "$FILE" | while IFS=: read -r line_num comment; do
+    # Ambil kata ke-3 sebagai tanggal
+    expiry_date=$(echo "$comment" | awk '{print $3}')
+    
+    # Validasi apakah tanggal sesuai format YYYY-MM-DD
+    if [[ "$expiry_date" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]]; then
+        # Bandingkan tanggal dengan hari ini
+        today=$(date +%F)
+        if [[ "$expiry_date" < "$today" ]]; then
+            echo "Tanggal expired ditemukan di baris $line_num: $comment"
+            echo "Menghapus baris $line_num dan $((line_num + 1))..."
+
+            # Hapus baris tersebut dan baris berikutnya secara aman
+            sed -i "${line_num}d" "$FILE"
+            sed -i "${line_num}d" "$FILE"
+        fi
+    else
+        echo "Format tanggal tidak valid pada baris $line_num: $comment"
+    fi
 done
 
 systemctl restart xray
