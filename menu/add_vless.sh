@@ -21,4 +21,36 @@ ESCAPED_ENTRY=$(echo "$COMMENT_LINE\n$NEW_ENTRY" | sed 's/[&/\]/\\&/g')
 sed -i "/\/\/ VLESS$/a $COMMENT_LINE\n$NEW_ENTRY" "$CONFIG_FILE"
 sed -i "/\/\/ VLESS-GRPC$/a $COMMENT_LINE\n$NEW_ENTRY" "$CONFIG_FILE"
 
+# === Create Link Vmess
+HOST=(cat /etc/xray/domain)
+
+# Buat remark
+remark_tls="${USERNAME}-TLS"
+remark_ws="${USERNAME}-WS"
+remark_grpc="${USERNAME}-gRPC"
+
+# --- Buat 3 jenis link ---
+link_tls="vless://${UUID}@${HOST}:443?path=/vless&security=tls&encryption=none&type=ws#${remark_tls}"
+link_ws="vless://${UUID}@${HOST}:80?path=/vless&security=none&encryption=none&type=ws#${remark_ws}"
+link_grpc="vless://${UUID}@${HOST}:443?mode=gun&security=tls&encryption=none&type=grpc&serviceName=/vless-grpc#${remark_grpc}"
+
+clear
+# Tampilkan hasil
+echo "✅ Account VLess Berhasil Dibuat"
+echo "Username: $user"
+echo "Expired: $exp"
+echo "-----------------------------------------------"
+echo "UUID: $NEW_UUID"
+echo "Host: $HOST"
+echo "-----------------------------------------------"
+echo "1. WebSocket + TLS (Port 443)"
+echo "$link_tls"
+echo
+echo "2. WebSocket (tanpa TLS, Port 80)"
+echo "$link_ws"
+echo
+echo "3. gRPC (Port 443)"
+echo "$link_grpc"
+echo "-----------------------------------------------"
+
 systemctl restart xray
