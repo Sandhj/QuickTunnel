@@ -23,7 +23,7 @@ sed -i "/\/\/ VMESS-GRPC$/a $COMMENT_LINE\n$NEW_ENTRY" "$CONFIG_FILE"
 
 # ==== Fungsi Create Link
 UUID=$(cat /proc/sys/kernel/random/uuid)
-HOST=$(cat /root/etc/xray/domain)
+HOST=$(cat /etc/xray/domain)
 
 # Fungsi buat JSON VMess
 build_vmess() {
@@ -77,11 +77,11 @@ link_grpc=$(build_vmess "gRPC" '{
 
 # Tampilkan hasil
 echo "✅ VMess Account Berhasil Dibuat"
-echo " Username: $USERNAME"
+echo " Username: $user"
 echo " Expired : $jumlah_hari"
 echo "-----------------------------------------------"
 echo "UUID: $UUID"
-echo "Host: $HOST"
+echo "Host: $exp"
 echo "-----------------------------------------------"
 echo "1. WebSocket + TLS (Port 443)"
 echo "vmess://$link_tls"
