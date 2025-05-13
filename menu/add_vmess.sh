@@ -79,10 +79,10 @@ clear
 # Tampilkan hasil
 echo "✅ VMess Account Berhasil Dibuat"
 echo " Username: $user"
-echo " Expired : $jumlah_hari"
+echo " Expired : $exp"
 echo "-----------------------------------------------"
 echo "UUID: $UUID"
-echo "Host: $exp"
+echo "Host: $HOST"
 echo "-----------------------------------------------"
 echo "1. WebSocket + TLS (Port 443)"
 echo "vmess://$link_tls"
