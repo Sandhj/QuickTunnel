@@ -23,3 +23,4 @@ grep '##' /etc/xray/config.json | while read -r line; do
         ((counter++))
     fi
 done
+echo "----|-------------------|--------------"
