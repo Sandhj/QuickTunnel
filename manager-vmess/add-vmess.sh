@@ -95,6 +95,8 @@ echo "Creating New Account..."
 animate
 
 # Tampilkan hasil
+echo ""
+echo ""
 echo "✅ VMess Account Berhasil Dibuat"
 echo " Username: $user"
 echo " Expired : $exp"
