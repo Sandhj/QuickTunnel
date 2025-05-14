@@ -71,7 +71,7 @@ do
     if (( COUNT == 0 )); then
         echo "❌ Tidak ada aktivitas ditemukan untuk email ini."
     else
-        echo "✅ Ditemukan \$COUNT IP unik menggunakan akun ini:"
+        echo "✅ Ditemukan \$COUNT IP menggunakan akun ini:"
         echo "\$IPs"
 
         if (( COUNT > LIMIT )); then
