@@ -1,6 +1,9 @@
 #!/bin/bash
-
-read -p "Masukkan Username :" user
+echo -e "┌──────────────────────────────────────┐"
+echo -e "│     =   CREATE NEW TROJAN ACCOUNT   =       │"
+echo -e "└──────────────────────────────────────┘"
+echo ""
+read -p "Masukkan Username : " user
 read -p "Masukkan jumlah hari: " jumlah_hari
 
 # Memastikan input adalah angka positif
