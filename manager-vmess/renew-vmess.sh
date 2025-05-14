@@ -5,7 +5,7 @@ tampilkan_user() {
     clear
     echo ""
     echo "----------------------------------------------------"
-    echo "No. | Username            | Tanggal Kedaluwarsa"
+    echo "No. | Username            | Expired  "
     echo "----|---------------------|----------------------"
 
     declare -A seen_users
@@ -73,4 +73,11 @@ cp /etc/xray/config.json /etc/xray/config.json.bak
 # Ganti tanggal expired untuk **SEMUA entry dengan username yang sama**
 sed -i "/## $user_to_renew / s/ [0-9]\{4\}-[0-9]\{2\}-[0-9]\{2\}/ $new_expired/" /etc/xray/config.json
 
-echo "Berhasil memperpanjang masa aktif user $user_to_renew hingga $new_expired"
+#Hasil
+echo ""
+echo "┌──────────────────────────────┐"
+echo "│     ✅ AKUN DIPERBARUI            │"
+echo "└──────────────────────────────┘"
+echo "  User   : $user_to_renew"
+echo "  Expire : $new_expired"
+echo "────────────────────────────────"
