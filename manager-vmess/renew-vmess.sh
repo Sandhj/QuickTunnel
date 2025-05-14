@@ -65,7 +65,6 @@ timestamp_expired=$(date -d "$expired_date" +%s)
 new_timestamp=$((timestamp_expired + tambah_hari * 86400))  # 86400 detik per hari
 new_expired=$(date -d "@$new_timestamp" "+%Y-%m-%d")
 
-echo "Tanggal expired baru: $new_expired"
 
 # Backup file asli sebelum edit
 cp /etc/xray/config.json /etc/xray/config.json.bak
@@ -76,7 +75,7 @@ sed -i "/## $user_to_renew / s/ [0-9]\{4\}-[0-9]\{2\}-[0-9]\{2\}/ $new_expired/"
 #Hasil
 echo ""
 echo "┌──────────────────────────────┐"
-echo "│     ✅ AKUN DIPERBARUI            │"
+echo "│     ✅ AKUN DIPERBARUI       │"
 echo "└──────────────────────────────┘"
 echo "  User   : $user_to_renew"
 echo "  Expire : $new_expired"
