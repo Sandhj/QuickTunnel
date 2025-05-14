@@ -44,8 +44,10 @@ PATH_GRPC="/trojan-grpc"
 PARAMS_GRPC="type=grpc&${HOST_PARAM}&serviceName=${PATH_GRPC}&security=${SECURITY}&${SNI_PARAM}"
 LINK_GRPC="trojan://${NEW_UUID}@${HOST}:${PORT}?${PARAMS_GRPC}#${user}-gRPC"
 
-clear
+
 # Tampilkan hasil
+echo ""
+echo ""
 echo "✅ Account Trojan Berhasil Dibuat" 
 echo "Username     : $user"
 echo "Expired      : $exp"
