@@ -6,7 +6,7 @@ declare -A seen_users
 # Inisialisasi nomor urut
 counter=1
 echo ""
-echo "---------------------------------------"
+echo "‒‒‒‒┬‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒┬‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒"
 echo "No. | User              | Expired Date"
 echo "----|-------------------|--------------"
 
@@ -23,4 +23,4 @@ grep '##' /etc/xray/config.json | while read -r line; do
         ((counter++))
     fi
 done
-echo "----|-------------------|--------------"
+echo "---------------------------------------"
