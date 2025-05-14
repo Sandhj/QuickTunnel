@@ -1,7 +1,11 @@
 #!/bin/bash
-
-read -p "Masukkan Username :" user
-read -p "Masukkan jumlah hari: " jumlah_hari
+clear
+echo -e "┌──────────────────────────────────────┐"
+echo -e "│   =   CREATE NEW VMESS ACCOUNT   =   │"
+echo -e "└──────────────────────────────────────┘"
+echo ""
+read -p "Username : " user
+read -p "Masa Aktif: " jumlah_hari
 
 # Memastikan input adalah angka positif
 if ! [[ "$jumlah_hari" =~ ^[0-9]+$ ]]; then
@@ -76,7 +80,20 @@ link_grpc=$(build_vmess "gRPC" '{
   "sni": "'"${HOST}"'"
 }')
 
-clear
+#Animsi Loading
+animate() {
+  local delay=0.1
+  local bar=""
+  for ((i=0; i<20; i++)); do
+    bar+="-"
+    printf "\r[%-20s]" "$bar"
+    sleep $delay
+  done
+}
+
+echo "Creating New Account..."
+animate
+
 # Tampilkan hasil
 echo "✅ VMess Account Berhasil Dibuat"
 echo " Username: $user"
