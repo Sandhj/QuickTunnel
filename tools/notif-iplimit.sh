@@ -1,7 +1,7 @@
 #!/bin/bash
 
-TOKEN=$(cat /root/token)
-IDTELE=$(cat /root/idtele)
+TOKEN="6933923564:AAHC1esXFo0eLFFaRxNv7woM0yEu5-pM6wY"
+IDTELE="576495165"
 
 # Folder tujuan
 FOLDER="/root/san/iplimit"
@@ -89,8 +89,3 @@ EOF
 
 # Beri izin eksekusi
 chmod +x "$SCRIPT_FILE"
-
-# Tambahkan cron job (jika belum ada)
-CRON_JOB="0 * * * * $SCRIPT_FILE"
-(crontab -l 2>/dev/null | grep -v "$SCRIPT_FILE") | crontab -
-(crontab -l 2>/dev/null; echo "$CRON_JOB") | crontab -
