@@ -44,6 +44,19 @@ PATH_GRPC="/trojan-grpc"
 PARAMS_GRPC="type=grpc&${HOST_PARAM}&serviceName=${PATH_GRPC}&security=${SECURITY}&${SNI_PARAM}"
 LINK_GRPC="trojan://${NEW_UUID}@${HOST}:${PORT}?${PARAMS_GRPC}#${user}-gRPC"
 
+#Animsi Loading
+animate() {
+  local delay=0.1
+  local bar=""
+  for ((i=0; i<20; i++)); do
+    bar+="-"
+    printf "\r[%-20s]" "$bar"
+    sleep $delay
+  done
+}
+
+echo "Creating New Account..."
+animate
 
 # Tampilkan hasil
 echo ""
