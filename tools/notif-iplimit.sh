@@ -1,5 +1,8 @@
 #!/bin/bash
 
+TOKEN=$(cat /root/token)
+IDTELE=$(cat /root/idtele)
+
 # Folder tujuan
 FOLDER="/root/san/iplimit"
 
