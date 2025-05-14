@@ -12,7 +12,7 @@ tampilkan_user() {
     counter=1
 
     # Baca baris dengan '#?' dari config.json
-    grep '##?' /etc/xray/config.json | while read -r line; do
+    grep '#?' /etc/xray/config.json | while read -r line; do
         user=$(echo "$line" | awk '{print $2}')
         expired=$(echo "$line" | awk '{print $3}')
 
