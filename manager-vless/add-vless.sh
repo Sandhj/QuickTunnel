@@ -1,8 +1,11 @@
 #!/bin/bash
-
-
-read -p "Masukkan Username : " user
-read -p "Masukkan jumlah hari: " jumlah_hari
+clear
+echo -e "┌──────────────────────────────────────┐"
+echo -e "│   =   CREATE NEW VLESS ACCOUNT   =   │"
+echo -e "└──────────────────────────────────────┘"
+echo ""
+read -p "Username : " user
+read -p "Masa Aktif: " jumlah_hari
 
 # Memastikan input adalah angka positif
 if ! [[ "$jumlah_hari" =~ ^[0-9]+$ ]]; then
@@ -35,7 +38,23 @@ link_tls="vless://${NEW_UUID}@${HOST}:443?path=/vlessws&security=tls&encryption=
 link_ws="vless://${NEW_UUID}@${HOST}:80?path=/vless-grpc&security=none&encryption=none&type=ws&host=${HOST}#${remark_ws}"
 link_grpc="vless://${NEW_UUID}@${HOST}:443?mode=gun&security=tls&encryption=none&type=grpc&serviceName=/vless-grpc&host=${HOST}&sni=${HOST}#${remark_grpc}"
 
+#Animsi Loading
+animate() {
+  local delay=0.1
+  local bar=""
+  for ((i=0; i<20; i++)); do
+    bar+="-"
+    printf "\r[%-20s]" "$bar"
+    sleep $delay
+  done
+}
+
+echo "Creating New Account..."
+animate
+
 clear
+echo ""
+echo ""
 # Tampilkan hasil
 echo "✅ Account VLess Berhasil Dibuat"
 echo "Username: $user"
