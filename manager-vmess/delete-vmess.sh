@@ -5,7 +5,7 @@ tampilkan_user() {
     clear
     echo ""
     echo "----------------------------------------------------"
-    echo "No. | Username            | Tanggal Kedaluwarsa"
+    echo "No. | Username            | Expired"
     echo "----|---------------------|-------------------------"
 
     declare -A seen_users
@@ -63,7 +63,7 @@ cp /etc/xray/config.json /etc/xray/config.json.bak
 sed -i "/## $user_to_delete /{N;d;}" /etc/xray/config.json
 
 echo "┌──────────────────────────────┐"
-echo "│   ✅   Berhasil Menghapus     │"
+echo "│   ✅   Berhasil Menghapus    │"
 echo "└──────────────────────────────┘"
 echo "  User   : $user_to_delete"
 echo "────────────────────────────────"
