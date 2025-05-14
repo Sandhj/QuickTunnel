@@ -67,3 +67,5 @@ echo "│   ✅   Berhasil Menghapus    │"
 echo "└──────────────────────────────┘"
 echo "  User   : $user_to_delete"
 echo "────────────────────────────────"
+
+systemctl restart xray
