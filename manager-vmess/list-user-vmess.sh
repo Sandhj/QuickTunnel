@@ -5,6 +5,8 @@ declare -A seen_users
 
 # Inisialisasi nomor urut
 counter=1
+
+clear
 echo ""
 echo "---------------------------------------"
 echo "No. | User              | Expired Date"
