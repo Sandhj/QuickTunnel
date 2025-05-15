@@ -6,12 +6,28 @@ echo -e "└──────────────────────�
 echo ""
 read -p "Username : " user
 read -p "Masa Aktif: " jumlah_hari
+read -p "Limit IP: " jumlah
 
 # Memastikan input adalah angka positif
 if ! [[ "$jumlah_hari" =~ ^[0-9]+$ ]]; then
   echo "Input harus berupa angka positif."
   exit 1
 fi
+
+# === Setting Limit IP
+# Lokasi file konfigurasi
+FILE="/etc/xray/limitip/clients_limit.conf"
+
+if ! [[ "$jumlah" =~ ^[0-9]+$ ]]; then
+  echo "Jumlah koneksi harus berupa angka!"
+  exit 1
+fi
+# Tambahkan data ke file
+echo "$user=$jumlah" >> $FILE
+
+
+
+# === Tambahkan Akun Ke Json
 
 CONFIG_FILE="/etc/xray/config.json"
 NEW_UUID=$(uuidgen | tr '[:upper:]' '[:lower:]')
