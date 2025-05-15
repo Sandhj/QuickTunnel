@@ -9,12 +9,20 @@ NC='\e[0m'
 CREDITS="${green} ـــــــــــــــﮩ٨ـ QuickTunnel ${NC}" 
 
 # Running Banner
-TEXT="QuickTunnel ـــــــــــــــﮩ٨ـ"
+TEXT="QuickTunnel ـــــــــــــــﮩ٨ـ | Preparing . . . | Thanks To San (Owner)"
 for (( i=0; i<${#TEXT}; i++ ))
 do
     echo -n -e "${green}${TEXT:$i:1}${NC}"
     sleep 0.1 #Delay Antar Huruf
 done
+echo""
+TEXT2="Contac The Owner If You Have Anything Problem. Lets Start in 2 Second"
+for (( i=0; i<${#TEXT2}; i++ ))
+do
+    echo -n -e "${green}${TEXT2:$i:1}${NC}"
+    sleep 0.1 #Delay Antar Huruf
+done
+sleep 2
 clear
 
 
