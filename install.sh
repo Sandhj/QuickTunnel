@@ -1,5 +1,6 @@
 #!/bin/bash
 
+clear
 # ==== Export Warna
 green='\e[0;32m'
 NC='\e[0m'
