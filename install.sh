@@ -42,4 +42,6 @@ echo $domain >> /root/domain
 apt update -y && apt upgrade -y
 
 # ==== Install Xray
-wget -q ${GITHUB}install/
+wget -q ${GITHUB}install/install-xray.sh && bash install-xray.sh
+
+# ==== Pasang Tools
