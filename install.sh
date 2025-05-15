@@ -8,6 +8,9 @@ NC='\e[0m'
 # ==== Export CREDITS
 CREDITS="${green} ـــــــــــــــﮩ٨ـ QuickTunnel ${NC}" 
 
+# ==== Export Link Github 
+GITHUB="https://raw.githubusercontent.com/Sandhj/QuickTunnel/main/"
+
 # Running Banner
 TEXT="QuickTunnel ـــــــــــــــﮩ٨ـ | Preparing . . . | Thanks To San (Owner)"
 for (( i=0; i<${#TEXT}; i++ ))
@@ -35,4 +38,8 @@ read -p "Type Your Domain : " domain
 
 echo $domain >> /root/domain
 
+# ==== Perbaharui System
+apt update -y && apt upgrade -y
 
+# ==== Install Xray
+wget -q ${GITHUB}install/
