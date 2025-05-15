@@ -6,7 +6,7 @@ echo -e "└──────────────────────�
 echo ""
 read -p "Username : " user
 read -p "Masa Aktif: " jumlah_hari
-read -p "Masukkan jumlah koneksi maksimal: " jumlah
+read -p "Limit IP: " jumlah
 
 # Memastikan input adalah angka positif
 if ! [[ "$jumlah_hari" =~ ^[0-9]+$ ]]; then
