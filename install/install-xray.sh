@@ -7,7 +7,8 @@ NC='\e[0m'
 # ==== Export CREDITS
 CREDITS="${green} ـــــــــــــــﮩ٨ـ QuickTunnel ${NC}" 
 
-
+# ==== Export Github Link 
+GITHUB="https://raw.githubusercontent.com/Sandhj/QuickTunnel/main/"
 
 # ==== Export Domain
 domain=$(cat /root/domain)
@@ -86,8 +87,8 @@ fi
 mkdir -p /home/vps/public_html
 
 # ==== Ambil Config.json dan Xray.conf
-wget 
-                 
+wget -q ${GITHUB}setup.sh 
+chmod +x setup.sh                 
 
 rm -rf /etc/systemd/system/xray.service.d
 cat <<EOF> /etc/systemd/system/xray.service
