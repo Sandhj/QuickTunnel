@@ -87,7 +87,8 @@ fi
 mkdir -p /home/vps/public_html
 
 # ==== Ambil Config.json dan Xray.conf
-wget -q ${GITHUB}tools/config.json
+wget -q "${GITHUB}tools/config.json" -O /etc/xray/config.json
+wget -q "${GITHUB}tools/xray.conf" -O /etc/nginx/conf.d/xray.conf
 chmod +x setup.sh                 
 
 rm -rf /etc/systemd/system/xray.service.d
