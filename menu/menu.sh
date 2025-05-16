@@ -1,3 +1,8 @@
+# Export Jumlah Akun
+vmess=$(( $(grep -c '##' /etc/xray/config.json 2>/dev/null) / 2 ))
+vless=$(( $(grep -c '#?' /etc/xray/config.json 2>/dev/null) / 2 ))
+trojan=$(( $(grep -c '#!' /etc/xray/config.json 2>/dev/null) / 2 ))
+
 echo -e "┌──────────────────────────────────────┐"
 echo -e "│       =   INFORMASI SERVER  =        │"
 echo -e "└──────────────────────────────────────┘"
@@ -10,10 +15,10 @@ echo -e " RAM                 : "
 echo -e "┌──────────────────────────────────────┐"
 echo -e "│ SERVICE            | JUMLAH USER     │"
 echo -e "├────────────────────┼─────────────────┤"
-printf "│ %-18s │ %15d │\n" "SSH" "20"
-printf "│ %-18s │ %15d │\n" "VMess" "20"
-printf "│ %-18s │ %15d │\n" "VLESS" "20"
-printf "│ %-18s │ %15d │\n" "TROJAN" "20"
+printf "│ %-18s │ %15d │\n" "SSH" "$ssh"
+printf "│ %-18s │ %15d │\n" "VMess" "$vmess"
+printf "│ %-18s │ %15d │\n" "VLESS" "$vless"
+printf "│ %-18s │ %15d │\n" "TROJAN" "$trojan"
 echo -e "└──────────────────────────────────────┘"
 echo -e "┌──────────────────────────────────────┐"
 echo -e "│            = MENU UTAMA =            │"
