@@ -43,39 +43,35 @@ echo -e "     ${YELLOW}3. VLESS MANAGER    7. RESTART SERV. ${NC}"
 echo -e "     ${YELLOW}4. TROJAN MANAGER   8. MENU LAIN ${NC}"
 echo -e "${BLUE}   └──────────────────────────────────────┘${NC}"
 echo -e ""
-read -p " Select menu : " opt
-echo -e " "
-case $opt in
-1 | 01)
-clear
-menu_ssh
-;;
-2 | 02)
-clear
-menu_vmess
-;;
-3 | 03)
-clear
-menu_vless
-;;
-4 | 04)
-clear
-menu_trojan
-;;
-5 | 05)
-clear
-menu_bot
-;;
-6 | 06)
-clear
-change_domain
-;;
-7 | 07)
-clear
-restart_service
-;;
-8 | 08)
-clear
-menu-lain
-;;
+read -p "Select Menu : " pilihan
+
+# Memproses pilihan
+case $pilihan in
+    1)
+        ./menu_ssh
+        ;;
+    2)
+        ./menu_vmess
+        ;;
+    3)
+        ./menu_vless
+        ;;
+    4)
+        ./menu_trojan
+        ;;
+    5)
+        ./menu_bot
+        ;;
+    6)
+        ./change_domain
+        ;;
+    7)
+        ./restart_service
+        ;;
+    8)
+        ./menu_lain
+        ;;
+    *)
+        ./menu
+        ;;
 esac
