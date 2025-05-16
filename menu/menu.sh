@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Export OS
+# Ambil PRETTY_NAME dari /etc/os-release
+OS_PRETTY=$(grep -E '^PRETTY_NAME=' /etc/os-release | cut -d= -f2 | tr -d '"')
 # Expor IP
 IP=$(curl -s ifconfig.me)
 # Export Jumlah Akun
@@ -10,7 +13,7 @@ trojan=$(( $(grep -c '#!' /etc/xray/config.json 2>/dev/null) / 2 ))
 echo -e "┌──────────────────────────────────────┐"
 echo -e "│       =   INFORMASI SERVER  =        │"
 echo -e "└──────────────────────────────────────┘"
-echo -e " OS SYSTEM           : "
+echo -e " OS SYSTEM           : $OS_PRETTY "
 echo -e " ISP                 : "
 echo -e " REGION              : "
 echo -e " IP                  : $IP"
