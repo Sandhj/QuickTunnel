@@ -40,5 +40,7 @@ echo -e "${YELLOW}   └──────────────────�
 echo -e "     ${YELLOW}1. SSH MANAGER      5. BOT MANAGER   ${NC}"
 echo -e "     ${YELLOW}2. VMESS MANAGER    6. CHANGE DOMAIN ${NC}"
 echo -e "     ${YELLOW}3. VLESS MANAGER    7. RESTART SERV. ${NC}"
-echo -e "     ${YELLOW}4. TROJAN MANAGER   8. REBOOT SERVER ${NC}"
+echo -e "     ${YELLOW}4. TROJAN MANAGER   8. MENU LAIN ${NC}"
 echo -e "${BLUE}   └──────────────────────────────────────┘${NC}"
+echo -e ""
+
