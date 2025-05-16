@@ -4,6 +4,8 @@
 OS_PRETTY=$(grep -E '^PRETTY_NAME=' /etc/os-release | cut -d= -f2 | tr -d '"')
 IP=$(curl -s ifconfig.me)
 ISP=$(curl -s "http://ip-api.com/json/" | jq -r '.isp')
+country=$(curl -s "http://ip-api.com/json/" | jq -r '.country')
+domain=(cat /etc/xray/domain)
 
 # Export Jumlah Akun
 vmess=$(( $(grep -c '##' /etc/xray/config.json 2>/dev/null) / 2 ))
@@ -15,9 +17,9 @@ echo -e "│       =   INFORMASI SERVER  =        │"
 echo -e "└──────────────────────────────────────┘"
 echo -e " OS SYSTEM           : $OS_PRETTY "
 echo -e " ISP                 : $ISP"
-echo -e " REGION              : "
+echo -e " REGION              : $country"
 echo -e " IP                  : $IP"
-echo -e " DOMAIN              : "
+echo -e " DOMAIN              : $domian"
 echo -e " RAM                 : "
 echo -e "┌──────────────────────────────────────┐"
 echo -e "│ SERVICE            | JUMLAH USER     │"
