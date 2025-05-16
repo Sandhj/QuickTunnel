@@ -1,4 +1,5 @@
 #!/bin/bash
+clear
 
 # Export Informasi Server
 OS_PRETTY=$(grep -E '^PRETTY_NAME=' /etc/os-release | cut -d= -f2 | tr -d '"')
