@@ -1,3 +1,7 @@
+#!/bin/bash
+
+# Expor IP
+IP=$(curl -s ifconfig.me)
 # Export Jumlah Akun
 vmess=$(( $(grep -c '##' /etc/xray/config.json 2>/dev/null) / 2 ))
 vless=$(( $(grep -c '#?' /etc/xray/config.json 2>/dev/null) / 2 ))
@@ -9,7 +13,7 @@ echo -e "└──────────────────────�
 echo -e " OS SYSTEM           : "
 echo -e " ISP                 : "
 echo -e " REGION              : "
-echo -e " IP                  : "
+echo -e " IP                  : $IP"
 echo -e " DOMAIN              : "
 echo -e " RAM                 : "
 echo -e "┌──────────────────────────────────────┐"
