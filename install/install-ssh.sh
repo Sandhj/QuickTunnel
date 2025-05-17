@@ -16,14 +16,6 @@ NET=$(ip -o $ANU -4 route show to default | awk '{print $5}');
 source /etc/os-release
 ver=$VERSION_ID
 
-#detail nama perusahaan
-country=ID
-state=Indonesia
-locality=Jakarta
-organization=none
-organizationalunit=none
-commonname=none
-email=none
 
 # simple password minimal
 curl -sS https://raw.githubusercontent.com/king-vpn/autoscript-vip/main/install/password | openssl aes-256-cbc -d -a -pass pass:scvps07gg -pbkdf2 > /etc/pam.d/common-password
@@ -245,6 +237,16 @@ accept = 990
 connect = 127.0.0.1:1194
 
 END
+
+#detail nama perusahaan
+country=ID
+state=Indonesia
+locality=Jakarta
+organization=none
+organizationalunit=none
+commonname=none
+email=none
+
 
 # make a certificate
 openssl genrsa -out key.pem 2048
