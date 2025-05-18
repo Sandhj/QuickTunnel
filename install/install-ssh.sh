@@ -43,6 +43,7 @@ chmod +x /etc/rc.local
 # enable rc local
 systemctl enable rc-local
 systemctl start rc-local.service
+systemctl status rc-local.service
 
 # disable ipv6
 echo 1 > /proc/sys/net/ipv6/conf/all/disable_ipv6
