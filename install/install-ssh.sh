@@ -10,16 +10,6 @@ NET=$(ip -o $ANU -4 route show to default | awk '{print $5}')
 source /etc/os-release
 ver=$VERSION_ID
 
-#detail nama perusahaan
-country=ID
-state=INDONESIA
-locality=JAWATENGAH
-organization=Blogger
-organizationalunit=Blogger
-commonname=none
-email=admin@sedang.my.id
-
-
 # go to root
 cd
 
@@ -169,6 +159,15 @@ connect = 127.0.0.1:700
 accept = 443
 connect = 127.0.0.1:1194
 END
+
+#detail nama perusahaan
+country=ID
+state=INDONESIA
+locality=JAWATENGAH
+organization=Blogger
+organizationalunit=Blogger
+commonname=none
+email=admin@sedang.my.id
 
 # make a certificate
 openssl genrsa -out key.pem 2048
