@@ -28,7 +28,7 @@ fi
 # Download file-file yang dibutuhkan
 echo -e "${BLUE}Downloading WebSocket binaries...${NC}"
 
-wget -O /usr/local/bin/ws-dropbear https://raw.githubusercontent.com/Paper890/mysc/main/websocket/dropbear-ws.py
+wget -O /usr/local/bin/ws-dropbear https://raw.githubusercontent.com/Paper890/mysc/main/websocket/ws-dropbear
 wget -O /usr/local/bin/ws-stunnel https://raw.githubusercontent.com/Paper890/mysc/main/websocket/ws-stunnel
 
 chmod +x /usr/local/bin/ws-dropbear
