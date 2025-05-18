@@ -149,22 +149,25 @@ socket = a:SO_REUSEADDR=1
 socket = l:TCP_NODELAY=1
 socket = r:TCP_NODELAY=1
 
-[dropbear]
-accept = 222
-connect = 127.0.0.1:22
-
-[dropbear]
+;===== Tunnel untuk ws-dropbear =====
+[ws-dropbear]
 accept = 777
 connect = 127.0.0.1:109
 
-[ws-stunnel]
+;===== Tunnel untuk ws-nontls =====
+[ws-nontls]
 accept = 2096
-connect = 700
+connect = 127.0.0.1:8080
 
+;===== Tunnel untuk ws-stunnel =====
+[ws-stunnel]
+accept = 8080
+connect = 127.0.0.1:700
+
+;===== Tunnel untuk OpenVPN =====
 [openvpn]
-accept = 442
+accept = 443
 connect = 127.0.0.1:1194
-
 END
 
 # make a certificate
