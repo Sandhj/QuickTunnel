@@ -67,7 +67,7 @@ fi
 
 # Getting Proxy Template
 echo -e "${BLUE}Downloading ws-nontls.py...${NC}"
-wget -q -O /usr/local/bin/ws-nontls https://raw.githubusercontent.com/Sandhj/QuickTunnel/main/Websocket/ws-nontls.py
+wget -q -O /usr/local/bin/ws-nontls https://raw.githubusercontent.com/Sandhj/QuickTunnel/main/Websocket/ws-nontls
 chmod +x /usr/local/bin/ws-nontls
 
 # Installing Service
@@ -84,7 +84,7 @@ User=root
 CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 NoNewPrivileges=true
-ExecStart=/usr/bin/python3 -O /usr/local/bin/ws-nontls 8880
+ExecStart=/usr/bin/python3 -O /usr/local/bin/ws-nontls
 Restart=on-failure
 
 [Install]
