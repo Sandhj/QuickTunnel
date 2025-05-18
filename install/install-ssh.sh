@@ -91,9 +91,9 @@ apt -y install nginx
 cd
 rm /etc/nginx/sites-enabled/default
 rm /etc/nginx/sites-available/default
-wget -O /etc/nginx/nginx.conf "https://raw.githubusercontent.com/Paper890/mysc/main/ssh/nginx.conf"
+wget -O /etc/nginx/nginx.conf "https://raw.githubusercontent.com/Sandhj/QuickTunnel/main/ssh/nginx.conf"
 rm /etc/nginx/conf.d/vps.conf
-wget -O /etc/nginx/conf.d/vps.conf "https://raw.githubusercontent.com/Paper890/mysc/main/ssh/vps.conf"
+wget -O /etc/nginx/conf.d/vps.conf "https://raw.githubusercontent.com/Sandhj/QuickTunnel/main/ssh/vps.conf"
 /etc/init.d/nginx restart
 
 mkdir /etc/systemd/system/nginx.service.d
@@ -103,15 +103,15 @@ systemctl daemon-reload
 service nginx restart
 cd
 mkdir -p /home/vps/public_html
-wget -O /home/vps/public_html/index.html "https://raw.githubusercontent.com/Paper890/mysc/main/ssh/multiport"
-wget -O /home/vps/public_html/.htaccess "https://raw.githubusercontent.com/Paper890/mysc/main/ssh/.htaccess"
+wget -O /home/vps/public_html/index.html "https://raw.githubusercontent.com/Sandhj/QuickTunnel/main/ssh/multiport"
+wget -O /home/vps/public_html/.htaccess "https://raw.githubusercontent.com/Sandhj/QuickTunnel/main/ssh/.htaccess"
 mkdir -p /home/vps/public_html/ss-ws
 mkdir -p /home/vps/public_html/clash-ws
 
 # install badvpn
 cd
 apt install screen -y
-wget -O /usr/bin/badvpn-udpgw "https://raw.githubusercontent.com/Paper890/mysc/main/ssh/newudpgw"
+wget -O /usr/bin/badvpn-udpgw "https://raw.githubusercontent.com/Sandhj/QuickTunnel/main/ssh/newudpgw"
 chmod +x /usr/bin/badvpn-udpgw
 
 # Add services
@@ -197,7 +197,7 @@ cp -s /usr/local/ddos/ddos.sh /usr/local/sbin/ddos
 /usr/local/ddos/ddos.sh --cron > /dev/null 2>&1
 
 # banner /etc/issue.net
-wget -O /etc/issue.net "https://raw.githubusercontent.com/Paper890/mysc/main/issue.net"
+wget -O /etc/issue.net "https://raw.githubusercontent.com/Sandhj/QuickTunnel/main/ssh/issue.net"
 chmod +x /etc/issue.net
 echo "Banner /etc/issue.net" >> /etc/ssh/sshd_config
 sed -i 's@DROPBEAR_BANNER=""@DROPBEAR_BANNER="/etc/issue.net"@g' /etc/default/dropbear
