@@ -28,20 +28,20 @@ fi
 # Download file-file yang dibutuhkan
 echo -e "${BLUE}Downloading WebSocket binaries...${NC}"
 
-wget -O /usr/local/bin/ws-dropbear https://raw.githubusercontent.com/Paper890/mysc/main/websocket/ws-dropbear
-wget -O /usr/local/bin/ws-stunnel https://raw.githubusercontent.com/Paper890/mysc/main/websocket/ws-stunnel
+wget -O /usr/local/bin/ws-dropbear https://raw.githubusercontent.com/Sandhj/QuickTunnel/main/Websocket/ws-dropbear
+wget -O /usr/local/bin/ws-stunnel https://raw.githubusercontent.com/Sandhj/QuickTunnel/main/Websocket/ws-stunnel
 
 chmod +x /usr/local/bin/ws-dropbear
 chmod +x /usr/local/bin/ws-stunnel
 
 # Service ws-dropbear
 echo -e "${BLUE}Setting up ws-dropbear service...${NC}"
-wget -O /etc/systemd/system/ws-dropbear.service https://raw.githubusercontent.com/Paper890/mysc/main/websocket/service-wsdropbear
+wget -O /etc/systemd/system/ws-dropbear.service https://raw.githubusercontent.com/Sandhj/QuickTunnel/main/Websocket/service-wsdropbear
 chmod 644 /etc/systemd/system/ws-dropbear.service
 
 # Service ws-stunnel
 echo -e "${BLUE}Setting up ws-stunnel service...${NC}"
-wget -O /etc/systemd/system/ws-stunnel.service https://raw.githubusercontent.com/Paper890/mysc/main/websocket/ws-stunnel.service
+wget -O /etc/systemd/system/ws-stunnel.service https://raw.githubusercontent.com/Sandhj/QuickTunnel/main/Websocket/service-wsstunnel
 chmod 644 /etc/systemd/system/ws-stunnel.service
 
 # Reload systemd
@@ -67,7 +67,7 @@ fi
 
 # Getting Proxy Template
 echo -e "${BLUE}Downloading ws-nontls.py...${NC}"
-wget -q -O /usr/local/bin/ws-nontls https://raw.githubusercontent.com/Paper890/mysc/main/websocket/ws-nontls.py
+wget -q -O /usr/local/bin/ws-nontls https://raw.githubusercontent.com/Sandhj/QuickTunnel/main/Websocket/ws-nontls.py
 chmod +x /usr/local/bin/ws-nontls
 
 # Installing Service
