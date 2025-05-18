@@ -202,32 +202,6 @@ chmod +x /etc/issue.net
 echo "Banner /etc/issue.net" >> /etc/ssh/sshd_config
 sed -i 's@DROPBEAR_BANNER=""@DROPBEAR_BANNER="/etc/issue.net"@g' /etc/default/dropbear
 
-# download script
-cd /usr/bin
-wget -O speedtest "https://raw.githubusercontent.com/FranataVPN/src/ipuk/ssh/speedtest_cli.py"
-wget -O xp "https://raw.githubusercontent.com/Paper890/mysc/main/ssh/xp.sh"
-wget -O auto-set "https://raw.githubusercontent.com/Paper890/mysc/main/xray/auto-set.sh"
-chmod +x speedtest xp auto-set
-cd
-
-cat > /etc/cron.d/re_otm <<-END
-SHELL=/bin/sh
-PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
-0 7 * * * root /sbin/reboot
-END
-
-cat > /etc/cron.d/xp_otm <<-END
-SHELL=/bin/sh
-PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
-2 0 * * * root /usr/bin/xp
-END
-
-cat > /home/re_otm <<-END
-7
-END
-
-service cron restart >/dev/null 2>&1
-service cron reload >/dev/null 2>&1
 
 # remove unnecessary files
 apt autoclean -y >/dev/null 2>&1
