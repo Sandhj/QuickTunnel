@@ -130,32 +130,7 @@ echo "/usr/sbin/nologin" >> /etc/shells
 /etc/init.d/ssh restart
 /etc/init.d/dropbear restart
 
-# install stunnel
-apt install stunnel4 -y
-cat > /etc/stunnel/stunnel.conf <<-END
-cert = /etc/stunnel/stunnel.pem
-client = no
-socket = a:SO_REUSEADDR=1
-socket = l:TCP_NODELAY=1
-socket = r:TCP_NODELAY=1
-
-;===== Tunnel untuk ws-dropbear =====
-[ws-dropbear]
-accept = 777
-connect = 127.0.0.1:109
-
-;===== Tunnel untuk ws-nontls =====
-[ws-nontls]
-accept = 2096
-connect = 127.0.0.1:8080
-
-;===== Tunnel untuk ws-stunnel =====
-[ws-stunnel]
-accept = 8080
-connect = 127.0.0.1:700
-END
-
-#detail nama perusahaan
+# Detail nama perusahaan
 country=ID
 state=INDONESIA
 locality=JAWATENGAH
@@ -164,15 +139,47 @@ organizationalunit=Blogger
 commonname=none
 email=admin@sedang.my.id
 
-# make a certificate
+# Install stunnel
+apt update && apt install stunnel4 -y
+
+# Konfigurasi stunnel
+cat > /etc/stunnel/stunnel.conf <<-END
+cert = /etc/stunnel/stunnel.pem
+client = no
+socket = a:SO_REUSEADDR=1
+socket = l:TCP_NODELAY=1
+socket = r:TCP_NODELAY=1
+
+[dropbear]
+accept = 222
+connect = 127.0.0.1:22
+
+[dropbear-ssl]
+accept = 777
+connect = 127.0.0.1:109
+
+[ws-stunnel]
+accept = 2096
+connect = 700
+
+[openvpn]
+accept = 442
+connect = 127.0.0.1:1194
+END
+
+# Membuat sertifikat
+mkdir -p /etc/stunnel
+cd /etc/stunnel
 openssl genrsa -out key.pem 2048
 openssl req -new -x509 -key key.pem -out cert.pem -days 1095 \
--subj "/C=$country/ST=$state/L=$locality/O=$organization/OU=$organizationalunit/CN=$commonname/emailAddress=$email"
-cat key.pem cert.pem >> /etc/stunnel/stunnel.pem
+    -subj "/C=$country/ST=$state/L=$locality/O=$organization/OU=$organizationalunit/CN=$commonname/emailAddress=$email"
+cat key.pem cert.pem > stunnel.pem
+chmod 600 stunnel.pem
 
-# konfigurasi stunnel
+# Aktifkan stunnel
 sed -i 's/ENABLED=0/ENABLED=1/g' /etc/default/stunnel4
-/etc/init.d/stunnel4 restart
+systemctl enable stunnel4
+systemctl restart stunnel4
 
 # install fail2ban
 apt -y install fail2ban
