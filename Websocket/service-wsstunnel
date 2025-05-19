@@ -14,7 +14,7 @@ AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 NoNewPrivileges=true
 
 # Gunakan python3 untuk kompatibilitas Debian 12
-ExecStart=/usr/bin/python3 -O /usr/local/bin/ws-stunnel 2097
+ExecStart=/usr/bin/python3 -O /usr/local/bin/ws-stunnel 700
 
 # Restart policy
 Restart=on-failure
