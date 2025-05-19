@@ -84,7 +84,7 @@ User=root
 CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 NoNewPrivileges=true
-ExecStart=/usr/bin/python3 -O /usr/local/bin/ws-nontls
+ExecStart=/usr/bin/python3 -O /usr/local/bin/ws-nontls 8880
 Restart=on-failure
 
 [Install]
