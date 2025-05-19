@@ -9,7 +9,7 @@ import getopt
 
 # Listen
 LISTENING_ADDR = '0.0.0.0'
-LISTENING_PORT = 8888  # Default port jika tidak diberikan
+LISTENING_PORT = sys.argv[1]
 
 # Pass
 PASS = ''
