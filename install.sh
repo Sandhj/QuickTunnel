@@ -41,7 +41,8 @@ echo $domain >> /root/domain
 # ==== Perbaharui System
 apt update -y && apt upgrade -y
 
-# ==== Install Xray
+# ==== Install SSH & Xray
+wget -q ${GITHUB}install/install-ssh.sh && bash install-ssh.sh
 wget -q ${GITHUB}install/install-xray.sh && bash install-xray.sh
 
 # ==== Pasang Tools
