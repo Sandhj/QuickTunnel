@@ -10,7 +10,7 @@ import getopt
 
 # Listen
 LISTENING_ADDR = '127.0.0.1'
-LISTENING_PORT = int(sys.argv[1])
+LISTENING_PORT = 700
 
 # Pass
 PASS = ''
