@@ -50,5 +50,9 @@ wget -q ${GITHUB}install/install-vnstat.sh && bash install-vnstat.sh
 
 # ==== Pasang Tools Limit IP
 cd /etc/xray/
-wget -q ${GITHUB}tools/install-vnstat.
+wget -q ${GITHUB}tools/clients_limit.conf
+wget -q ${GITHUB}tools/check-ip-limit.sh
+cd
+
+
 
