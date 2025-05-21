@@ -45,4 +45,10 @@ apt update -y && apt upgrade -y
 wget -q ${GITHUB}install/install-ssh.sh && bash install-ssh.sh
 wget -q ${GITHUB}install/install-xray.sh && bash install-xray.sh
 
-# ==== Pasang Tools
+# ==== Install Vnstat
+wget -q ${GITHUB}install/install-vnstat.sh && bash install-vnstat.sh
+
+# ==== Pasang Tools Limit IP
+cd /etc/xray/
+wget -q ${GITHUB}tools/install-vnstat.
+
