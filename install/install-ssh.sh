@@ -156,6 +156,20 @@ chmod +x /etc/issue.net
 echo "Banner /etc/issue.net" >> /etc/ssh/sshd_config
 chown -R www-data:www-data /home/vps/public_html
 
+# ==== Python Server Websocket 
+wget -O /usr/local/bin/ws-stunnel ${GITHUB}ssh/ws-stunnel
+chmod +x /usr/local/bin/ws-stunnel
+
+# Service ws-stunnel
+wget -O /etc/systemd/system/ws-stunnel.service ${GITHUB}ssh/service-wsstunnel
+chmod 644 /etc/systemd/system/ws-stunnel.service
+
+# Reload systemd
+systemctl daemon-reload
+systemctl start ws-stunnel
+systemctl restart ws-stunnel
+
+
 
 /etc/init.d/nginx restart >/dev/null 2>&1
 /etc/init.d/ssh restart >/dev/null 2>&1
