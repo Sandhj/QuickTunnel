@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Konfigurasi
-LOG_FILE="/path/to/access.log"            # Ganti dengan path access.log Anda
+LOG_FILE="/var/log/xray/access.log"            # Ganti dengan path access.log Anda
 CLIENT_CONFIG="clients_limit.conf"
 TIME_WINDOW_MINUTES=60                   # Cek dalam X menit terakhir
 SESSION_DURATION_MINUTES=5               # Asumsikan tiap sesi aktif selama X menit
