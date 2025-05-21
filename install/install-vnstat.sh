@@ -26,9 +26,3 @@ chown -R vnstat:vnstat /var/lib/vnstat
 # Enable service
 systemctl enable vnstat
 systemctl restart vnstat
-
-# Cek status
-systemctl status vnstat
-
-# Bersihkan sisa file
-rm -rf vnstat-2.6*
