@@ -19,30 +19,24 @@ read -p "Select Menu : " pilihan
 # Memproses pilihan
 case $pilihan in
     1)
-        ./menu_ssh
+        ./create_ssh.sh
         ;;
     2)
-        ./menu_vmess
+        ./renew_ssh.sh
         ;;
     3)
-        ./menu_vless
+        ./delete_ssh.sh
         ;;
     4)
-        ./menu_trojan
+        ./list_ssh
         ;;
     5)
-        ./menu_bot
+        ./cek_login_ssh
         ;;
     6)
-        ./change_domain
-        ;;
-    7)
-        ./restart_service
-        ;;
-    8)
-        ./menu_lain
+        ./trial_ssh
         ;;
     *)
-        ./menu
+        ./menu_ssh
         ;;
 esac
