@@ -20,6 +20,11 @@ pip3 install requests
 pip3 install schedule
 pip3 install pyTelegramBotAPI
 
+cat <<EOL > run.sh
+#!/bin/bash
+source /opt/autobackup/bot/bin/activate
+python3 /opt/autobackup/auto.py
+EOL
 
 # Buat file script python
 cat <<EOF > auto.py
@@ -138,7 +143,7 @@ Description=Backup and Restore Bot Service
 After=network.target
 
 [Service]
-ExecStart=/usr/bin/python3 /opt/autobackup/auto.py
+ExecStart=/usr/bin/python3 /opt/autobackup/run.sh
 WorkingDirectory=/opt/autobackup
 StandardOutput=inherit
 StandardError=inherit
