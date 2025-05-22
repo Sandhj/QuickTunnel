@@ -1,15 +1,9 @@
 #!/bin/bash
-
-# Pastikan dijalankan sebagai root
-if [ "$EUID" -ne 0 ]; then
-  echo "Silakan jalankan dengan sudo/root."
-  exit 1
-fi
-
+clear
 # Fungsi untuk menampilkan daftar user
 tampilkan_daftar() {
     echo "---------------------------------------"
-    echo "       .:: LIST SSH ACCOUNT ::.        "
+    echo "       .:: RENEW SSH ACCOUNT ::.       "
     echo "---------------------------------------"
     printf "%-3s | %-17s | %-12s\n" "No" "Username" "Expired"
     echo "---------------------------------------"
@@ -29,13 +23,8 @@ tampilkan_daftar() {
 tampilkan_daftar
 
 # Input nomor user
-read -p "Masukkan nomor user yang ingin diperpanjang: " nomor_user
+read -p "Select User " nomor_user
 
-# Validasi input
-if ! [[ "$nomor_user" =~ ^[0-9]+$ ]] || [ "$nomor_user" -le 0 ]; then
-    echo "Nomor user tidak valid."
-    exit 1
-fi
 
 # Ambil username berdasarkan nomor
 selected_user=$(getent passwd | awk -F: '$3 >= 1000 && $3 != 65534 {print $1}' | sed -n "${nomor_user}p")
