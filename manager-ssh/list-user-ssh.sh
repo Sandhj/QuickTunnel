@@ -20,7 +20,7 @@ do
         
         # Jika ada informasi expired, tampilkan
         if [ ! -z "$exp" ]; then
-            printf "| %s. %-20s | %s\n" "$no" "$user" "$exp"
+            printf "%-3s | %-17s | %-12s\n" "$no" "$user" "$exp"
             no=$((no + 1))
         fi
     fi
