@@ -1,8 +1,8 @@
 #!/bin/bash
 clear
 echo "---------------------------------------"
-echo "No. | User              | Expired Date"
-echo "----|-------------------|--------------"
+echo "       .:: LIST SSH ACCOUNT ::.        "
+echo "---------------------------------------"
 
 # Inisialisasi counter
 no=1
