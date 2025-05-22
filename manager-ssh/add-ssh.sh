@@ -1,5 +1,5 @@
 #!/bin/bash
-
+clear
 # Input dari pengguna
 echo -e "┌──────────────────────────────────────┐"
 echo -e "│   =   CREATE NEW SSH ACCOUNT   =     │"
