@@ -23,10 +23,17 @@ username="${users[num-1]}"
 echo "Anda akan menghapus akun: $username"
 read -p "Apakah Anda yakin? (y/n): " confirm
 
+succes="
+┌──────────────────────────────┐
+│   ✅   Berhasil Menghapus    │
+└──────────────────────────────┘
+  User   : $username"
+────────────────────────────────"
+
 if [[ "$confirm" == "y" || "$confirm" == "Y" ]]; then
     userdel -r "$username" &>/dev/null
     if [ $? -eq 0 ]; then
-        echo "Akun $username berhasil dihapus."
+        echo "$succes"
     else
         echo "Gagal menghapus akun $username."
     fi
