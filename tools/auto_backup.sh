@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Minta token bot dan chat ID dari pengguna
+read -p "Nama Identitas Server: " name_server
 read -p "Masukkan Token Bot Telegram Anda: " BOT_TOKEN
 read -p "Masukkan Chat ID Telegram Anda: " CHAT_ID
 
@@ -65,7 +66,7 @@ def copy_files_and_folder():
 
 def create_zip():
     now = datetime.now()
-    zip_filename = os.path.join(destination_dir, f"Tanggal_{now.strftime('%Y-%m-%d')}.zip")
+    zip_filename = os.path.join(destination_dir, f"${name_server}{now.strftime('%Y-%m-%d')}.zip")
     with zipfile.ZipFile(zip_filename, 'w', zipfile.ZIP_DEFLATED) as zipf:
         for root, dirs, files in os.walk(destination_dir):
             for file in files:
