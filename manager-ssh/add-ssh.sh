@@ -1,4 +1,5 @@
 #!/bin/bash
+domain=(cat /etc/xray/domain)
 clear
 # Input dari pengguna
 echo -e "┌──────────────────────────────────────┐"
@@ -34,12 +35,14 @@ animate
 
 # Menampilkan informasi akun
 echo ""
+echo ""
 echo "✅ Akun SSH telah berhasil dibuat!"
 echo "------------------------------------"
 echo "Username : $Login"
 echo "Password : $Pass"
 echo "Expired  : $exp"
 echo "------------------------------------"
+echo "Host : $domain"
 echo "Websocket : 80"
 echo "Websocket (TLS): 443"
 echo "BadVpn  : 7100-7900"
