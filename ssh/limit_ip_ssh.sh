@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Konfigurasi Bot Telegram
-BOT_TOKEN="YOUR_BOT_TOKEN"
-CHAT_ID="YOUR_CHAT_ID"
+BOT_TOKEN="6933923564:AAHC1esXFo0eLFFaRxNv7woM0yEu5-pM6wY"
+CHAT_ID="576495165"
 
 # Lokasi file konfigurasi client
 CONFIG_FILE="/root/client_ssh.conf"
