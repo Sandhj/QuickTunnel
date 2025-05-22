@@ -72,31 +72,20 @@ done
 systemctl restart xray
 
 # ==== Expired SSH
-hariini=`date +%d-%m-%Y`
-cat /etc/shadow | cut -d: -f1,8 | sed /:$/d > /tmp/expirelist.txt
-totalaccounts=`cat /tmp/expirelist.txt | wc -l`
-for((i=1; i<=$totalaccounts; i++ ))
-do
-tuserval=`head -n $i /tmp/expirelist.txt | tail -n 1`
-username=`echo $tuserval | cut -f1 -d:`
-userexp=`echo $tuserval | cut -f2 -d:`
-userexpireinseconds=$(( $userexp * 86400 ))
-tglexp=`date -d @$userexpireinseconds`             
-tgl=`echo $tglexp |awk -F" " '{print $3}'`
-while [ ${#tgl} -lt 2 ]
-do
-tgl="0"$tgl
-done
-while [ ${#username} -lt 15 ]
-do
-username=$username" " 
-done
-bulantahun=`echo $tglexp |awk -F" " '{print $2,$6}'`
-todaystime=`date +%s`
-if [ $userexpireinseconds -ge $todaystime ] ;
-then
-:
-else
-userdel --force $username
-fi
-done
+hapus_user_kadaluarsa() {
+    echo "Memeriksa dan menghapus akun yang sudah kadaluarsa..."
+    for user in $(cut -f1 -d: /etc/passwd); do
+        expire_date=$(chage -l "$user" 2>/dev/null | grep "Account expires" | awk -F": " '{print $2}')
+        if [[ "$expire_date" != "never" && "$expire_date" != "" ]]; then
+            # Konversi tanggal expired dan tanggal hari ini ke format detik sejak epoch
+            expire_seconds=$(date -d "$expire_date" +%s 2>/dev/null)
+            today_seconds=$(date +%s)
+
+            if [[ "$expire_seconds" -lt "$today_seconds" ]]; then
+                echo "Akun $user telah kadaluarsa. Menghapus..."
+                userdel -r "$user" &>/dev/null
+            fi
+        fi
+    done
+}
+hapus_user_kadaluarsa
