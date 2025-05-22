@@ -18,6 +18,20 @@ echo -e "$Pass\n$Pass\n" | passwd $Login &> /dev/null
 # Mendapatkan tanggal expired akun
 exp=$(chage -l $Login | grep "Account expires" | awk -F": " '{print $2}')
 
+#Animsi Loading
+animate() {
+  local delay=0.1
+  local bar=""
+  for ((i=0; i<20; i++)); do
+    bar+="-"
+    printf "\r[%-20s]" "$bar"
+    sleep $delay
+  done
+}
+
+echo "Creating New Account..."
+animate
+
 # Menampilkan informasi akun
 echo ""
 echo "✅ Akun SSH telah berhasil dibuat!"
