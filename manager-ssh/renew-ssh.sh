@@ -1,0 +1,63 @@
+#!/bin/bash
+
+# Pastikan dijalankan sebagai root
+if [ "$EUID" -ne 0 ]; then
+  echo "Silakan jalankan dengan sudo/root."
+  exit 1
+fi
+
+# Fungsi untuk menampilkan daftar user
+tampilkan_daftar() {
+    echo "---------------------------------------"
+    echo "       .:: LIST SSH ACCOUNT ::.        "
+    echo "---------------------------------------"
+    printf "%-3s | %-17s | %-12s\n" "No" "Username" "Expired"
+    echo "---------------------------------------"
+
+    no=1
+    getent passwd | awk -F: '$3 >= 1000 && $3 != 65534 {print $1}' | while read -r username; do
+        exp=$(chage -l "$username" 2>/dev/null | grep "Account expires" | awk -F": " '{print $2}')
+        if [ ! -z "$exp" ]; then
+            printf "%-3s | %-17s | %-12s\n" "$no" "$username" "$exp"
+            no=$((no + 1))
+        fi
+    done
+
+    echo "---------------------------------------"
+}
+
+tampilkan_daftar
+
+# Input nomor user
+read -p "Masukkan nomor user yang ingin diperpanjang: " nomor_user
+
+# Validasi input
+if ! [[ "$nomor_user" =~ ^[0-9]+$ ]] || [ "$nomor_user" -le 0 ]; then
+    echo "Nomor user tidak valid."
+    exit 1
+fi
+
+# Ambil username berdasarkan nomor
+selected_user=$(getent passwd | awk -F: '$3 >= 1000 && $3 != 65534 {print $1}' | sed -n "${nomor_user}p")
+
+if [ -z "$selected_user" ]; then
+    echo "User dengan nomor $nomor_user tidak ditemukan."
+    exit 1
+fi
+
+# Input durasi perpanjangan
+read -p "Berapa hari ingin diperpanjang? " durasi_hari
+
+if ! [[ "$durasi_hari" =~ ^[0-9]+$ ]] || [ "$durasi_hari" -le 0 ]; then
+    echo "Durasi hari tidak valid."
+    exit 1
+fi
+
+# Hitung tanggal expired baru
+expired_date=$(date -d "+$durasi_hari days" +"%Y-%m-%d")
+
+# Lakukan perubahan expired date
+chage -E "$expired_date" "$selected_user"
+
+echo ""
+echo "✅ Masa aktif akun '$selected_user' berhasil diperpanjang hingga: $expired_date"
