@@ -4,21 +4,22 @@
 read -p "Masukkan Token Bot Telegram Anda: " BOT_TOKEN
 read -p "Masukkan Chat ID Telegram Anda: " CHAT_ID
 
-# Perbarui paket dan instal Python3-pip jika belum ada
-apt-get update
+# Buat direktori proyek
+mkdir -p /opt/autobackup
+cd /opt/autobackup
+
+# Buat venv untuk Bot
 apt install python3.11-venv
+python3 -m venv bot
+source bot/bin/activate
 
 apt-get install -y python3-pip
-
 
 # Instal modul Python yang diperlukan
 pip3 install requests
 pip3 install schedule
 pip3 install pyTelegramBotAPI
 
-# Buat direktori proyek
-mkdir -p /opt/autobackup
-cd /opt/autobackup
 
 # Buat file script python
 cat <<EOF > auto.py
