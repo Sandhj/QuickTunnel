@@ -49,4 +49,9 @@ expired_date=$(date -d "+$durasi_hari days" +"%Y-%m-%d")
 chage -E "$expired_date" "$selected_user"
 
 echo ""
-echo "✅ Masa aktif akun '$selected_user' berhasil diperpanjang hingga: $expired_date"
+echo "┌──────────────────────────────┐"
+echo "│   ✅   Berhasil Perpanjang  │"
+echo "└──────────────────────────────┘"
+echo "  User        : $selected_user"
+echo "  New Expired : $expired_date
+echo "────────────────────────────────"
