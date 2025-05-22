@@ -5,9 +5,7 @@ mapfile -t users < <(getent passwd | awk -F: '$3 >= 1000 && $3 != 65534 {print $
 
 clear
 echo "---------------------------------------"
-echo "       .:: LIST SSH ACCOUNT ::.        "
-echo "---------------------------------------"
-printf "%-3s | %-17s\n" "No" "Username"
+echo "      .:: DELETE SSH ACCOUNT ::.       "
 echo "---------------------------------------"
 
 # Tampilkan daftar user
