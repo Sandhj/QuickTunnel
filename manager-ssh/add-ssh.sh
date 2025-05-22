@@ -1,9 +1,13 @@
 #!/bin/bash
 
 # Input dari pengguna
-read -p "Masukkan username yang ingin dibuat: " Login
-read -p "Masukkan password untuk user $Login: " Pass
-read -p "Masukkan masa aktif akun dalam hari: " masaaktif
+echo -e "┌──────────────────────────────────────┐"
+echo -e "│   =   CREATE NEW SSH ACCOUNT   =     │"
+echo -e "└──────────────────────────────────────┘"
+echo ""
+read -p "Username : " Login
+read -p "Password : " Pass
+read -p "Expired : " masaaktif
 
 # Membuat user dengan masa aktif tertentu dan shell /bin/false
 useradd -e $(date -d "$masaaktif days" +"%Y-%m-%d") -s /bin/false -M $Login
@@ -16,9 +20,13 @@ exp=$(chage -l $Login | grep "Account expires" | awk -F": " '{print $2}')
 
 # Menampilkan informasi akun
 echo ""
-echo "Akun SSH telah berhasil dibuat!"
-echo "-----------------------------"
+echo "✅ Akun SSH telah berhasil dibuat!"
+echo "------------------------------------"
 echo "Username : $Login"
 echo "Password : $Pass"
 echo "Expired  : $exp"
-echo "-----------------------------"
+echo "------------------------------------"
+echo "Websocket : 80"
+echo "Websocket (TLS): 443"
+echo "BadVpn  : 7100-7900"
+echo "------------------------------------"
