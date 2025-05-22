@@ -19,16 +19,16 @@ read -p "Select Menu : " pilihan
 # Memproses pilihan
 case $pilihan in
     1)
-        ./create_ssh.sh
+        ./add-ssh.sh
         ;;
     2)
-        ./renew_ssh.sh
+        ./renew-ssh.sh
         ;;
     3)
-        ./delete_ssh.sh
+        ./delete-ssh.sh
         ;;
     4)
-        ./list_ssh
+        ./list_user_ssh
         ;;
     5)
         ./cek_login_ssh
