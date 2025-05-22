@@ -5,6 +5,7 @@ read -p "Masukkan Token Bot Telegram Anda: " BOT_TOKEN
 read -p "Masukkan Chat ID Telegram Anda: " CHAT_ID
 
 # Buat direktori proyek
+mkdir -p /tmp/backup
 mkdir -p /opt/autobackup
 cd /opt/autobackup
 
@@ -160,6 +161,8 @@ systemctl enable auto
 systemctl start auto
 
 echo "Autobackup Berhasil Di install" 
+
+deactivate 
 
 cd
 rm auto.sh
