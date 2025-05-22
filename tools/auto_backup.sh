@@ -143,7 +143,7 @@ Description=Backup and Restore Bot Service
 After=network.target
 
 [Service]
-ExecStart=/usr/bin/python3 /opt/autobackup/run.sh
+ExecStart=/usr/bin/bash /opt/autobackup/run.sh
 WorkingDirectory=/opt/autobackup
 StandardOutput=inherit
 StandardError=inherit
