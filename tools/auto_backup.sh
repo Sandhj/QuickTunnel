@@ -6,7 +6,10 @@ read -p "Masukkan Chat ID Telegram Anda: " CHAT_ID
 
 # Perbarui paket dan instal Python3-pip jika belum ada
 apt-get update
+apt install python3.11-venv
+
 apt-get install -y python3-pip
+
 
 # Instal modul Python yang diperlukan
 pip3 install requests
