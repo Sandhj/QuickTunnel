@@ -27,7 +27,7 @@ succes="
 ┌──────────────────────────────┐
 │   ✅   Berhasil Menghapus    │
 └──────────────────────────────┘
-  User   : $username"
+  User   : $username
 ────────────────────────────────"
 
 if [[ "$confirm" == "y" || "$confirm" == "Y" ]]; then
