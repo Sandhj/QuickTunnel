@@ -7,13 +7,13 @@ YELLOW='\033[0;33m'
 NC='\033[0m' # No Color
 
 echo -e "${BLUE}   ┌──────────────────────────────────────┐${NC}"
-echo -e "${BLUE}   │       =   INFORMASI SERVER  =        │${NC}"
+echo -e "${BLUE}   │       .::   MENU SSH MANAGER  ::.        │${NC}"
 echo -e "${BLUE}   └──────────────────────────────────────┘${NC}"
-echo -e "    1. Create New Account         : ${YELLOW}$OS_PRETTY${NC}"
-echo -e "    2. Renew Account: ${YELLOW}$ISP${NC}"
-echo -e "    3. Delete Account            : ${YELLOW}$country${NC}"
-echo -e "    4. List Account                  : ${YELLOW}$IP${NC}"
-echo -e "    5. Cek Login              : ${YELLOW}$domain${NC}"
+echo -e "    1. Create New Account         "
+echo -e "    2. Renew Account"
+echo -e "    3. Delete Account       "
+echo -e "    4. List Account                "
+echo -e "    5. Cek Login          "
 echo -e "${BLUE}   └──────────────────────────────────────┘${NC}"
 echo -e ""
 read -p "Select Menu : " pilihan
