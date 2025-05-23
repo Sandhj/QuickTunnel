@@ -33,7 +33,7 @@ case $pilihan in
         trial-ssh.sh
         ;;
     0)
-        menu.sh
+        menu
         ;;
     *)
         menu_ssh.sh
