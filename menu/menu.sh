@@ -48,30 +48,30 @@ read -p "Select Menu : " pilihan
 # Memproses pilihan
 case $pilihan in
     1)
-        ./menu_ssh.sh
+        menu_ssh.sh
         ;;
     2)
-        ./menu_vmess.sh
+        menu_vmess.sh
         ;;
     3)
-        ./menu_vless.sh
+        menu_vless.sh
         ;;
     4)
-        ./menu_trojan.sh
+        menu_trojan.sh
         ;;
     5)
-        ./menu_bot.sh
+        menu_bot.sh
         ;;
     6)
-        ./change_domain.sh
+        change_domain.sh
         ;;
     7)
-        ./restart_service.sh
+        restart_service.sh
         ;;
     8)
-        ./menu_lain.sh
+        menu_lain.sh
         ;;
     *)
-        ./menu
+        menu.sh
         ;;
 esac
