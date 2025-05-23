@@ -18,24 +18,24 @@ read -p "Select Menu (0 To Back Menu) : " pilihan
 # Memproses pilihan
 case $pilihan in
     1)
-        ./add-trojan.sh
+        add-trojan.sh
         ;;
     2)
-        ./renew-trojan.sh
+        renew-trojan.sh
         ;;
     3)
-        ./delete-trojan.sh
+        delete-trojan.sh
         ;;
     4)
-        ./list-user-trojan.sh
+        list-user-trojan.sh
         ;;
     5)
-        ./trial-trojan.sh
+        trial-trojan.sh
         ;;
     0)
-        ./menu.sh
+        menu.sh
         ;;
     *)
-        ./menu_trojan.sh
+        menu_trojan.sh
         ;;
 esac
