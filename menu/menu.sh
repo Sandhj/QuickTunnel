@@ -17,6 +17,7 @@ domain=$(cat /etc/xray/domain)
 vmess=$(( $(grep -c '##' /etc/xray/config.json 2>/dev/null) / 2 ))
 vless=$(( $(grep -c '#?' /etc/xray/config.json 2>/dev/null) / 2 ))
 trojan=$(( $(grep -c '#!' /etc/xray/config.json 2>/dev/null) / 2 ))
+ssh="$(awk -F: '$3 >= 1000 && $1 != "nobody" {print $1}' /etc/passwd | wc -l)"
 
 echo -e "${BLUE}   ┌──────────────────────────────────────┐${NC}"
 echo -e "${BLUE}   │       =   INFORMASI SERVER  =        │${NC}"
