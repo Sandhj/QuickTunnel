@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # Export Link Github 
-GITHUB=
+GITHUB="https://raw.githubusercontent.com/Sandhj/QuickTunnel/main/"
 
 # Install autobackup l
-wget -q ${GITHUB}install/install-ssh.sh && bash install-ssh.sh
+wget -q ${GITHUB}tools/install-ssh.sh && bash install-ssh.sh
 
 # Install LimitIP
