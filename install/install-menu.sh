@@ -1,7 +1,4 @@
 #!/bin/bash
-# Hapus Semua Menu jika ada 
-#!/bin/bash
-
 # Direktori tempat file berada
 DIR="/usr/bin"
 
