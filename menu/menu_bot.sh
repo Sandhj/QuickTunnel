@@ -1,0 +1,29 @@
+#!/bin/bash
+clear
+# Definisi Warna
+BLUE='\033[0;34m'
+YELLOW='\033[0;33m'
+NC='\033[0m' # No Color
+echo -e "${BLUE}   ┌──────────────────────────────────────┐${NC}"
+echo -e "${BLUE}   |      .::   MENU BOT MANAGER  ::.     │${NC}"
+echo -e "${BLUE}   └──────────────────────────────────────┘${NC}"
+echo -e "      1. Instal Autobackup & Limit IP Xray            "
+echo -e "      2. Install Bot Manager Admin                 "
+echo -e "${BLUE}   └──────────────────────────────────────┘${NC}"
+echo -e ""
+read -p "Select Menu (0 To Back Menu) : " pilihan
+# Memproses pilihan
+case $pilihan in
+    1)
+        ./install-autobackup.sh
+        ;;
+    2)
+        ./install-bot-manager.sh
+        ;;
+    0)
+        ./menu.sh
+        ;;
+    *)
+        ./menu_bot.sh
+        ;;
+esac
