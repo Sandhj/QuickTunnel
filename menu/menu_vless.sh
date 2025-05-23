@@ -28,15 +28,15 @@ case $pilihan in
         ./delete-vless.sh
         ;;
     4)
-        ./list-user-vless
+        ./list-user-vless.sh
         ;;
     5)
-        ./trial-vless
+        ./trial-vless.sh
         ;;
     0)
         ./menu.sh
         ;;
     *)
-        ./menu_vless
+        ./menu_vless.sh
         ;;
 esac
