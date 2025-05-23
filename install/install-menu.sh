@@ -1,50 +1,34 @@
 #!/bin/bash
-# Direktori tempat file berada
-DIR="/usr/bin"
+# Hapus File Lama
+rm -f /usr/bin/menu
+rm -f /usr/bin/menu_bot.sh
+rm -f /usr/bin/menu_lain.sh
+rm -f /usr/bin/menu_ssh.sh
+rm -f /usr/bin/menu_vmess.sh
+rm -f /usr/bin/menu_vless.sh
+rm -f /usr/bin/menu_trojan.sh
+rm -f /usr/bin/add-vmess.sh
+rm -f /usr/bin/delete-vmess.sh
+rm -f /usr/bin/list-user-vmess.sh
+rm -f /usr/bin/renew-vmess.sh
+rm -f /usr/bin/trial-vmess.sh
+rm -f /usr/bin/add-ssh.sh
+rm -f /usr/bin/delete-ssh.sh
+rm -f /usr/bin/list-user-ssh.sh
+rm -f /usr/bin/renew-ssh.sh
+rm -f /usr/bin/trial-ssh.sh
+rm -f /usr/bin/add-vless.sh
+rm -f /usr/bin/delete-vless.sh
+rm -f /usr/bin/list-user-vless.sh
+rm -f /usr/bin/renew-vless.sh
+rm -f /usr/bin/trial-vless.sh
+rm -f /usr/bin/add-trojan.sh
+rm -f /usr/bin/delete-trojan.sh
+rm -f /usr/bin/list-user-trojan.sh
+rm -f /usr/bin/renew-trojan.sh
+rm -f /usr/bin/trial-trojan.sh
 
-# Daftar file yang akan dihapus
-FILES=(
-    "menu"
-    "menu_bot.sh"
-    "menu_lain.sh"
-    "menu_ssh.sh"
-    "menu_vmess.sh"
-    "menu_vless.sh"
-    "menu_trojan.sh"
-    "add-vmess.sh"
-    "delete-vmess.sh"
-    "list-user-vmess.sh"
-    "renew-vmess.sh"
-    "trial-vmess.sh"
-    "add-ssh.sh"
-    "delete-ssh.sh"
-    "list-user-ssh.sh"
-    "renew-ssh.sh"
-    "trial-ssh.sh"
-    "add-vless.sh"
-    "delete-vless.sh"
-    "list-user-vless.sh"
-    "renew-vless.sh"
-    "trial-vless.sh"
-    "add-trojan.sh"
-    "delete-trojan.sh"
-    "list-user-trojan.sh"
-    "renew-trojan.sh"
-    "trial-trojan.sh"
-)
-
-# Loop dan hapus setiap file, arahkan output ke /dev/null untuk menyembunyikannya
-for FILE in "${FILES[@]}"; do
-    if [ -f "$DIR/$FILE" ]; then
-        echo "[INFO] Menghapus: $DIR/$FILE"
-        sudo rm -f "$DIR/$FILE" > /dev/null 2>&1
-    else
-        echo "Tidak ada yang perlu di hapus"
-    fi
-done
-
-
-# Buat dan masuk ke direktori "menu"
+# Ambil File Baru
 mkdir -p ~/menu
 cd ~/menu || { echo "Gagal masuk ke direktori menu"; exit 1; }
 URL="https://raw.githubusercontent.com/Sandhj/QuickTunnel/main/menu"
