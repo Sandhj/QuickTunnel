@@ -37,7 +37,7 @@ case $pilihan in
         ./trial_ssh
         ;;
     0)
-        ./trial_ssh
+        ./menu.sh
         ;;
     *)
         ./menu_ssh
