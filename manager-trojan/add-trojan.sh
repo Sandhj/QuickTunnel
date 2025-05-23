@@ -93,3 +93,7 @@ echo "$LINK_GRPC"
 echo "-----------------------------------------------"
 
 systemctl restart xray
+
+echo "Tekan Enter Untuk Kembali (↩️)"
+read -s
+menu
