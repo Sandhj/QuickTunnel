@@ -18,24 +18,24 @@ read -p "Select Menu (0 To Back Menu) : " pilihan
 # Memproses pilihan
 case $pilihan in
     1)
-        ./add-vless.sh
+        add-vless.sh
         ;;
     2)
-        ./renew-vless.sh
+        renew-vless.sh
         ;;
     3)
-        ./delete-vless.sh
+        delete-vless.sh
         ;;
     4)
-        ./list-user-vless.sh
+        list-user-vless.sh
         ;;
     5)
-        ./trial-vless.sh
+        trial-vless.sh
         ;;
     0)
-        ./menu.sh
+        menu.sh
         ;;
     *)
-        ./menu_vless.sh
+        menu_vless.sh
         ;;
 esac
