@@ -47,3 +47,6 @@ echo "Websocket : 80"
 echo "Websocket (TLS): 443"
 echo "BadVpn  : 7100-7900"
 echo "------------------------------------"
+echo "Tekan Enter Untuk Kembali (↩️)"
+read -s
+menu
