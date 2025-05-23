@@ -5,7 +5,7 @@ tampilkan_user() {
     clear
     echo ""
     echo "----------------------------------------------------"
-    echo "               DELETE TROJAN ACCOUNT         "
+    echo "           .:: DELETE TROJAN ACCOUNT ::.        "
     echo "----------------------------------------------------"
     echo "No. | Username            | Expired"
     echo "----|---------------------|-------------------------"
