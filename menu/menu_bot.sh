@@ -15,7 +15,7 @@ read -p "Select Menu (0 To Back Menu) : " pilihan
 # Memproses pilihan
 case $pilihan in
     1)
-        ./install-autobackup.sh
+        wget -q https://raw.githubusercontent.com/Sandhj/QuickTunnel/main/install/install-autobackup.sh && bash install-autobackup.sh
         ;;
     2)
         ./install-bot-manager.sh
