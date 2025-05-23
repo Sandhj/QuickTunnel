@@ -9,6 +9,8 @@ counter=1
 clear
 echo ""
 echo "---------------------------------------"
+echo "      .:: LIST VLESS ACCOUNT ::.        "
+echo "---------------------------------------"
 echo "No. | User              | Expired Date"
 echo "----|-------------------|--------------"
 
@@ -26,3 +28,6 @@ grep '##' /etc/xray/config.json | while read -r line; do
     fi
 done
 echo "---------------------------------------"
+echo "Tekan Enter Untuk Kembali (↩️)"
+read -s
+menu
