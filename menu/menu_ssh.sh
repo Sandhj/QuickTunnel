@@ -11,8 +11,7 @@ echo -e "      1. Create New Account              "
 echo -e "      2. Renew Account                   "
 echo -e "      3. Delete Account                  "
 echo -e "      4. List Account                    "
-echo -e "      5. Cek Login                       "
-echo -e "      6. Trial Account 1 Hari          "
+echo -e "      5. Trial Account 1 Hari          "
 echo -e "${BLUE}   └──────────────────────────────────────┘${NC}"
 echo -e ""
 read -p "Select Menu (0 Back to Menu) : " pilihan
@@ -28,18 +27,15 @@ case $pilihan in
         ./delete-ssh.sh
         ;;
     4)
-        ./list_user_ssh
+        ./list-user-ssh.sh
         ;;
     5)
-        ./cek_login_ssh
-        ;;
-    6)
-        ./trial_ssh
+        ./trial-ssh.sh
         ;;
     0)
         ./menu.sh
         ;;
     *)
-        ./menu_ssh
+        ./menu_ssh.sh
         ;;
 esac
