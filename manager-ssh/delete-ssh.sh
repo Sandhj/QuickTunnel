@@ -41,4 +41,6 @@ else
     echo "Penghapusan dibatalkan."
 fi
 echo ""
-read -p "Tekan Enter untuk keluar..."
+echo "Tekan Enter Untuk Kembali (↩️)"
+read -s
+menu
