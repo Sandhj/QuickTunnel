@@ -18,24 +18,24 @@ read -p "Select Menu (0 To Back Menu) : " pilihan
 # Memproses pilihan
 case $pilihan in
     1)
-        ./add-vmess.sh
+        add-vmess.sh
         ;;
     2)
-        ./renew-vmess.sh
+        renew-vmess.sh
         ;;
     3)
-        ./delete-vmess.sh
+        delete-vmess.sh
         ;;
     4)
-        ./list-user-vmess.sh
+        list-user-vmess.sh
         ;;
     5)
-        ./trial-vmess.sh
+        trial-vmess.sh
         ;;
     0)
-        ./menu.sh
+        menu.sh
         ;;
     *)
-        ./menu_vmess.sh
+        menu_vmess.sh
         ;;
 esac
