@@ -5,7 +5,7 @@ tampilkan_user() {
     clear
     echo ""
     echo "----------------------------------------------------"
-    echo "             .:: RENEW VLESS ACCOUNT ::.            "
+    echo "             .:: RENEW VMESS ACCOUNT ::.            "
     echo "----------------------------------------------------"
     echo "No. | Username            | Expired  "
     echo "----|---------------------|-------------------------"
