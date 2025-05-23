@@ -4,7 +4,7 @@ mkdir -p ~/menu
 cd ~/menu || { echo "Gagal masuk ke direktori menu"; exit 1; }
 URL="https://raw.githubusercontent.com/Sandhj/QuickTunnel/main/menu"
 # Unduh semua file menu utama
-wget -q "$URL/menu.sh" && chmod +x menu.sh
+wget -q "$URL/menu" && chmod +x menu
 wget -q "$URL/menu_bot.sh" && chmod +x menu_bot.sh
 wget -q "$URL/menu_lain.sh" && chmod +x menu_lain.sh
 wget -q "$URL/menu_ssh.sh" && chmod +x menu_ssh.sh
