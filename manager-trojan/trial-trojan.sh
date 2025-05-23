@@ -10,12 +10,6 @@ echo ""
 user=Trial-$RANDOM_HURUF
 jumlah_hari=1
 
-# Memastikan input adalah angka positif
-if ! [[ "$jumlah_hari" =~ ^[0-9]+$ ]]; then
-  echo "Input harus berupa angka positif."
-  exit 1
-fi
-
 # === Setting Limit IP
 # Lokasi file konfigurasi
 FILE="/etc/xray/limitip/clients_limit.conf"
