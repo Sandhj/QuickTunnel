@@ -9,7 +9,7 @@ counter=1
 clear
 echo ""
 echo "---------------------------------------"
-echo "      .:: LIST VLESS ACCOUNT ::.        "
+echo "      .:: LIST VMESS ACCOUNT ::.        "
 echo "---------------------------------------"
 echo "No. | User              | Expired Date"
 echo "----|-------------------|--------------"
