@@ -48,28 +48,28 @@ read -p "Select Menu : " pilihan
 # Memproses pilihan
 case $pilihan in
     1)
-        ./menu_ssh
+        ./menu_ssh.sh
         ;;
     2)
-        ./menu_vmess
+        ./menu_vmess.sh
         ;;
     3)
-        ./menu_vless
+        ./menu_vless.sh
         ;;
     4)
-        ./menu_trojan
+        ./menu_trojan.sh
         ;;
     5)
-        ./menu_bot
+        ./menu_bot.sh
         ;;
     6)
-        ./change_domain
+        ./change_domain.sh
         ;;
     7)
-        ./restart_service
+        ./restart_service.sh
         ;;
     8)
-        ./menu_lain
+        ./menu_lain.sh
         ;;
     *)
         ./menu
