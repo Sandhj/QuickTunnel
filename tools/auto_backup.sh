@@ -5,6 +5,9 @@ read -p "Nama Identitas Server: " name_server
 read -p "Masukkan Token Bot Telegram Anda: " BOT_TOKEN
 read -p "Masukkan Chat ID Telegram Anda: " CHAT_ID
 
+echo $BOT_TOKEN >> /root/domain
+echo $CHAT_ID >> /root/domain
+
 # Buat direktori proyek
 mkdir -p /tmp/backup
 mkdir -p /opt/autobackup
