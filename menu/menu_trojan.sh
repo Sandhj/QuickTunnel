@@ -33,7 +33,7 @@ case $pilihan in
         trial-trojan.sh
         ;;
     0)
-        menu.sh
+        menu
         ;;
     *)
         menu_trojan.sh
