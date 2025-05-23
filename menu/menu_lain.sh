@@ -18,24 +18,24 @@ read -p "Select Menu (0 To Back Menu) : " pilihan
 # Memproses pilihan
 case $pilihan in
     1)
-        ./cert-domain.sh
+        cert-domain.sh
         ;;
     2)
-        ./change-domain.sh
+        change-domain.sh
         ;;
     3)
-        ./vnstat
+        vnstat
         ;;
     4)
-        ./status-service.sh
+        status-service.sh
         ;;
     5)
-        ./reboot
+        reboot
         ;;
     0)
-        ./menu.sh
+        menu.sh
         ;;
     *)
-        ./menu_lain.sh
+        menu_lain.sh
         ;;
 esac
