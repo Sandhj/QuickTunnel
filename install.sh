@@ -46,7 +46,7 @@ wget -q ${GITHUB}install/install-ssh.sh && bash install-ssh.sh
 wget -q ${GITHUB}install/install-xray.sh && bash install-xray.sh
 
 # ==== Install Menu
-wget -q ${GITHUB}install/install-menu.sh && bash install-xray.sh
+wget -q ${GITHUB}install/install-menu.sh && bash install-menu.sh
 
 # ==== Install Vnstat
 wget -q ${GITHUB}install/install-vnstat.sh && bash install-vnstat.sh
