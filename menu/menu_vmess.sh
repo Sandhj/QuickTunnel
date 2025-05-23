@@ -35,6 +35,7 @@ case $pilihan in
         ;;
     0)
         ./menu.sh
+        ;;
     *)
         ./menu_vmess
         ;;
