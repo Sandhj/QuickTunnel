@@ -73,6 +73,6 @@ case $pilihan in
         menu_lain.sh
         ;;
     *)
-        menu.sh
+        menu
         ;;
 esac
