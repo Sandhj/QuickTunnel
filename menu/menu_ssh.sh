@@ -15,7 +15,7 @@ echo -e "      5. Cek Login                       "
 echo -e "      6. Trial Account 60 Menit          "
 echo -e "${BLUE}   └──────────────────────────────────────┘${NC}"
 echo -e ""
-read -p "Select Menu : " pilihan
+read -p "Select Menu (0 Back to Menu) : " pilihan
 # Memproses pilihan
 case $pilihan in
     1)
@@ -34,6 +34,9 @@ case $pilihan in
         ./cek_login_ssh
         ;;
     6)
+        ./trial_ssh
+        ;;
+    0)
         ./trial_ssh
         ;;
     *)
