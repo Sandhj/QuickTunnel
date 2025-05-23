@@ -12,7 +12,7 @@ echo -e "      2. Renew Account                   "
 echo -e "      3. Delete Account                  "
 echo -e "      4. List Account                    "
 echo -e "      5. Cek Login                       "
-echo -e "      6. Trial Account 60 Menit          "
+echo -e "      6. Trial Account 1 Hari          "
 echo -e "${BLUE}   └──────────────────────────────────────┘${NC}"
 echo -e ""
 read -p "Select Menu (0 To Back Menu) : " pilihan
