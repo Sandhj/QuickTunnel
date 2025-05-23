@@ -1,8 +1,7 @@
 #!/bin/bash
 
-# Minta token bot dan chat ID dari pengguna
-read -p "Masukkan Token Bot Telegram Anda: " BOT_TOKEN
-read -p "Masukkan Chat ID Telegram Anda: " CHAT_ID
+BOT_TOKEN=(cat /root/token)
+CHAT_ID=(cat /root/chatid)
 
 cat <<EOL > /etc/xray/limitip.sh
 #!/bin/bash
