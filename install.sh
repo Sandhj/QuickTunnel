@@ -36,6 +36,8 @@ echo -e "└──────────────────────�
 echo ""
 read -p "Type Your Domain : " domain
 
+mkdir -p /etc/xray/
+echo "example=1" >> /etc/xray/clients_limit.conf
 echo $domain >> /root/domain
 
 # ==== Perbaharui System
@@ -44,9 +46,23 @@ apt update -y && apt upgrade -y
 # ==== Install SSH & Xray
 wget -q ${GITHUB}install/install-ssh.sh && bash install-ssh.sh
 wget -q ${GITHUB}install/install-xray.sh && bash install-xray.sh
-
 # ==== Install Menu
 wget -q ${GITHUB}install/install-menu.sh && bash install-menu.sh
-
 # ==== Install Vnstat
 wget -q ${GITHUB}install/install-vnstat.sh && bash install-vnstat.sh
+
+# ==== Memasang Default Menu saat Boot
+cat> /root/.profile << END
+# ~/.profile: executed by Bourne-compatible login shells.
+
+if [ "$BASH" ]; then
+  if [ -f ~/.bashrc ]; then
+    . ~/.bashrc
+  fi
+fi
+
+mesg n || true
+clear
+menu
+END
+chmod 644 /root/.profile
