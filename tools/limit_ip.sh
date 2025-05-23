@@ -90,6 +90,8 @@ cat <<EOL > /etc/xray/clients_limit.conf
 example=1
 EOL
 
-# Tambahkan ke crontab jika belum ada
-CRON_JOB="*/5 * * * * /etc/xray/limitip.sh"
-( crontab -l 2>/dev/null | grep -v "/etc/xray/limitip.sh" ; echo "$CRON_JOB" ) | crontab -
+# Cron job entry
+CRON_JOB="*/5 * * * * /bin/bash /etc/xray/limitip.sh"
+
+# Cek apakah cron job sudah ada
+(crontab -l 2>/dev/null | grep -F "$CRON_JOB") >/dev/null 2>&1
