@@ -28,7 +28,7 @@ case $pilihan in
         ./delete-trojan.sh
         ;;
     4)
-        ./list-user_trojan.sh
+        ./list-user-trojan.sh
         ;;
     5)
         ./trial-trojan.sh
@@ -37,6 +37,6 @@ case $pilihan in
         ./menu.sh
         ;;
     *)
-        ./menu-trojan
+        ./menu_trojan.sh
         ;;
 esac
