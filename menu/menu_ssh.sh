@@ -18,24 +18,24 @@ read -p "Select Menu (0 Back to Menu) : " pilihan
 # Memproses pilihan
 case $pilihan in
     1)
-        ./add-ssh.sh
+        add-ssh.sh
         ;;
     2)
-        ./renew-ssh.sh
+        renew-ssh.sh
         ;;
     3)
-        ./delete-ssh.sh
+        delete-ssh.sh
         ;;
     4)
-        ./list-user-ssh.sh
+        list-user-ssh.sh
         ;;
     5)
-        ./trial-ssh.sh
+        trial-ssh.sh
         ;;
     0)
-        ./menu.sh
+        menu.sh
         ;;
     *)
-        ./menu_ssh.sh
+        menu_ssh.sh
         ;;
 esac
