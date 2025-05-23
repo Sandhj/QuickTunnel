@@ -23,7 +23,7 @@ tampilkan_daftar() {
 tampilkan_daftar
 
 # Input nomor user
-read -p "Select User " nomor_user
+read -p "Select User : " nomor_user
 
 
 # Ambil username berdasarkan nomor
@@ -35,7 +35,7 @@ if [ -z "$selected_user" ]; then
 fi
 
 # Input durasi perpanjangan
-read -p "Berapa hari ingin diperpanjang? " durasi_hari
+read -p "Berapa hari ingin diperpanjang? : " durasi_hari
 
 if ! [[ "$durasi_hari" =~ ^[0-9]+$ ]] || [ "$durasi_hari" -le 0 ]; then
     echo "Durasi hari tidak valid."
@@ -53,7 +53,7 @@ echo "┌───────────────────────�
 echo "│   ✅   Berhasil Perpanjang  │"
 echo "└──────────────────────────────┘"
 echo "  User        : $selected_user"
-echo "  New Expired : $expired_date
+echo "  New Expired : $expired_date"
 echo "────────────────────────────────"
 echo "Tekan Enter Untuk Kembali (↩️)"
 read -s
