@@ -33,7 +33,7 @@ case $pilihan in
         reboot
         ;;
     0)
-        menu.sh
+        menu
         ;;
     *)
         menu_lain.sh
