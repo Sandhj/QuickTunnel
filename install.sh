@@ -36,8 +36,8 @@ echo -e "└──────────────────────�
 echo ""
 read -p "Type Your Domain : " domain
 
-mkdir -p /etc/xray/
-echo "example=1" >> /etc/xray/clients_limit.conf
+mkdir -p /etc/xray/limitip
+echo "example=1" >> /etc/xray/limitip/clients_limit.conf
 echo $domain >> /root/domain
 
 # ==== Perbaharui System
