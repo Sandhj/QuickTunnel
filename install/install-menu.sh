@@ -18,18 +18,22 @@ FILES=(
     "delete-vmess.sh"
     "list-user-vmess.sh"
     "renew-vmess.sh"
+    "trial-vmess.sh"
     "add-ssh.sh"
     "delete-ssh.sh"
     "list-user-ssh.sh"
     "renew-ssh.sh"
+    "trial-ssh.sh"
     "add-vless.sh"
     "delete-vless.sh"
     "list-user-vless.sh"
     "renew-vless.sh"
+    "trial-vless.sh"
     "add-trojan.sh"
     "delete-trojan.sh"
     "list-user-trojan.sh"
     "renew-trojan.sh"
+    "trial-trojan.sh"
 )
 
 # Loop dan hapus setiap file, arahkan output ke /dev/null untuk menyembunyikannya
@@ -61,21 +65,28 @@ wget -q "$URL2/manager-vmess/add-vmess.sh" && chmod +x add-vmess.sh
 wget -q "$URL2/manager-vmess/delete-vmess.sh" && chmod +x delete-vmess.sh
 wget -q "$URL2/manager-vmess/list-user-vmess.sh" && chmod +x list-user-vmess.sh
 wget -q "$URL2/manager-vmess/renew-vmess.sh" && chmod +x renew-vmess.sh
+wget -q "$URL2/manager-vmess/trial-vmess.sh" && chmod +x trial-vmess.sh
+
 # SSH
 wget -q "$URL2/manager-ssh/add-ssh.sh" && chmod +x add-ssh.sh
 wget -q "$URL2/manager-ssh/delete-ssh.sh" && chmod +x delete-ssh.sh
 wget -q "$URL2/manager-ssh/list-user-ssh.sh" && chmod +x list-user-ssh.sh
 wget -q "$URL2/manager-ssh/renew-ssh.sh" && chmod +x renew-ssh.sh
+wget -q "$URL2/manager-ssh/trial-ssh.sh" && chmod +x trial-ssh.sh
+
 # VLESS
 wget -q "$URL2/manager-vless/add-vless.sh" && chmod +x add-vless.sh
 wget -q "$URL2/manager-vless/delete-vless.sh" && chmod +x delete-vless.sh
 wget -q "$URL2/manager-vless/list-user-vless.sh" && chmod +x list-user-vless.sh
 wget -q "$URL2/manager-vless/renew-vless.sh" && chmod +x renew-vless.sh
+wget -q "$URL2/manager-vless/trial-vless.sh" && chmod +x trial-vless.sh
+
 # TROJAN
 wget -q "$URL2/manager-trojan/add-trojan.sh" && chmod +x add-trojan.sh
 wget -q "$URL2/manager-trojan/delete-trojan.sh" && chmod +x delete-trojan.sh
 wget -q "$URL2/manager-trojan/list-user-trojan.sh" && chmod +x list-user-trojan.sh
 wget -q "$URL2/manager-trojan/renew-trojan.sh" && chmod +x renew-trojan.sh
+wget -q "$URL2/manager-trojan/trial-trojan.sh" && chmod +x trial-trojan.sh
 
 # Pindahkan semua file dari ~/menu ke /usr/bin/
 sudo mv -f ~/menu/* /usr/bin/
