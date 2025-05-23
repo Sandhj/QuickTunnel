@@ -33,7 +33,7 @@ case $pilihan in
         trial-vless.sh
         ;;
     0)
-        menu.sh
+        menu
         ;;
     *)
         menu_vless.sh
