@@ -5,6 +5,8 @@ tampilkan_user() {
     clear
     echo ""
     echo "----------------------------------------------------"
+    echo "            .:: DELETE VMESS ACCOUNT ::.            "
+    echo "----------------------------------------------------"
     echo "No. | Username            | Expired"
     echo "----|---------------------|-------------------------"
 
@@ -69,3 +71,6 @@ echo "  User   : $user_to_delete"
 echo "────────────────────────────────"
 
 systemctl restart xray
+echo "Tekan Enter Untuk Kembali (↩️)"
+read -s
+menu
