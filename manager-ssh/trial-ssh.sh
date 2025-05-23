@@ -1,5 +1,5 @@
 #!/bin/bash
-domain=(cat /etc/xray/domain)
+domain=$(cat /etc/xray/domain)
 RANDOM_HURUF=$(cat /dev/urandom | tr -dc 'A-Z' | head -c4)
 export RANDOM_HURUF
 
