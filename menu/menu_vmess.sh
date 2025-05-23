@@ -28,15 +28,15 @@ case $pilihan in
         ./delete-vmess.sh
         ;;
     4)
-        ./list-user-vmess
+        ./list-user-vmess.sh
         ;;
     5)
-        ./trial-vmess
+        ./trial-vmess.sh
         ;;
     0)
         ./menu.sh
         ;;
     *)
-        ./menu_vmess
+        ./menu_vmess.sh
         ;;
 esac
