@@ -21,7 +21,7 @@ case $pilihan in
         install-bot-manager.sh
         ;;
     0)
-        menu.sh
+        menu
         ;;
     *)
         menu_bot.sh
