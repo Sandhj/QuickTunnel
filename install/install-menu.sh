@@ -1,4 +1,48 @@
 #!/bin/bash
+# Hapus Semua Menu jika ada 
+#!/bin/bash
+
+# Direktori tempat file berada
+DIR="/usr/bin"
+
+# Daftar file yang akan dihapus
+FILES=(
+    "menu"
+    "menu_bot.sh"
+    "menu_lain.sh"
+    "menu_ssh.sh"
+    "menu_vmess.sh"
+    "menu_vless.sh"
+    "menu_trojan.sh"
+    "add-vmess.sh"
+    "delete-vmess.sh"
+    "list-user-vmess.sh"
+    "renew-vmess.sh"
+    "add-ssh.sh"
+    "delete-ssh.sh"
+    "list-user-ssh.sh"
+    "renew-ssh.sh"
+    "add-vless.sh"
+    "delete-vless.sh"
+    "list-user-vless.sh"
+    "renew-vless.sh"
+    "add-trojan.sh"
+    "delete-trojan.sh"
+    "list-user-trojan.sh"
+    "renew-trojan.sh"
+)
+
+# Loop dan hapus setiap file, arahkan output ke /dev/null untuk menyembunyikannya
+for FILE in "${FILES[@]}"; do
+    if [ -f "$DIR/$FILE" ]; then
+        echo "[INFO] Menghapus: $DIR/$FILE"
+        sudo rm -f "$DIR/$FILE" > /dev/null 2>&1
+    else
+        echo "Tidak ada yang perlu di hapus"
+    fi
+done
+
+
 # Buat dan masuk ke direktori "menu"
 mkdir -p ~/menu
 cd ~/menu || { echo "Gagal masuk ke direktori menu"; exit 1; }
