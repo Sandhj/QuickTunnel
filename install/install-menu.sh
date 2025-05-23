@@ -34,7 +34,7 @@ wget -q "$URL2/manager-trojan/list-user-trojan.sh" && chmod +x list-user-trojan.
 wget -q "$URL2/manager-trojan/renew-trojan.sh" && chmod +x renew-trojan.sh
 
 # Pindahkan semua file dari ~/menu ke /usr/bin/
-sudo mv -f ~/menu/*.sh /usr/bin/
+sudo mv -f ~/menu/* /usr/bin/
 
 # Hapus direktori menu setelah pemindahan
 rm -rf ~/menu
