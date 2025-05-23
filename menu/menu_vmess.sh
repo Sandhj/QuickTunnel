@@ -28,10 +28,10 @@ case $pilihan in
         ./delete-vmess.sh
         ;;
     4)
-        ./list_user_vmess
+        ./list-user-vmess
         ;;
     5)
-        ./trial_vmess
+        ./trial-vmess
         ;;
     0)
         ./menu.sh
