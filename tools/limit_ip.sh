@@ -72,7 +72,7 @@ while IFS='=' read -r email limit; do
 
     if (( overlap > limit )); then
         msg="🔴 <b>Pelanggaran Batas Device</b>\n"
-        msg+="Email: <code>$email</code>\n"
+        msg+="Username: <code>$email</code>\n"
         msg+="Batas IP: $limit\n"
         msg+="IP Aktif Bersamaan: $overlap\n"
         msg+="Status: ⚠️ Melebihi batas!"
@@ -87,5 +87,5 @@ done < "$CLIENT_CONFIG"
 EOL
 
 cat <<EOL > /etc/xray/clients_limit.conf
-admin=1
+example=1
 EOL
