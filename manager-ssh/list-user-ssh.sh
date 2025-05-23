@@ -20,3 +20,6 @@ getent passwd | while IFS=: read -r username pass uid gid gecos home shell; do
 done
 
 echo "---------------------------------------"
+echo "Tekan Enter Untuk Kembali (↩️)"
+read -s
+menu
