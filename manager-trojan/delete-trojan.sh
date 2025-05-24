@@ -4,20 +4,17 @@
 tampilkan_user() {
     clear
     echo ""
-    echo "----------------------------------------------------"
-    echo "           .:: DELETE TROJAN ACCOUNT ::.        "
-    echo "----------------------------------------------------"
-    echo "No. | Username            | Expired"
-    echo "----|---------------------|-------------------------"
-
+    echo "  ┌──────────────────────────────────────┐"
+    echo "  │     .:: DELETE TROJAN ACCOUNT ::.    │"
+    echo "  └──────────────────────────────────────┘"
+    echo "   No. | Username            | Expired"
+    echo "  -----|---------------------|------------"
     declare -A seen_users
     counter=1
-
     # Baca baris dengan '#!' dari config.json
     grep '#!' /etc/xray/config.json | while read -r line; do
         user=$(echo "$line" | awk '{print $2}')
         expired=$(echo "$line" | awk '{print $3}')
-
         # Hindari duplikat dalam tampilan
         if [[ -z "${seen_users[$user]}" ]]; then
             seen_users[$user]=1
@@ -25,9 +22,8 @@ tampilkan_user() {
             ((counter++))
         fi
     done
-
     total_users=$((counter - 1))
-    echo "----------------------------------------------------"
+    echo "  ----------------------------------------"
     echo ""
 }
 
