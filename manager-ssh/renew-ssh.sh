@@ -50,7 +50,7 @@ chage -E "$expired_date" "$selected_user"
 
 echo ""
 echo "┌──────────────────────────────┐"
-echo "│   ✅   Berhasil Perpanjang  │"
+echo "│   ✅   Berhasil Perpanjang   │"
 echo "└──────────────────────────────┘"
 echo "  User        : $selected_user"
 echo "  New Expired : $expired_date"
