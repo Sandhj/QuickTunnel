@@ -10,17 +10,6 @@ echo ""
 user=Trial-$RANDOM_HURUF
 jumlah_hari=1
 
-# === Setting Limit IP
-# Lokasi file konfigurasi
-FILE="/etc/xray/limitip/clients_limit.conf"
-
-if ! [[ "$jumlah" =~ ^[0-9]+$ ]]; then
-  echo "Jumlah koneksi harus berupa angka!"
-  exit 1
-fi
-# Tambahkan data ke file
-echo "$user=$jumlah" >> $FILE
-
 
 
 # === Tambahkan Akun Ke Json
