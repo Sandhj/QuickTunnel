@@ -1,7 +1,7 @@
 #!/bin/bash
 
-BOT_TOKEN=(cat /root/token)
-CHAT_ID=(cat /root/chatid)
+BOT_TOKEN=$(cat /root/token)
+CHAT_ID=$(cat /root/chatid)
 
 cat <<EOL > /etc/xray/limitip.sh
 #!/bin/bash
