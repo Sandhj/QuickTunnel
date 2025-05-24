@@ -7,18 +7,18 @@ NC='\033[0m' # No Color
 echo -e "${BLUE}   ┌──────────────────────────────────────┐${NC}"
 echo -e "${BLUE}   |      .::   MENU TOOLS MANAGER  ::.   │${NC}"
 echo -e "${BLUE}   └──────────────────────────────────────┘${NC}"
-echo -e "      1. Cert Domain              "
+echo -e "      1. Update Script             "
 echo -e "      2. Change Domain                  "
 echo -e "      3. Vnstat                  "
 echo -e "      4. Status Service                   "
-echo -e "      5. Reboot Server          "
+echo -e "      5. Cert Domain          "
 echo -e "${BLUE}   └──────────────────────────────────────┘${NC}"
 echo -e ""
 read -p "Select Menu (0 To Back Menu) : " pilihan
 # Memproses pilihan
 case $pilihan in
     1)
-        cert-domain.sh
+        install-menu.sh
         ;;
     2)
         change-domain.sh
@@ -30,6 +30,9 @@ case $pilihan in
         status-service.sh
         ;;
     5)
+        cert-domain.sh
+        ;;
+    6)
         reboot
         ;;
     0)
