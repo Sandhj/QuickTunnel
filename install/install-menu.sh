@@ -40,6 +40,7 @@ wget -q "$URL/menu_ssh.sh" && chmod +x menu_ssh.sh
 wget -q "$URL/menu_vmess.sh" && chmod +x menu_vmess.sh
 wget -q "$URL/menu_vless.sh" && chmod +x menu_vless.sh
 wget -q "$URL/menu_trojan.sh" && chmod +x menu_trojan.sh
+
 URL2="https://raw.githubusercontent.com/Sandhj/QuickTunnel/main"
 # VMESS
 wget -q "$URL2/manager-vmess/add-vmess.sh" && chmod +x add-vmess.sh
@@ -68,6 +69,11 @@ wget -q "$URL2/manager-trojan/delete-trojan.sh" && chmod +x delete-trojan.sh
 wget -q "$URL2/manager-trojan/list-user-trojan.sh" && chmod +x list-user-trojan.sh
 wget -q "$URL2/manager-trojan/renew-trojan.sh" && chmod +x renew-trojan.sh
 wget -q "$URL2/manager-trojan/trial-trojan.sh" && chmod +x trial-trojan.sh
+
+# Install Tools
+URL3="https://raw.githubusercontent.com/Sandhj/QuickTunnel/main/tools"
+
+wget -q "$URL2/change-domain.sh" && chmod +x change-domain.sh
 
 # Pindahkan semua file dari ~/menu ke /usr/bin/
 sudo mv -f ~/menu/* /usr/bin/
