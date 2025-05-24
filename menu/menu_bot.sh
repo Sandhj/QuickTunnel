@@ -7,7 +7,7 @@ NC='\033[0m' # No Color
 echo -e "${BLUE}   ┌──────────────────────────────────────┐${NC}"
 echo -e "${BLUE}   |      .::   MENU BOT MANAGER  ::.     │${NC}"
 echo -e "${BLUE}   └──────────────────────────────────────┘${NC}"
-echo -e "      1. Instal Autobackup & Limit IP Xray            "
+echo -e "      1. Instal Autobackup             "
 echo -e "      2. Install Bot Manager Admin                 "
 echo -e "${BLUE}   └──────────────────────────────────────┘${NC}"
 echo -e ""
