@@ -4,16 +4,14 @@
 mapfile -t users < <(getent passwd | awk -F: '$3 >= 1000 && $3 != 65534 {print $1}')
 
 clear
-echo "---------------------------------------"
-echo "      .:: DELETE SSH ACCOUNT ::.       "
-echo "---------------------------------------"
-
+echo -e "  ┌──────────────────────────────────────┐"
+echo -e "  │      .:: DELETE SSH ACCOUNT ::.      │"
+echo -e "  └──────────────────────────────────────┘"
 # Tampilkan daftar user
 for i in "${!users[@]}"; do
-    printf "%-3s | %-17s\n" "$((i+1))" "${users[i]}"
+    printf "%-2s | %-17s \n" "    $((i+1))" "${users[i]}"
 done
-
-echo "---------------------------------------"
+echo "  ---------------------------------------"
 echo ""
 read -p "Masukkan nomor user dari daftar: " num  
 # Ambil username berdasarkan nomor
