@@ -12,7 +12,8 @@ echo -e "      2. Change Domain                  "
 echo -e "      3. Vnstat                  "
 echo -e "      4. Status Service                   "
 echo -e "      5. Cert Domain          "
-echo -e "      6. Reboot Server          "
+echo -e "      6. Change Banner SSH         "
+echo -e "      7. Reboot Server          "
 echo -e "${BLUE}   └──────────────────────────────────────┘${NC}"
 echo -e ""
 read -p "Select Menu (0 To Back Menu) : " pilihan
@@ -34,10 +35,13 @@ case $pilihan in
         cert-domain.sh
         ;;
     6)
+        nano /etc/issue.net
+        ;;
+    7)
         reboot
         ;;
     0)
-        menu
+        reboot
         ;;
     *)
         menu_lain.sh
