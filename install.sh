@@ -76,3 +76,7 @@ do
     sleep 0.1 #Delay Antar Huruf
 done
 sleep 2
+
+echo "Tekan Enter Untuk Menuju Menu Utama(↩️)"
+read -s
+menu
