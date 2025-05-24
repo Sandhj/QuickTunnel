@@ -73,10 +73,8 @@ END
 chmod 644 /root/.profile
 
 # ===== Pasang Cronjob
-# Cron job limitIP
 CRON_JOB="*/5 * * * * /bin/bash /etc/xray/limitip.sh"
-(crontab -l 2>/dev/null | grep -F "$CRON_JOB") >/dev/null 2>&1
-
+(crontab -l 2>/dev/null; echo "$CRON_JOB") | crontab -
 
 # ============== END SCRIPT==================
 clear
