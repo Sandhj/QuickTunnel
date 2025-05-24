@@ -3,12 +3,13 @@
 # Fungsi untuk menampilkan daftar user
 tampilkan_user() {
     clear
-    echo ""
-    echo "----------------------------------------------------"
-    echo "           .:: RENEW TROJAN ACCOUNT ::.             "
-    echo "----------------------------------------------------"
-    echo "No. | Username            | Expired  "
-    echo "----|---------------------|-------------------------"
+echo ""
+echo "  ┌──────────────────────────────────────┐"
+echo "  │      .:: RENEW TROJAN ACCOUNT ::.    │"
+echo "  └──────────────────────────────────────┘"
+echo "   No. | User              | Expired Date"
+echo "  -----|-------------------|--------------"
+    
 
     declare -A seen_users
     counter=1
@@ -27,7 +28,7 @@ tampilkan_user() {
     done
 
     total_users=$((counter - 1))
-    echo "----------------------------------------------------"
+    echo "  ----------------------------------------"
     echo ""
 }
 
