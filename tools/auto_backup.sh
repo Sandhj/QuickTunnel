@@ -1,10 +1,5 @@
 #!/bin/bash
 
-# Minta token bot dan chat ID dari pengguna
-read -p "Nama Identitas Server: " name_server
-read -p "Masukkan Token Bot Telegram Anda: " BOT_TOKEN
-read -p "Masukkan Chat ID Telegram Anda: " CHAT_ID
-
 # Buat direktori proyek
 mkdir -p /tmp/backup
 mkdir -p /opt/autobackup
@@ -41,8 +36,9 @@ import telebot
 from datetime import datetime
 
 # Informasi bot Telegram
-bot_token = "${BOT_TOKEN}"
-chat_id = "${CHAT_ID}"
+bot_token ="$(cat /etc/xray/token)
+chat_id = "$(cat /etc/xray/chatid)
+name_server=$(cat /etc/xray/name)
 bot = telebot.TeleBot(bot_token)
 
 # Lokasi direktori dan file/folder yang ingin disalin
