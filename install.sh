@@ -19,7 +19,6 @@ if curl -s "$GITHUB_URL" | grep -q "$VPS_IP"; then
     # Cek tanggal kadaluarsa
     if [[ "$EXPIRY" > "$TODAY" || "$EXPIRY" == "$TODAY" ]]; then
         echo "Akses diberikan untuk IP: $VPS_IP"
-        exit 0
     else
         echo "Akses ditolak. Tanggal kadaluarsa: $EXPIRY"
         exit 1
