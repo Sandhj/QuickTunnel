@@ -12,6 +12,7 @@ IP=$(curl -s ifconfig.me)
 ISP=$(curl -s "http://ip-api.com/json/" | jq -r '.isp')
 country=$(curl -s "http://ip-api.com/json/" | jq -r '.country')
 domain=$(cat /etc/xray/domain)
+version=$(cat /etc/xray/version)
 
 # Export Jumlah Akun
 vmess=$(( $(grep -c '##' /etc/xray/config.json 2>/dev/null) / 2 ))
@@ -43,6 +44,7 @@ echo -e "     ${YELLOW}2. VMESS MANAGER    6. CHANGE DOMAIN ${NC}"
 echo -e "     ${YELLOW}3. VLESS MANAGER    7. RESTART SERV. ${NC}"
 echo -e "     ${YELLOW}4. TROJAN MANAGER   8. MENU LAIN ${NC}"
 echo -e "${BLUE}   └──────────────────────────────────────┘${NC}"
+echo -e "                          Version Script : $version"
 echo -e ""
 read -p "Select Menu : " pilihan
 
