@@ -24,7 +24,7 @@ grep '#?' /etc/xray/config.json | while read -r line; do
     # Cek apakah user sudah pernah ditampilkan
     if [[ -z "${seen_users[$user]}" ]]; then
         seen_users[$user]=1  # Tandai bahwa user ini sudah ditampilkan
-        printf "%-3s | %-17s | %-12s\n" "$counter" "$user" "$expired"
+        printf "%-6s | %-17s | %-12s\n" "   $counter" "$user" "$expired"
         ((counter++))
     fi
 done
