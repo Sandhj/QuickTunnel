@@ -1,7 +1,12 @@
 #!/bin/bash
 
-# Export Link Github 
-GITHUB="https://raw.githubusercontent.com/Sandhj/QuickTunnel/main/"
+# Setup Data Bot
+read -p "NAMA SERVER : " name_server
+read -p "BOT TOKEN   : " token
+read -p "CHAT ID     : " chatid
 
-# Install autobackup l
-wget -q ${GITHUB}tools/auto_backup.sh && bash auto_backup.sh
+echo $name_server >> /etc/xray/name_server
+echo $token >> /etc/xray/token
+echo $chatid >> /etc/xray/chatid
+
+systemctl restart auto
