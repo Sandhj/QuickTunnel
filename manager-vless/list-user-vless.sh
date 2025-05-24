@@ -8,11 +8,12 @@ counter=1
 
 clear
 echo ""
-echo "---------------------------------------"
-echo "      .:: LIST VLESS ACCOUNT ::.            "
-echo "---------------------------------------"
-echo "No. | User              | Expired Date"
-echo "----|-------------------|--------------"
+
+echo "  ┌──────────────────────────────────────┐"
+echo "  │      .:: LIST VMESS ACCOUNT ::.      │"
+echo "  └──────────────────────────────────────┘"
+echo "   No. | User              | Expired Date"
+echo "  -----|-------------------|--------------"
 
 # Baca setiap baris yang mengandung '##' dari file config.json
 grep '#?' /etc/xray/config.json | while read -r line; do
@@ -27,7 +28,7 @@ grep '#?' /etc/xray/config.json | while read -r line; do
         ((counter++))
     fi
 done
-echo "---------------------------------------"
+echo "  ----------------------------------------"
 
 echo "Tekan Enter Untuk Kembali (↩️)"
 read -s
