@@ -12,6 +12,7 @@ echo -e "      2. Change Domain                  "
 echo -e "      3. Vnstat                  "
 echo -e "      4. Status Service                   "
 echo -e "      5. Cert Domain          "
+echo -e "      6. Reboot Server          "
 echo -e "${BLUE}   └──────────────────────────────────────┘${NC}"
 echo -e ""
 read -p "Select Menu (0 To Back Menu) : " pilihan
