@@ -39,6 +39,7 @@ read -p "Type Your Domain : " domain
 mkdir -p /etc/xray/limitip
 echo "example=1" >> /etc/xray/limitip/clients_limit.conf
 echo $domain >> /root/domain
+echo $domain >> /etc/xray/domain
 
 # ==== Perbaharui System
 apt update -y && apt upgrade -y
