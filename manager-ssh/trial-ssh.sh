@@ -6,7 +6,7 @@ export RANDOM_HURUF
 clear
 # Input dari pengguna
 echo -e "┌──────────────────────────────────────┐"
-echo -e "│   =   CREATE NEW SSH ACCOUNT   =     │"
+echo -e "│    .:: CREATE TRIAL SSH ACCOUNT ::.  │"
 echo -e "└──────────────────────────────────────┘"
 echo ""
 Login=Trial-$RANDOM_HURUF
