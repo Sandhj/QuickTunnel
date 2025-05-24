@@ -1,5 +1,5 @@
 #!/bin/bash
-domain=(cat /etc/xray/domain)
+domain=$(cat /etc/xray/domain)
 clear
 # Input dari pengguna
 echo -e "┌──────────────────────────────────────┐"
