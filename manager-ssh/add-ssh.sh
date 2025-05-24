@@ -3,7 +3,7 @@ domain=$(cat /etc/xray/domain)
 clear
 # Input dari pengguna
 echo -e "┌──────────────────────────────────────┐"
-echo -e "│   =   CREATE NEW SSH ACCOUNT   =     │"
+echo -e "│    .:: CREATE NEW SSH ACCOUNT ::.    │"
 echo -e "└──────────────────────────────────────┘"
 echo ""
 read -p "Username : " Login
