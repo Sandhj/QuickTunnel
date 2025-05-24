@@ -4,7 +4,7 @@ export RANDOM_HURUF
 
 clear
 echo -e "┌──────────────────────────────────────┐"
-echo -e "│   =   CREATE TRIAL VLESS ACCOUNT   = │"
+echo -e "│  .:: CREATE TRIAL VLESS ACCOUNT ::.  │"
 echo -e "└──────────────────────────────────────┘"
 echo ""
 user=Trial-$RANDOM_HURUF
