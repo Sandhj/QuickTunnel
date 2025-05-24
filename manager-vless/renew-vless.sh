@@ -4,11 +4,12 @@
 tampilkan_user() {
     clear
     echo ""
-    echo "----------------------------------------------------"
-    echo "            .:: RENEW VLESS ACCOUNT ::.            "
-    echo "----------------------------------------------------"
-    echo "No. | Username            | Expired  "
-    echo "----|---------------------|-------------------------"
+    
+    echo "  ┌──────────────────────────────────────┐"
+    echo "  │      .:: RENEW VMESS ACCOUNT ::.     │"
+    echo "  └──────────────────────────────────────┘"
+    echo "   No. | Username            | Expired  "
+    echo "  -----|---------------------|-------------"
 
     declare -A seen_users
     counter=1
@@ -21,13 +22,13 @@ tampilkan_user() {
         # Hindari duplikat dalam tampilan
         if [[ -z "${seen_users[$user]}" ]]; then
             seen_users[$user]=1
-            printf "%-3s | %-19s | %-15s\n" "$counter" "$user" "$expired"
+            printf "%-5s | %-19s | %-15s\n" "   $counter" "$user" "$expired"
             ((counter++))
         fi
     done
 
     total_users=$((counter - 1))
-    echo "----------------------------------------------------"
+    echo "  -----------------------------------------"
     echo ""
 }
 
