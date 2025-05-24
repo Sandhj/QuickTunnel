@@ -7,8 +7,8 @@ TIME_WINDOW_MINUTES=60                   # Cek dalam X menit terakhir
 SESSION_DURATION_MINUTES=5               # Asumsikan tiap sesi aktif selama X menit
 
 # Konfigurasi Telegram Bot
-TELEGRAM_BOT_TOKEN="6933923564:AAHC1esXFo0eLFFaRxNv7woM0yEu5-pM6wY"  # Ganti dengan token bot Anda
-TELEGRAM_CHAT_ID="576495165"             # Ganti dengan chat ID tujuan
+TELEGRAM_BOT_TOKEN="$(cat /etc/xray/token)"  # Ganti dengan token bot Anda
+TELEGRAM_CHAT_ID="$(cat /etc/xray/chatid)"             # Ganti dengan chat ID tujuan
 
 # Fungsi kirim notifikasi ke Telegram
 send_telegram_alert() {
