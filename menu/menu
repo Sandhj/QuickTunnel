@@ -64,7 +64,7 @@ case $pilihan in
         menu_bot.sh
         ;;
     6)
-        change_domain.sh
+        change-domain.sh
         ;;
     7)
         restart_service.sh
