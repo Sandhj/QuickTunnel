@@ -4,7 +4,7 @@ export RANDOM_HURUF
 
 clear
 echo -e "┌──────────────────────────────────────┐"
-echo -e "│   =   CREATE NEW VMESS ACCOUNT   =   │"
+echo -e "│   =   CREATE TRIAL VMESS ACCOUNT   = │"
 echo -e "└──────────────────────────────────────┘"
 echo ""
 user=Trial-$RANDOM_HURUF
