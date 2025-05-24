@@ -8,18 +8,16 @@ counter=1
 
 clear
 echo ""
-echo "---------------------------------------"
-echo "      .:: LIST TROJAN ACCOUNT ::.      " 
-echo "---------------------------------------"
-echo "No. | User              | Expired Date"
-echo "----|-------------------|--------------"
-
+echo "  ┌──────────────────────────────────────┐"
+echo "  │      .:: LIST TROJAN ACCOUNT ::.     │"
+echo "  └──────────────────────────────────────┘"
+echo "   No. | User              | Expired Date"
+echo "  -----|-------------------|--------------"
 # Baca setiap baris yang mengandung '##' dari file config.json
 grep '#!' /etc/xray/config.json | while read -r line; do
     # Ekstrak username dan expired date
     user=$(echo "$line" | awk '{print $2}')
     expired=$(echo "$line" | awk '{print $3}')
-
     # Cek apakah user sudah pernah ditampilkan
     if [[ -z "${seen_users[$user]}" ]]; then
         seen_users[$user]=1  # Tandai bahwa user ini sudah ditampilkan
@@ -27,7 +25,7 @@ grep '#!' /etc/xray/config.json | while read -r line; do
         ((counter++))
     fi
 done
-echo "---------------------------------------"
+echo "  ----------------------------------------"
 echo "Tekan Enter Untuk Kembali (↩️)"
 read -s
 menu
