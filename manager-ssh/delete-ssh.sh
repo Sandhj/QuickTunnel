@@ -11,7 +11,7 @@ echo -e "  └──────────────────────
 for i in "${!users[@]}"; do
     printf "%-2s | %-17s \n" "    $((i+1))" "${users[i]}"
 done
-echo "  ---------------------------------------"
+echo "  ─────────────────────────────────"
 echo ""
 read -p "Masukkan nomor user dari daftar: " num  
 # Ambil username berdasarkan nomor
