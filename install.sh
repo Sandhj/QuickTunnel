@@ -66,3 +66,13 @@ clear
 menu
 END
 chmod 644 /root/.profile
+
+clear
+echo""
+TEXTEND="Script Already Installed On Your System | Thanks for Using QuickTunnel Script " 
+for (( i=0; i<${#TEXT2}; i++ ))
+do
+    echo -n -e "${green}${TEXTEND:$i:1}${NC}"
+    sleep 0.1 #Delay Antar Huruf
+done
+sleep 2
