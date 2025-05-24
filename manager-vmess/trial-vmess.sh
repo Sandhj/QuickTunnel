@@ -3,10 +3,10 @@ RANDOM_HURUF=$(cat /dev/urandom | tr -dc 'A-Z' | head -c4)
 export RANDOM_HURUF
 
 clear
-echo -e "┌──────────────────────────────────────┐"
-echo -e "│   =   CREATE TRIAL VMESS ACCOUNT   = │"
-echo -e "└──────────────────────────────────────┘"
-echo ""
+
+echo "  ┌──────────────────────────────────────┐"
+echo "  │  .:: CREATE TRIAL VMESS ACCOUNT ::.  │"
+echo "  └──────────────────────────────────────┘"echo ""
 user=Trial-$RANDOM_HURUF
 jumlah_hari=1
 
