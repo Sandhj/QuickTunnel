@@ -9,7 +9,7 @@ tampilkan_user() {
     echo "  │     .:: DELETE VMESS ACCOUNT ::.     │"
     echo "  └──────────────────────────────────────┘"
     echo "   No. | Username            | Expired"
-    echo "  -----|---------------------|-------------"
+    echo "  -----|---------------------|------------"
 
     declare -A seen_users
     counter=1
@@ -28,7 +28,7 @@ tampilkan_user() {
     done
 
     total_users=$((counter - 1))
-    echo "  -----------------------------------------"
+    echo "  ----------------------------------------"
     echo ""
 }
 
