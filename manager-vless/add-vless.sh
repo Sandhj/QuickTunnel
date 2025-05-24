@@ -1,7 +1,7 @@
 #!/bin/bash
 clear
 echo -e "┌──────────────────────────────────────┐"
-echo -e "│   =   CREATE NEW VLESS ACCOUNT   =   │"
+echo -e "│  .:: CREATE NEW VLESS ACCOUNT ::.    │"
 echo -e "└──────────────────────────────────────┘"
 echo ""
 read -p "Username : " user
