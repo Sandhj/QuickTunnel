@@ -51,6 +51,11 @@ wget -q ${GITHUB}install/install-xray.sh && bash install-xray.sh
 wget -q ${GITHUB}install/install-menu.sh && bash install-menu.sh
 # ==== Install Vnstat
 wget -q ${GITHUB}install/install-vnstat.sh && bash install-vnstat.sh
+# Install Limit IP Xray
+cd /etc/xray/
+wget -q ${GITHUB}tools/check_ip_limit.sh 
+wget -q ${GITHUB}tools/clients_limit.conf 
+cd
 
 # ==== Memasang Default Menu saat Boot
 cat> /root/.profile << END
