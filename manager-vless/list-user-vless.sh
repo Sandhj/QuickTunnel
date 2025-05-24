@@ -10,7 +10,7 @@ clear
 echo ""
 
 echo "  ┌──────────────────────────────────────┐"
-echo "  │      .:: LIST VMESS ACCOUNT ::.      │"
+echo "  │      .:: LIST VLESS ACCOUNT ::.      │"
 echo "  └──────────────────────────────────────┘"
 echo "   No. | User              | Expired Date"
 echo "  -----|-------------------|--------------"
