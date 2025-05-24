@@ -73,7 +73,7 @@ wget -q "$URL2/manager-trojan/trial-trojan.sh" && chmod +x trial-trojan.sh
 # Install Tools
 URL3="https://raw.githubusercontent.com/Sandhj/QuickTunnel/main/tools"
 
-wget -q "$URL2/change-domain.sh" && chmod +x change-domain.sh
+wget -q "$URL3/change-domain.sh" && chmod +x change-domain.sh
 
 # Pindahkan semua file dari ~/menu ke /usr/bin/
 sudo mv -f ~/menu/* /usr/bin/
