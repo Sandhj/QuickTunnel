@@ -9,7 +9,7 @@ tampilkan_user() {
     echo "  │     .:: DELETE VLESS ACCOUNT ::.     │"
     echo "  └──────────────────────────────────────┘"
     echo "   No. | Username            | Expired"
-    echo "  -----|---------------------|-------------"
+    echo "  -----|---------------------|------------"
     
 
     declare -A seen_users
@@ -29,7 +29,7 @@ tampilkan_user() {
     done
 
     total_users=$((counter - 1))
-    echo "  -----------------------------------------"
+    echo "  ----------------------------------------"
     echo ""
 }
 
