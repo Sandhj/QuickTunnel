@@ -7,12 +7,12 @@ NC='\033[0m' # No Color
 echo -e "${BLUE}   ┌──────────────────────────────────────┐${NC}"
 echo -e "${BLUE}   |      .::   MENU TOOLS MANAGER  ::.   │${NC}"
 echo -e "${BLUE}   └──────────────────────────────────────┘${NC}"
-echo -e "      1. Update Script             "
-echo -e "      2. Change Domain                  "
-echo -e "      3. Vnstat                  "
-echo -e "      4. Status Service                   "
-echo -e "      5. Cert Domain          "
-echo -e "      6. Change Banner SSH         "
+echo -e "      1. Update Script          "
+echo -e "      2. Status Service         "
+echo -e "      3. Restart Service        "
+echo -e "      4. Change Domain          "
+echo -e "      5. Update Domain          "
+echo -e "      6. Banner SSH             "
 echo -e "      7. Reboot Server          "
 echo -e "${BLUE}   └──────────────────────────────────────┘${NC}"
 echo -e ""
@@ -23,13 +23,13 @@ case $pilihan in
         install-menu.sh
         ;;
     2)
-        change-domain.sh
+        status-service.sh
         ;;
     3)
-        vnstat
+        restart-service.sh
         ;;
     4)
-        status-service.sh
+        change-domain.sh
         ;;
     5)
         cert-domain.sh
@@ -41,7 +41,7 @@ case $pilihan in
         reboot
         ;;
     0)
-        reboot
+        menu
         ;;
     *)
         menu_lain.sh
