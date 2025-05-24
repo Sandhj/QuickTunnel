@@ -67,7 +67,7 @@ animate() {
 echo "Creating New Account..."
 animate
 
-clear
+
 echo ""
 echo ""
 # Tampilkan hasil
