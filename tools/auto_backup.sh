@@ -36,8 +36,8 @@ import telebot
 from datetime import datetime
 
 # Informasi bot Telegram
-bot_token ="$(cat /etc/xray/token)
-chat_id = "$(cat /etc/xray/chatid)
+bot_token =$(cat /etc/xray/token)
+chat_id =$(cat /etc/xray/chatid)
 name_server=$(cat /etc/xray/name)
 bot = telebot.TeleBot(bot_token)
 
