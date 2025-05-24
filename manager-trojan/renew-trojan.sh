@@ -22,7 +22,7 @@ echo "  -----|-------------------|--------------"
         # Hindari duplikat dalam tampilan
         if [[ -z "${seen_users[$user]}" ]]; then
             seen_users[$user]=1
-            printf "%-3s | %-19s | %-15s\n" "$counter" "$user" "$expired"
+            printf "%-6s | %-19s | %-15s\n" "   $counter" "$user" "$expired"
             ((counter++))
         fi
     done
