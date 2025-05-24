@@ -2,26 +2,22 @@
 clear
 # Fungsi untuk menampilkan daftar user
 tampilkan_daftar() {
-    echo "---------------------------------------"
-    echo "       .:: RENEW SSH ACCOUNT ::.       "
-    echo "---------------------------------------"
-    printf "%-3s | %-17s | %-12s\n" "No" "Username" "Expired"
-    echo "---------------------------------------"
-
+    echo "  ┌──────────────────────────────────────┐"
+    echo "  │       .:: RENEW SSH ACCOUNT ::.      │"
+    echo "  └──────────────────────────────────────┘"
+    printf "   %-3s | %-17s | %-12s\n" "No" "Username" "Expired"
+    echo "  ---------------------------------------"
     no=1
-    getent passwd | awk -F: '$3 >= 1000 && $3 != 65534 {print $1}' | while read -r username; do
-        exp=$(chage -l "$username" 2>/dev/null | grep "Account expires" | awk -F": " '{print $2}')
+    getent passwd | awk -F: '$3 >= 1000 && $3 != 65534 {print $1}' | while read -r use>
+        exp=$(chage -l "$username" 2>/dev/null | grep "Account expires" | awk -F": " '>
         if [ ! -z "$exp" ]; then
-            printf "%-3s | %-17s | %-12s\n" "$no" "$username" "$exp"
+            printf "   %-3s | %-17s | %-12s\n" "$no" "$username" "$exp"
             no=$((no + 1))
         fi
     done
-
-    echo "---------------------------------------"
+    echo "  ---------------------------------------"
 }
-
 tampilkan_daftar
-
 # Input nomor user
 read -p "Select User : " nomor_user
 
