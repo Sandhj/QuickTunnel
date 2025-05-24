@@ -1,4 +1,3 @@
-# QuickTunnel – Script Tunneling SSH & XRAY untuk Debian 12
 ## 📌 Deskripsi
 
 **QuickTunnel** adalah script otomatisasi ringan yang dirancang untuk mempermudah pemasangan layanan tunneling menggunakan protokol SSH dan XRay. Script ini mendukung teknologi tunneling modern seperti **WebSocket**, **VMESS**, **VLESS**, dan **Trojan**, menjadikannya ideal bagi pengguna yang membutuhkan solusi proxy berkinerja tinggi dengan konfigurasi minimal.
