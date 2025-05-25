@@ -52,6 +52,7 @@ progress_bar() {
 
 # Jalankan animasi
 echo -e "${BLUE}🚀 Starting system update...${NC}"
+echo -e "${BLUE}Please Wait...!${NC}"
 progress_bar
 
 # ================== ================== ================== ==================
@@ -135,7 +136,7 @@ loading_bar() {
 }
 
 # Jalankan animasi bar loading
-echo "🚀 Starting system update simulation..."
+echo "🚀 Starting system update..."
 loading_bar 50
 
 echo "Tekan Enter Untuk Menuju Menu Utama(↩️)"
