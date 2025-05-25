@@ -89,5 +89,5 @@ end_time=$(date +%s)
 duration=$((end_time - start_time))
 
 echo -e "${GREEN}┌──────────────────────────────────────┐${NC}"
-echo -e "${GREEN}│     UPDATE BERHASIL KE VERSI TERBARU        │${NC}"
+echo -e "${GREEN}│   UPDATE BERHASIL KE VERSI TERBARU   │${NC}"
 echo -e "${GREEN}└──────────────────────────────────────┘${NC}"
