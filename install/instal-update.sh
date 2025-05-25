@@ -18,3 +18,10 @@ ${GITHUB}/manager-trojan/renew-trojan.sh
 ${GITHUB}/manager-trojan/list-user-trojan.sh
 ${GITHUB}/manager-trojan/delete-trojan.sh
 ${GITHUB}/manager-trojan/add-trojan.sh
+
+# VMESS
+${GITHUB}/manager-vless/trial-vless.sh
+${GITHUB}/manager-vless/renew-vless.sh
+${GITHUB}/manager-vless/ist-user-vless.sh
+${GITHUB}/manager-vless/delete-vless.sh
+${GITHUB}/manager-vless/add-vless.sh
