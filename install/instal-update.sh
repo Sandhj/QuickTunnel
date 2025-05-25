@@ -1,9 +1,13 @@
 # ==== Link Github
-GITHUB="https://raw.githubusercontent.com/Sandhj/QuickTunnel/main"
+GITHUB="wget -q https://raw.githubusercontent.com/Sandhj/QuickTunnel/main"
+
+# ==== Buat Direktori dan masuk
+mkdir -p update
+cd update
 
 # VMESS
-/manager-ssh/trial-ssh.sh
-/manager-ssh/renew-ssh.sh
-/manager-ssh/list-user-ssh.sh
-/manager-ssh/add-ssh.sh
-/manager-ssh/delete-ssh.sh
+${GITHUB}/manager-ssh/trial-ssh.sh
+${GITHUB}/manager-ssh/renew-ssh.sh
+${GITHUB}/manager-ssh/list-user-ssh.sh
+${GITHUB}/manager-ssh/add-ssh.sh
+${GITHUB}/manager-ssh/delete-ssh.sh
