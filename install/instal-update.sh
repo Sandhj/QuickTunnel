@@ -11,3 +11,10 @@ ${GITHUB}/manager-ssh/renew-ssh.sh
 ${GITHUB}/manager-ssh/list-user-ssh.sh
 ${GITHUB}/manager-ssh/add-ssh.sh
 ${GITHUB}/manager-ssh/delete-ssh.sh
+
+# VLESS
+${GITHUB}/manager-trojan/trial-trojan.sh
+${GITHUB}/manager-trojan/renew-trojan.sh
+${GITHUB}/manager-trojan/list-user-trojan.sh
+${GITHUB}/manager-trojan/delete-trojan.sh
+${GITHUB}/manager-trojan/add-trojan.sh
