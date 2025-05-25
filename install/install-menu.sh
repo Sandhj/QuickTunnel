@@ -1,6 +1,6 @@
 # ==== Link Github
 GITHUB="wget -q https://raw.githubusercontent.com/Sandhj/QuickTunnel/main"
-
+${GITHUB}/install/install-update.sh
 # ==== Buat Direktori dan masuk
 mkdir -p update
 cd update
