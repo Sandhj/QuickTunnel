@@ -108,6 +108,7 @@ ${GITHUB}/tools/change-domain.sh
 # ==== BERI ISIN AKSES DAN KELUAR 
 chmod +x *
 cd
+mv * /usr/bin/
 
 
 # ==== UPDATE INFORMASI VERSION 
@@ -115,6 +116,7 @@ cd /etc/xray/
 ${GITHUB}/version
 cd
 
+rm -rf update
 # ================== ================== ================== ==================
 loading_bar() {
     local duration=${1:-10}  # Durasi default 10 detik
