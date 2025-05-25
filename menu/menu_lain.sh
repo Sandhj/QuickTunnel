@@ -20,7 +20,7 @@ read -p "Select Menu (0 To Back Menu) : " pilihan
 # Memproses pilihan
 case $pilihan in
     1)
-        bash <(curl -s https://raw.githubusercontent.com/Sandhj/QuickTunnel/main/install/install-update.sh)
+        install-update.sh
         ;;
     2)
         status-service.sh
