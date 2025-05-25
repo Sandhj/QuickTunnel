@@ -33,4 +33,11 @@ ${GITHUB}/manager-vmess/list-user-vmess.sh
 ${GITHUB}/manager-vmess/elete-vmess.sh
 ${GITHUB}/manager-vmess/add-vmess.sh
 
-# Tools
+# MENU
+menu
+menu_ssh.sh
+menu_vmess.sh
+menu_vless.sh
+menu_trojan.sh
+menu_lain.sh
+
