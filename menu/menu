@@ -43,7 +43,7 @@ echo -e "     ${YELLOW}1. SSH MANAGER      5. BOT-MANAGER   ${NC}"
 echo -e "     ${YELLOW}2. VMESS MANAGER    6. VNSTAT ${NC}"
 echo -e "     ${YELLOW}3. VLESS MANAGER    7. RESTART SERVICE ${NC}"
 echo -e "     ${YELLOW}4. TROJAN MANAGER   8. MENU LAIN ${NC}"
-echo -e "${BLUE}   └──────────────────────────────────────┘${NC}"
+echo -e "${YELLOW}   └──────────────────────────────────────┘${NC}"
 echo -e "           Version Script : $version"
 echo -e ""
 read -p "Select Menu : " pilihan
@@ -69,7 +69,7 @@ case $pilihan in
         vnstat
         ;;
     7)
-        restart_service.sh
+        restart-service.sh
         ;;
     8)
         menu_lain.sh
