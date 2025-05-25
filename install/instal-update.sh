@@ -5,23 +5,32 @@ GITHUB="wget -q https://raw.githubusercontent.com/Sandhj/QuickTunnel/main"
 mkdir -p update
 cd update
 
-# VMESS
+# SSH
 ${GITHUB}/manager-ssh/trial-ssh.sh
 ${GITHUB}/manager-ssh/renew-ssh.sh
 ${GITHUB}/manager-ssh/list-user-ssh.sh
 ${GITHUB}/manager-ssh/add-ssh.sh
 ${GITHUB}/manager-ssh/delete-ssh.sh
 
-# VLESS
+# TROJAN
 ${GITHUB}/manager-trojan/trial-trojan.sh
 ${GITHUB}/manager-trojan/renew-trojan.sh
 ${GITHUB}/manager-trojan/list-user-trojan.sh
 ${GITHUB}/manager-trojan/delete-trojan.sh
 ${GITHUB}/manager-trojan/add-trojan.sh
 
-# VMESS
+# VLESS
 ${GITHUB}/manager-vless/trial-vless.sh
 ${GITHUB}/manager-vless/renew-vless.sh
 ${GITHUB}/manager-vless/ist-user-vless.sh
 ${GITHUB}/manager-vless/delete-vless.sh
 ${GITHUB}/manager-vless/add-vless.sh
+
+# VMESS
+${GITHUB}/manager-vmess/trial-vmess.sh
+${GITHUB}/manager-vmess/renew-vmess.sh
+${GITHUB}/manager-vmess/list-user-vmess.sh
+${GITHUB}/manager-vmess/elete-vmess.sh
+${GITHUB}/manager-vmess/add-vmess.sh
+
+# Tools
