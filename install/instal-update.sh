@@ -34,10 +34,10 @@ ${GITHUB}/manager-vmess/elete-vmess.sh
 ${GITHUB}/manager-vmess/add-vmess.sh
 
 # MENU
-menu
-menu_ssh.sh
-menu_vmess.sh
-menu_vless.sh
-menu_trojan.sh
-menu_lain.sh
-
+${GITHUB}/menu/menu
+${GITHUB}/menu/menu_ssh.sh
+${GITHUB}/menu/menu_vmess.sh
+${GITHUB}/menu/menu_vless.sh
+${GITHUB}/menu/menu_trojan.sh
+${GITHUB}/menu/menu_lain.sh
+${GITHUB}/menu/menu_bot.sh
