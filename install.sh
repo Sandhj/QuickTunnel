@@ -35,7 +35,7 @@ echo -e "└──────────────────────�
 echo ""
 read -p "Type Your Domain : " domain
 
-mkdir -p /etc/xray/
+mkdir -p /etc/xray/limitip/
 echo $domain >> /root/domain
 echo $domain >> /etc/xray/domain
 
@@ -50,7 +50,7 @@ wget -q ${GITHUB}install/install-menu.sh && bash install-menu.sh
 # ==== Install Vnstat
 wget -q ${GITHUB}install/install-vnstat.sh && bash install-vnstat.sh
 # ==== Install Limit IP Xray
-cd /etc/xray/
+cd /etc/xray/limitip
 wget -q ${GITHUB}tools/check-ip-limit.sh
 wget -q ${GITHUB}tools/clients_limit.conf
 cd
