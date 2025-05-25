@@ -27,6 +27,10 @@ rm -f /usr/bin/delete-trojan.sh
 rm -f /usr/bin/list-user-trojan.sh
 rm -f /usr/bin/renew-trojan.sh
 rm -f /usr/bin/trial-trojan.sh
+rm -f /usr/bin/update-script.sh
+rm -f /usr/bin/restar-service.sh
+rm -f /usr/bin/change-domain.sh
+rm -f /usr/bin/version
 
 # Ambil File Baru
 mkdir -p ~/menu
@@ -73,6 +77,7 @@ wget -q "$URL2/manager-trojan/trial-trojan.sh" && chmod +x trial-trojan.sh
 # Install Tools
 URL3="https://raw.githubusercontent.com/Sandhj/QuickTunnel/main"
 
+wget -q "$URL3/tools/update-script.sh" && chmod +x update-script.sh
 wget -q "$URL3/tools/restar-service.sh" && chmod +x restar-service.sh
 wget -q "$URL3/tools/change-domain.sh" && chmod +x change-domain.sh
 wget -q "$URL3/version"
