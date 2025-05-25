@@ -114,6 +114,7 @@ cd
 
 # ==== UPDATE INFORMASI VERSION 
 cd /etc/xray/
+rm version
 ${GITHUB}/version
 cd
 
