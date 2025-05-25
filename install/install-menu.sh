@@ -73,6 +73,7 @@ wget -q "$URL2/manager-trojan/trial-trojan.sh" && chmod +x trial-trojan.sh
 # Install Tools
 URL3="https://raw.githubusercontent.com/Sandhj/QuickTunnel/main"
 
+wget -q "$URL3/tools/restar-service.sh" && chmod +x restar-service.sh
 wget -q "$URL3/tools/change-domain.sh" && chmod +x change-domain.sh
 wget -q "$URL3/version"
 
