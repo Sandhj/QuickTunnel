@@ -1,34 +1,4 @@
 #!/bin/bash
-# ===== IZIN SCRIPT 
-
-# Dapatkan IP Publik VPS
-VPS_IP=$(curl -s https://api.ipify.org)
-
-# Dapatkan Tanggal Hari Ini
-TODAY=$(date +"%Y-%m-%d")
-
-# File di GitHub
-GITHUB_URL="https://raw.githubusercontent.com/Sandhj/QuickTunnel/main/permission"
-
-# Cek apakah IP dan tanggal valid
-if curl -s "$GITHUB_URL" | grep -q "$VPS_IP"; then
-    # Ambil baris yang cocok
-    LINE=$(curl -s "$GITHUB_URL" | grep "$VPS_IP")
-    EXPIRY=$(echo "$LINE" | awk '{print $2}')
-
-    # Cek tanggal kadaluarsa
-    if [[ "$EXPIRY" > "$TODAY" || "$EXPIRY" == "$TODAY" ]]; then
-        echo "Akses diberikan untuk IP: $VPS_IP"
-    else
-        echo "Akses ditolak. Tanggal kadaluarsa: $EXPIRY"
-        exit 1
-    fi
-else
-    echo "IP tidak terdaftar."
-    exit 1
-fi
-
-
 clear
 # ==== Export Warna
 green='\e[0;32m'
