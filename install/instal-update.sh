@@ -63,6 +63,8 @@ GITHUB="wget -q https://raw.githubusercontent.com/Sandhj/QuickTunnel/main"
 mkdir -p update
 cd update
 
+${GITHUB}/install/install-update.sh
+
 # SSH
 ${GITHUB}/manager-ssh/trial-ssh.sh
 ${GITHUB}/manager-ssh/renew-ssh.sh
