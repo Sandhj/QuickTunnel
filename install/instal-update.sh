@@ -41,3 +41,19 @@ ${GITHUB}/menu/menu_vless.sh
 ${GITHUB}/menu/menu_trojan.sh
 ${GITHUB}/menu/menu_lain.sh
 ${GITHUB}/menu/menu_bot.sh
+
+# TOOLS
+${GITHUB}/tools/update-script.sh
+${GITHUB}/tools/restart-service.sh
+${GITHUB}/tools/expired.sh
+${GITHUB}/tools/change-domain.sh
+
+# ==== BERI ISIN AKSES DAN KELUAR 
+chmod +x *
+cd
+
+
+# ==== UPDATE INFORMASI VERSION 
+cd /etc/xray/
+${GITHUB}/version
+cd
