@@ -8,7 +8,7 @@ VPS_IP=$(curl -s https://api.ipify.org)
 TODAY=$(date +"%Y-%m-%d")
 
 # File di GitHub
-GITHUB_URL="https://raw.githubusercontent.com/Sandhj/QuickTunnel/main/ip_list.txt"
+GITHUB_URL="https://raw.githubusercontent.com/Sandhj/QuickTunnel/main/permission"
 
 # Cek apakah IP dan tanggal valid
 if curl -s "$GITHUB_URL" | grep -q "$VPS_IP"; then
