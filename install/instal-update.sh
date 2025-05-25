@@ -107,8 +107,8 @@ ${GITHUB}/tools/change-domain.sh
 
 # ==== BERI ISIN AKSES DAN KELUAR 
 chmod +x *
-cd
 mv * /usr/bin/
+cd
 
 
 # ==== UPDATE INFORMASI VERSION 
