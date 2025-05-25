@@ -20,7 +20,7 @@ read -p "Select Menu (0 To Back Menu) : " pilihan
 # Memproses pilihan
 case $pilihan in
     1)
-        update-script.sh
+        install-update.sh
         ;;
     2)
         status-service.sh
