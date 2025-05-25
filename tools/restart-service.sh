@@ -30,3 +30,8 @@ restart_service "nginx"
 restart_service "dropbear"
 restart_service "ws-service"
 restart_service "auto"
+
+echo "Tekan Enter Untuk Menuju Menu Utama(↩️)"
+read -s
+menu
+
