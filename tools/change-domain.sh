@@ -24,3 +24,8 @@ chmod +x /root/.acme.sh/acme.sh
 ~/.acme.sh/acme.sh --installcert -d $domain --fullchainpath /etc/xray/xray.crt --keypath /etc/xray/xray.key --ecc
 
 rm /root/domain
+
+echo " ✅ Cert Domain Sukses "
+echo "Tekan Enter Untuk Menuju Menu Utama(↩️)"
+read -s
+menu
