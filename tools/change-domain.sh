@@ -7,7 +7,7 @@ echo -e "└──────────────────────�
 echo ""
 read -p "Type Your Domain : " domain
 
-echo $domain >> /root/domain
+echo $domain >> /etc/xray/domain
 
 # ==== hapus cert lama
 rm -f /etc/xray/xray.crt
