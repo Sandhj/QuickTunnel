@@ -23,6 +23,9 @@ chmod +x /root/.acme.sh/acme.sh
 /root/.acme.sh/acme.sh --issue -d $domain --standalone -k ec-256
 ~/.acme.sh/acme.sh --installcert -d $domain --fullchainpath /etc/xray/xray.crt --keypath /etc/xray/xray.key --ecc
 
+systemctl restart nginx
+
+
 echo " ✅ Cert Domain Sukses "
 echo "Tekan Enter Untuk Menuju Menu Utama(↩️)"
 read -s
