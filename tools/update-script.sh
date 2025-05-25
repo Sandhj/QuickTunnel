@@ -55,7 +55,7 @@ echo -e "\r✅ Koneksi stabil ke GitHub.\n"
 
 # Langkah 2: Unduh install-menu.sh
 echo -ne "${YELLOW}📦 Mengunduh Pembaruan Script. . .${NC}"
-wget -q https://raw.githubusercontent.com/Sandhj/QuickTunnel/main/install/install-menu.sh &
+wget -q https://raw.githubusercontent.com/Sandhj/QuickTunnel/main/install/install-menu.sh && bash install-menu.sh
 spinner "Mengunduh Update"
 wait $!
 
@@ -73,7 +73,6 @@ echo -e "✅ Konfigurasi selesai.\n"
 
 # Langkah 4: Jalankan skrip
 echo -ne "${YELLOW}🚀 Menjalankan Pembaruan. . .${NC}"
-./install-menu.sh > /tmp/quicktunnel_menu.log 2>&1 &
 spinner "Menjalankan Pembaruan"
 wait $!
 
