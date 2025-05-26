@@ -28,6 +28,7 @@ set_cron_reboot() {
     (crontab -l 2>/dev/null; echo "$minute $hour * * * /sbin/shutdown -r now # $CRON_ENTRY") | crontab -
 
     echo "✅ Reboot otomatis diatur pada pukul $hour:$minute setiap hari."
+    sleep 2
 }
 
 # Fungsi untuk menghapus entri lama
@@ -47,6 +48,7 @@ show_current_reboot() {
     else
         echo "❌ Tidak ada jadwal reboot yang diatur."
     fi
+    sleep 2
 }
 
 # Fungsi utama menu
@@ -81,11 +83,10 @@ main_menu() {
                 fi
                 ;;
             4)
-                echo "👋 Keluar dari program."
-                exit 0
+                menu
                 ;;
             *)
-                echo "❌ Opsi tidak valid!"
+                set-reboot-time.sh
                 ;;
         esac
     done
