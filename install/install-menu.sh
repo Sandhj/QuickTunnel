@@ -62,3 +62,4 @@ cd /etc/xray/
 ${GITHUB}/version
 cd
 
+rm install-menu
