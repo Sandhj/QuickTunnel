@@ -1,9 +1,12 @@
 # ==== Link Github
 GITHUB="wget -q https://raw.githubusercontent.com/Sandhj/QuickTunnel/main"
-${GITHUB}/install/install-update.sh
+
 # ==== Buat Direktori dan masuk
 mkdir -p update
 cd update
+
+# Perbaharui UPDATE
+${GITHUB}/install/install-update.sh
 
 # SSH
 ${GITHUB}/manager-ssh/trial-ssh.sh
@@ -59,4 +62,3 @@ cd /etc/xray/
 ${GITHUB}/version
 cd
 
-rm -rf update
