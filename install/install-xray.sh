@@ -16,7 +16,7 @@ domain=$(cat /root/domain)
 echo -e "$CREDITS"
 # ==== Install Paket Yang Dibutuhkan
 # Bersihkan cache dan update
-apt clean all && apt update
+apt clean all && apt update -y
 # Paket utama untuk Xray
 apt install -y curl socat gnupg gnupg2 gnupg1
 apt install nginx -y
