@@ -22,7 +22,7 @@ ${GITHUB}/manager-trojan/add-trojan.sh
 # VLESS
 ${GITHUB}/manager-vless/trial-vless.sh
 ${GITHUB}/manager-vless/renew-vless.sh
-${GITHUB}/manager-vless/ist-user-vless.sh
+${GITHUB}/manager-vless/list-user-vless.sh
 ${GITHUB}/manager-vless/delete-vless.sh
 ${GITHUB}/manager-vless/add-vless.sh
 
