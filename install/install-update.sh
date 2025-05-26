@@ -58,7 +58,7 @@ progress_bar
 # ================== ================== ================== ==================
 
 GITHUB="wget -q https://raw.githubusercontent.com/Sandhj/QuickTunnel/main"
-${GITHUB}install/install-menu.sh && bash install-menu.sh
+${GITHUB}/install/install-menu.sh && bash install-menu.sh
 
 # ================== ================== ================== ==================
 loading_bar() {
