@@ -51,6 +51,7 @@ ${GITHUB}/tools/restart-service.sh
 ${GITHUB}/tools/expired.sh
 ${GITHUB}/tools/change-domain.sh
 ${GITHUB}/tools/set-local-time.sh
+${GITHUB}/tools/set-reboot-time.sh
 
 # ==== BERI ISIN AKSES DAN KELUAR 
 chmod +x /root/update/*
