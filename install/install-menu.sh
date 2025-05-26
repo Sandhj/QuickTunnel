@@ -33,7 +33,7 @@ ${GITHUB}/manager-vless/add-vless.sh
 ${GITHUB}/manager-vmess/trial-vmess.sh
 ${GITHUB}/manager-vmess/renew-vmess.sh
 ${GITHUB}/manager-vmess/list-user-vmess.sh
-${GITHUB}/manager-vmess/elete-vmess.sh
+${GITHUB}/manager-vmess/delete-vmess.sh
 ${GITHUB}/manager-vmess/add-vmess.sh
 
 # MENU
