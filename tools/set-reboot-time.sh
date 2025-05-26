@@ -57,10 +57,12 @@ main_menu() {
         echo -e "${BLUE}   ┌──────────────────────────────────────┐${NC}"
         echo -e "${BLUE}   |      .::   SET REBOOT TIME  ::.      │${NC}"
         echo -e "${BLUE}   └──────────────────────────────────────┘${NC}"
-        echo "  1. Atur waktu reboot"
-        echo "  2. Lihat jadwal reboot saat ini"
-        echo "  3. Hapus jadwal reboot"
-        echo "  4. Keluar"
+        echo "    1. Atur waktu reboot"
+        echo "    2. Lihat jadwal reboot saat ini"
+        echo "    3. Hapus jadwal reboot"
+        echo "    4. Keluar"
+        echo -e "${BLUE}   └──────────────────────────────────────┘${NC}"
+        echo""
         read -p "Pilih opsi (1-4): " choice
 
         case $choice in
