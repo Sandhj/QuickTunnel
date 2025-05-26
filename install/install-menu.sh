@@ -2,8 +2,8 @@
 GITHUB="wget -q https://raw.githubusercontent.com/Sandhj/QuickTunnel/main"
 
 # ==== Buat Direktori dan masuk
-mkdir -p update
-cd update
+mkdir -p /root/update
+cd /root/update
 
 # Perbaharui UPDATE
 ${GITHUB}/install/install-update.sh
@@ -53,12 +53,12 @@ ${GITHUB}/tools/change-domain.sh
 ${GITHUB}/tools/set-local-time.sh
 
 # ==== BERI ISIN AKSES DAN KELUAR 
-chmod +x *
-mv * /usr/bin/
-cd
+chmod +x /root/update/*
+mv /root/update/* /usr/bin/
+cd /root/
 
 
 # ==== UPDATE INFORMASI VERSION 
 cd /etc/xray/
 ${GITHUB}/version
-cd
+cd /root/
