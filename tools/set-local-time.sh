@@ -1,13 +1,16 @@
 #!/bin/bash
+BLUE='\033[0;34m'
+NC='\033[0m' # No Color
 clear
-echo -e "┌────────────────────────────────────────┐"
-echo -e "│        .:: CHANGE TIME ZONE ::.        │"
-echo -e "└────────────────────────────────────────┘"
+echo -e "${BLUE}┌────────────────────────────────────────┐${NC}"
+echo -e "${BLUE}│        .:: CHANGE TIME ZONE ::.        │${NC}"
+echo -e "${BLUE}└────────────────────────────────────────┘${NC}"
 echo "  1. Asia/Jakarta (WIB)"
 echo "  2. Asia/Makassar (WITA)"
 echo "  3. Asia/Jayapura (WIT)"
-
-read -p "Masukkan pilihan (1/2/3): " choice
+echo -e "${BLUE}└────────────────────────────────────────┘${NC}"
+echo ""
+read -p "Masukkan pilihan (0 Go To Menu) : " choice
 
 case $choice in
     1)
@@ -19,9 +22,11 @@ case $choice in
     3)
         timezone="Asia/Jayapura"
         ;;
+    0)
+        timezone="Asia/Jayapura"
+        ;;
     *)
-        echo "Pilihan tidak valid."
-        exit 1
+        set-local-time.sh
         ;;
 esac
 
