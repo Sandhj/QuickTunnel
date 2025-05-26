@@ -11,20 +11,12 @@ CREDITS="${green} ـــــــــــــــﮩ٨ـ QuickTunnel ${NC}"
 GITHUB="https://raw.githubusercontent.com/Sandhj/QuickTunnel/main/"
 
 # Running Banner
-TEXT="QuickTunnel ـــــــــــــــﮩ٨ـ | Preparing . . . | Thanks To San (Owner)"
+TEXT="QuickTunnel ـــــــــــــــﮩ٨ـ | Preparing . . . "
 for (( i=0; i<${#TEXT}; i++ ))
 do
     echo -n -e "${green}${TEXT:$i:1}${NC}"
     sleep 0.1 #Delay Antar Huruf
 done
-echo""
-TEXT2="Contac The Owner If You Have Anything Problem. Lets Start in 2 Second"
-for (( i=0; i<${#TEXT2}; i++ ))
-do
-    echo -n -e "${green}${TEXT2:$i:1}${NC}"
-    sleep 0.1 #Delay Antar Huruf
-done
-sleep 2
 clear
 
 
@@ -39,14 +31,18 @@ mkdir -p /etc/xray/limitip/
 echo $domain >> /root/domain
 echo $domain >> /etc/xray/domain
 
+$CREDITS
 # ==== Perbaharui System
 apt update -y && apt upgrade -y
 
+$CREDITS
 # ==== Install SSH & Xray
 wget -q ${GITHUB}install/install-ssh.sh && bash install-ssh.sh
 wget -q ${GITHUB}install/install-xray.sh && bash install-xray.sh
+$CREDITS
 # ==== Install Menu
 wget -q ${GITHUB}install/install-menu.sh && bash install-menu.sh
+$CREDITS
 # ==== Install Vnstat
 wget -q ${GITHUB}install/install-vnstat.sh && bash install-vnstat.sh
 # ==== Install Limit IP Xray
@@ -54,6 +50,7 @@ cd /etc/xray/limitip
 wget -q ${GITHUB}tools/check-ip-limit.sh
 wget -q ${GITHUB}tools/clients_limit.conf
 cd
+$CREDITS
 # ==== Install Auto Backup
 wget -q ${GITHUB}tools/auto_backup.sh && bash auto_backup.sh
 
@@ -73,14 +70,14 @@ menu
 END
 chmod 644 /root/.profile
 
-# ===== Pasang Cronjob
-CRON_JOB="*/5 * * * * /bin/bash /etc/xray/limitip.sh"
+# ===== Pasang Cronjob limitIP
+CRON_JOB="*/5 * * * * /bin/bash /etc/xray/check-ip-limit.sh"
 (crontab -l 2>/dev/null; echo "$CRON_JOB") | crontab -
 
 # ============== END SCRIPT==================
 clear
 echo""
-TEXTEND="Script Already Installed On Your System | Thanks for Using QuickTunnel Script " 
+TEXTEND="Script Already Installed On Your System" 
 for (( i=0; i<${#TEXT2}; i++ ))
 do
     echo -n -e "${green}${TEXTEND:$i:1}${NC}"
