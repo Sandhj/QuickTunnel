@@ -1,15 +1,15 @@
 #!/bin/bash
 clear 
+BLUE='\033[0;34m'
+YELLOW='\033[0;33m'
+NC='\033[0m' # No Color
 
 # ==== Setup Input Domain
 echo -e "${BLUE}┌───────────────────────────────────────────────────┐${NC}"
 echo -e "${BLUE}│      .:: UPDATE CERTIFIED DOMAIN SERVER ::.       │${NC}"
 echo -e "${BLUE}└───────────────────────────────────────────────────┘${NC}"
-echo ""
-read -p "Type Your Domain : " domain
 
-rm -f /etc/xray/domain
-echo $domain >> /etc/xray/domain
+domain=$(cat /etc/xray/domain)
 
 # ==== hapus cert lama
 rm -f /etc/xray/xray.crt
