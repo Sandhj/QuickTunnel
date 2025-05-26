@@ -38,7 +38,7 @@ from datetime import datetime
 # Informasi bot Telegram
 bot_token ="token_tele"
 chat_id ="chatid_tele"
-name_server="name_server"
+
 bot = telebot.TeleBot(bot_token)
 
 # Lokasi direktori dan file/folder yang ingin disalin
@@ -62,7 +62,7 @@ def copy_files_and_folder():
 
 def create_zip():
     now = datetime.now()
-    zip_filename = os.path.join(destination_dir, f"${name_server}{now.strftime('%Y-%m-%d')}.zip")
+    zip_filename = os.path.join(destination_dir, f"NAME_SERVER{now.strftime('%Y-%m-%d')}.zip")
     with zipfile.ZipFile(zip_filename, 'w', zipfile.ZIP_DEFLATED) as zipf:
         for root, dirs, files in os.walk(destination_dir):
             for file in files:
