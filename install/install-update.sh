@@ -82,7 +82,7 @@ echo "🚀 Starting system update..."
 loading_bar 50
 
 cd
-rm -rf update
+rm -rf * /dev/null
 
 echo "Tekan Enter Untuk Menuju Menu Utama(↩️)"
 read -s
