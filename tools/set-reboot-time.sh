@@ -2,7 +2,7 @@
 
 clear
 
-CRON_ENTRY="auto_reboot_entry"
+CRON_ENTRY="auto_reboot"
 
 # Fungsi untuk menambahkan atau memperbarui entri crontab
 set_cron_reboot() {
@@ -25,7 +25,7 @@ set_cron_reboot() {
     remove_old_cron
 
     # Tambahkan entri baru ke crontab
-    (crontab -l 2>/dev/null; echo "$minute $hour * * * /sbin/shutdown -r now ") | crontab -
+    (crontab -l 2>/dev/null; echo "$minute $hour * * * /sbin/shutdown -r now # $CRON_ENTRY") | crontab -
 
     echo "✅ Reboot otomatis diatur pada pukul $hour:$minute setiap hari."
 }
@@ -52,12 +52,15 @@ show_current_reboot() {
 # Fungsi utama menu
 main_menu() {
     while true; do
+        clear
         echo ""
-        echo "=== Auto Reboot Configurator ==="
-        echo "1. Atur waktu reboot"
-        echo "2. Lihat jadwal reboot saat ini"
-        echo "3. Hapus jadwal reboot"
-        echo "4. Keluar"
+        echo -e "${BLUE}   ┌──────────────────────────────────────┐${NC}"
+        echo -e "${BLUE}   |      .::   SET REBOOT TIME  ::.      │${NC}"
+        echo -e "${BLUE}   └──────────────────────────────────────┘${NC}"
+        echo "  1. Atur waktu reboot"
+        echo "  2. Lihat jadwal reboot saat ini"
+        echo "  3. Hapus jadwal reboot"
+        echo "  4. Keluar"
         read -p "Pilih opsi (1-4): " choice
 
         case $choice in
