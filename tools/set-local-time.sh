@@ -1,9 +1,10 @@
 #!/bin/bash
-
-echo "Pilih zona waktu Indonesia yang ingin Anda gunakan:"
-echo "1. Asia/Jakarta (WIB)"
-echo "2. Asia/Makassar (WITA)"
-echo "3. Asia/Jayapura (WIT)"
+echo -e "┌────────────────────────────────────────┐"
+echo -e "│        .:: CHANGE TIME ZONE ::.        │"
+echo -e "└────────────────────────────────────────┘"
+echo "  1. Asia/Jakarta (WIB)"
+echo "  2. Asia/Makassar (WITA)"
+echo "  3. Asia/Jayapura (WIT)"
 
 read -p "Masukkan pilihan (1/2/3): " choice
 
@@ -35,3 +36,7 @@ sudo ln -s /usr/share/zoneinfo/$timezone /etc/localtime
 echo ""
 echo "Zona waktu telah diatur ke: $timezone"
 date
+
+echo "Tekan Enter Untuk Menuju Menu Utama(↩️)"
+read -s
+menu
