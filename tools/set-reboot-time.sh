@@ -37,6 +37,7 @@ remove_old_cron() {
         echo "🔄 Menghapus entri reboot lama..."
         crontab -l | grep -v "$CRON_ENTRY" | crontab -
     fi
+    sleep 2
 }
 
 # Fungsi untuk melihat entri reboot saat ini
@@ -48,7 +49,7 @@ show_current_reboot() {
     else
         echo "❌ Tidak ada jadwal reboot yang diatur."
     fi
-    sleep 2
+    sleep 3
 }
 
 # Fungsi utama menu
@@ -62,10 +63,9 @@ main_menu() {
         echo "    1. Atur waktu reboot"
         echo "    2. Lihat jadwal reboot saat ini"
         echo "    3. Hapus jadwal reboot"
-        echo "    4. Keluar"
         echo -e "${BLUE}   └──────────────────────────────────────┘${NC}"
         echo""
-        read -p "Pilih opsi (1-4): " choice
+        read -p "Pilih opsi (0 to back menu): " choice
 
         case $choice in
             1)
@@ -82,7 +82,7 @@ main_menu() {
                     echo "❌ Tidak ada jadwal reboot untuk dihapus."
                 fi
                 ;;
-            4)
+            0)
                 menu
                 ;;
             *)
