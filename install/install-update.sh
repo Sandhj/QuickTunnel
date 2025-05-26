@@ -81,6 +81,9 @@ loading_bar() {
 echo "🚀 Starting system update..."
 loading_bar 50
 
+cd
+rm -rf update
+
 echo "Tekan Enter Untuk Menuju Menu Utama(↩️)"
 read -s
 menu
