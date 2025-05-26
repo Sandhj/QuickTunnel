@@ -16,3 +16,7 @@ echo $new_chatid >> /etc/xray/chatid
 systemctl restart auto
 
 echo " ✅ Autobackup Berhasil di Pasang. . .!"
+
+echo "Tekan Enter Untuk Menuju Menu Utama(↩️)"
+read -s
+menu
