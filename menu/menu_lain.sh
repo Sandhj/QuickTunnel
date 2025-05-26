@@ -23,10 +23,10 @@ case $pilihan in
         install-update.sh
         ;;
     2)
-        status-service.sh
+        set-local-time.sh
         ;;
     3)
-        restart-service.sh
+        set-reboot-time.sh
         ;;
     4)
         change-domain.sh
