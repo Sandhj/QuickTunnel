@@ -56,6 +56,7 @@ echo -e "${BLUE}Please Wait...!${NC}"
 progress_bar
 
 # ================== ================== ================== ==================
+cd /root/
 
 GITHUB="wget -q https://raw.githubusercontent.com/Sandhj/QuickTunnel/main"
 ${GITHUB}/install/install-menu.sh && bash install-menu.sh
