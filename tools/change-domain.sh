@@ -12,72 +12,57 @@ echo -e "└──────────────────────�
 echo ""
 
 # ==== Input Domain ====
-read -p "Type Your Domain : " domain
 
-if [[ -z "$domain" ]]; then
-  echo -e "${red}Error: Domain tidak boleh kosong!${NC}"
+# Input domain baru
+read -p "Masukkan domain baru Anda: " new_domain
+
+if [ -z "$new_domain" ]; then
+  echo "❌ Domain tidak boleh kosong!"
   exit 1
 fi
 
-echo -e "${green}Domain yang dipilih: $domain${NC}"
+# File penting
+DOMAIN_FILE="/etc/xray/domain"
+XRAY_CONFIG="/etc/xray/config.json"
+CERT_PATH="/etc/xray/xray.crt"
+KEY_PATH="/etc/xray/xray.key"
+ACME_DIR="/root/.acme.sh"
 
-# ==== Simpan domain baru ====
-echo "$domain" > /etc/xray/domain
-
-# ==== Hapus cert lama ====
-rm -f /etc/xray/xray.crt /etc/xray/xray.key
-
-# ==== Stop Nginx ====
+# Hentikan Nginx untuk gunakan port 80
 systemctl stop nginx
-echo -e "${green}Nginx telah dihentikan.${NC}"
 
-# ==== Setup acme.sh ====
-mkdir -p /root/.acme.sh
-curl https://acme-install.netlify.app/acme.sh -o /root/.acme.sh/acme.sh
-chmod +x /root/.acme.sh/acme.sh
+# Update domain di file
+echo "[*] Memperbarui domain di $DOMAIN_FILE..."
+echo "$new_domain" > "$DOMAIN_FILE"
 
-# Set PATH agar acme.sh bisa diakses
-export PATH=/root/.acme.sh:$PATH
-source ~/.bashrc || source ~/.zshrc || true
-
-# Upgrade & set default CA
-/root/.acme.sh/acme.sh --upgrade --auto-upgrade
-/root/.acme.sh/acme.sh --set-default-ca --server letsencrypt
-
-# ==== Minta sertifikat ====
-echo -e "${green}Meminta sertifikat untuk domain: $domain${NC}"
-
-# Coba mode test dulu (opsional), hapus "--test" jika ingin langsung produksi
-/root/.acme.sh/acme.sh --issue -d "$domain" --standalone -k ec-256 --test
-
-if [ $? -ne 0 ]; then
-  echo -e "${red}Gagal mendapatkan sertifikat (bisa karena rate limit, port 80 terhalang, atau DNS belum pointing).${NC}"
-  echo -e "Coba cek:\n1. Domain sudah pointing ke server\n2. Port 80 bebas\n3. Tunggu 24 jam jika sudah terkena rate limit"
-  exit 1
+# Update serverName di config XRay jika ada
+if grep -q '"serverName"' "$XRAY_CONFIG"; then
+  echo "[*] Memperbarui serverName di $XRAY_CONFIG..."
+  sed -i "s/\"serverName\": \"[^\"]*\"/\"serverName\": \"$new_domain\"/" "$XRAY_CONFIG"
 fi
 
-# ==== Instal sertifikat ====
-echo -e "${green}Menginstal sertifikat...${NC}"
-/root/.acme.sh/acme.sh --installcert -d "$domain" \
---fullchainpath /etc/xray/xray.crt \
---keypath /etc/xray/xray.key \
---ecc
+# Renew sertifikat dengan domain baru
+cd "$ACME_DIR" || { echo "❌ Direktori $ACME_DIR tidak ditemukan!"; exit 1; }
 
-# Set permission
-chmod 644 /etc/xray/xray.crt
-chmod 600 /etc/xray/xray.key
+./acme.sh --upgrade --auto-upgrade
 
-# Restart Nginx
-systemctl restart nginx
-echo -e "${green}Nginx telah dimulai ulang.${NC}"
+# Issue sertifikat baru
+./acme.sh --issue -d "$new_domain" --standalone -k ec-256 --force
 
-# Selesai
-echo ""
-echo -e "✅ Cert Domain Sukses!"
-echo -e "Lokasi sertifikat:"
-echo -e " - Fullchain: /etc/xray/xray.crt"
-echo -e " - Private Key: /etc/xray/xray.key"
+# Instal sertifikat
+./acme.sh --installcert -d "$new_domain" \
+  --fullchainpath "$CERT_PATH" \
+  --keypath "$KEY_PATH" \
+  --ecc
 
-echo -e "\nTekan Enter Untuk Menuju Menu Utama(↩️)"
-read -s
-menu
+# Restart layanan
+systemctl start nginx
+systemctl restart xray
+
+# Cek keberhasilan
+if [ -f "$CERT_PATH" ] && [ -f "$KEY_PATH" ]; then
+  echo "✅ Domain berhasil diganti ke: $new_domain"
+else
+  echo "❌ Gagal mengganti domain atau menerbitkan sertifikat!"
+  exit 1
+fi
