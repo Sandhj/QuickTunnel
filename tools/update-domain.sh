@@ -9,25 +9,48 @@ echo -e "${BLUE}┌────────────────────�
 echo -e "${BLUE}│      .:: UPDATE CERTIFIED DOMAIN SERVER ::.       │${NC}"
 echo -e "${BLUE}└───────────────────────────────────────────────────┘${NC}"
 
-domain=$(cat /etc/xray/domain)
+# Ambil domain dari file
+DOMAIN_FILE="/etc/xray/domain"
+domain=$(cat "$DOMAIN_FILE")
 
-# ==== hapus cert lama
-rm -f /etc/xray/xray.crt
-rm -f /etc/xray/xray.key
+if [ -z "$domain" ]; then
+  echo "❌ Domain tidak ditemukan di $DOMAIN_FILE"
+  exit 1
+fi
 
-# ==== Cert Domain Dengan Acme
+# Path sertifikat
+CERT_PATH="/etc/xray/xray.crt"
+KEY_PATH="/etc/xray/xray.key"
+ACME_DIR="/root/.acme.sh"
+
+# Hentikan Nginx agar bisa menggunakan port 80
 systemctl stop nginx
-curl https://acme-install.netlify.app/acme.sh -o /root/.acme.sh/acme.sh
-chmod +x /root/.acme.sh/acme.sh
-/root/.acme.sh/acme.sh --upgrade --auto-upgrade
-/root/.acme.sh/acme.sh --set-default-ca --server letsencrypt
-/root/.acme.sh/acme.sh --issue -d $domain --standalone -k ec-256
-~/.acme.sh/acme.sh --installcert -d $domain --fullchainpath /etc/xray/xray.crt --keypath /etc/xray/xray.key --ecc
 
-systemctl restart nginx
+# Renew sertifikat
+echo "[*] Memulai proses renew sertifikat untuk domain: $domain..."
 
+cd "$ACME_DIR" || { echo "❌ Direktori $ACME_DIR tidak ditemukan!"; exit 1; }
 
-echo " ✅ Cert Domain Sukses "
-echo "Tekan Enter Untuk Menuju Menu Utama(↩️)"
-read -s
-menu
+# Upgrade acme.sh jika perlu
+./acme.sh --upgrade --auto-upgrade
+
+# Terbitkan ulang sertifikat
+./acme.sh --issue -d "$domain" --standalone -k ec-256 --force
+
+# Instal ulang sertifikat
+./acme.sh --installcert -d "$domain" \
+  --fullchainpath "$CERT_PATH" \
+  --keypath "$KEY_PATH" \
+  --ecc
+
+# Restart Nginx dan XRay
+systemctl start nginx
+systemctl restart xray
+
+# Cek keberhasilan
+if [ -f "$CERT_PATH" ] && [ -f "$KEY_PATH" ]; then
+  echo "✅ Sertifikat berhasil diperbarui untuk domain: $domain"
+else
+  echo "❌ Gagal memperbarui sertifikat!"
+  exit 1
+fi 
