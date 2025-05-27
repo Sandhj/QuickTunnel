@@ -32,7 +32,7 @@ case $pilihan in
         change-domain.sh
         ;;
     5)
-        cert-domain.sh
+        update-domain.sh
         ;;
     6)
         nano /etc/issue.net
