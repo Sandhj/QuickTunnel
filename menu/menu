@@ -65,7 +65,7 @@ case $pilihan in
         menu_bot.sh
         ;;
     6)
-        status_service.sh
+        status-service.sh
         ;;
     7)
         restart-service.sh
