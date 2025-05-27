@@ -1,17 +1,13 @@
 #!/bin/bash
-clear
+clear 
+BLUE='\033[0;34m'
+YELLOW='\033[0;33m'
+NC='\033[0m' # No Color
 
-# Warna untuk output
-green='\e[32m'
-red='\e[31m'
-NC='\e[0m'
-
-echo -e "┌───────────────────────────────────────────────────┐"
-echo -e "│  Setup New Domain For This Script | ${green}QuickTunnel${NC}   │"
-echo -e "└───────────────────────────────────────────────────┘"
-echo ""
-
-# ==== Input Domain ====
+# ==== Setup Input Domain
+echo -e "${BLUE}┌───────────────────────────────────────────────────┐${NC}"
+echo -e "${BLUE}│      .:: CHANGE CERTIFIED DOMAIN SERVER ::.       │${NC}"
+echo -e "${BLUE}└───────────────────────────────────────────────────┘${NC}"
 
 # Input domain baru
 read -p "Masukkan domain baru Anda: " new_domain
