@@ -66,3 +66,8 @@ else
   echo "❌ Gagal mengganti domain atau menerbitkan sertifikat!"
   exit 1
 fi
+
+echo ""
+echo "Tekan Enter Untuk Menuju Menu Utama(↩️)"
+read -s
+menu
