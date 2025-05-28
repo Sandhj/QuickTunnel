@@ -48,9 +48,9 @@ echo "Websocket (TLS): 443"
 echo "BadVpn  : 7100-7900"
 echo "------------------------------------"
 echo "Websocket :"
-echo "$domain:80@$Login:$Pass
+echo "$domain:80@$Login:$Pass"
 echo "Websocket TLS/SNI :"
-echo "$domain:443@$Login:$Pass
+echo "$domain:443@$Login:$Pass"
 echo "------------------------------------"
 echo "Tekan Enter Untuk Kembali (↩️)"
 read -s
