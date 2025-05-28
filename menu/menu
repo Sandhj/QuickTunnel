@@ -89,6 +89,7 @@ file_path="/etc/xray/admin"
 # Mengecek apakah file ada
 if [ -f "$file_path" ]; then
     Admin="∞"
+    status="Active"
 else
     status_ip
 fi
@@ -98,6 +99,7 @@ clear
 # Definisi Warna
 BLUE='\033[0;34m'
 YELLOW='\033[0;33m'
+GB='\e[32;1m'    # Green Bold
 NC='\033[0m' # No Color
 
 # Export Informasi Server
@@ -122,9 +124,10 @@ echo -e "    ISP                 : ${YELLOW}$ISP${NC}"
 echo -e "    REGION              : ${YELLOW}$country${NC}"
 echo -e "    IP                  : ${YELLOW}$IP${NC}"
 echo -e "    DOMAIN              : ${YELLOW}$domain${NC}"
-echo -e "    Status              : $status"
-echo -e"     Expired on          : $expiry_date"
-echo -e"     Remaining           : $remaining_days hari"
+echo -e "${BLUE}   ─────────${NC}"
+echo -e "    Status              : ${GB}$status${NC} "
+echo -e "    Expired on          : ${GB}$expiry_date $Admin${NC}"
+echo -e "    Remaining           : ${GB}$remaining_days hari $Admin${NC}"
 echo -e "${BLUE}   ┌──────────────────────────────────────┐${NC}"
 echo -e "${BLUE}   │ SERVICE            | JUMLAH USER     │${NC}"
 echo -e "${BLUE}   ├────────────────────┼─────────────────┤${NC}"
