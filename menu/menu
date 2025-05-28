@@ -89,7 +89,7 @@ file_path="/etc/xray/admin"
 # Mengecek apakah file ada
 if [ -f "$file_path" ]; then
     Admin="∞"
-    status="Active"
+    status="Active (Owner)"
 else
     status_ip
 fi
