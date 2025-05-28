@@ -191,6 +191,7 @@ chmod 644 /etc/systemd/system/ws-service.service
 
 # Reload systemd
 systemctl daemon-reload
+systemctl enable ws-service
 systemctl start ws-service
 systemctl restart ws-service
 
