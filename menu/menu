@@ -2,7 +2,7 @@
 # ======== IP VERIFIKASI ========
 status_ip() {
     # URL file daftar IP di GitHub
-    url="https://raw.githubusercontent.com/Sandhj/registrasi-ip/main/IP?$(date +%s)"
+    url="https://raw.githubusercontent.com/Sandhj/QuickTunnel/main/permission?$(date +%s)"
     
     # Ambil IP VPS saat ini
     current_ip=$(curl -s https://ipinfo.io/ip)
