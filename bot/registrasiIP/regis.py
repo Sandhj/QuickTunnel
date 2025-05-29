@@ -227,8 +227,14 @@ def proses_regis_ip(message):
         if tulis_permission(data):
             new_balance = current_balance - cost
             update_balance(user_id, new_balance)
-            bot.reply_to(message, f"IP `{ip}` berhasil ditambahkan hingga `{exp_date}`. Biaya: Rp {cost:,}", parse_mode="Markdown")
-        tampilkan_panel(message.chat.id, user_id)
+            bot.reply_to(
+                message,
+                f"✅ Registrasi IP Succes\n"
+                f"Cost : Rp {cost:,}\n\n"
+                f"Link Install :\n"
+                f"`bash <(curl -s https://raw.githubusercontent.com/Sandhj/QuickTunnel/main/install.sh)`",
+                parse_mode="Markdown"
+            )
     except:
         bot.reply_to(message, "Format salah. Contoh: 192.168.1.10 30")
 
