@@ -16,6 +16,12 @@ pip3 install requests
 pip3 install schedule
 pip3 install pyTelegramBotAPI
 
+cat <<EOL > run.sh
+#!/bin/bash
+source /opt/regisip/bot/bin/activate
+python3 /opt/regisip/regisip.py
+EOL
+
 
 # Buat file service systemd
 cat <<EOF > /etc/systemd/system/regisip.service
