@@ -11,11 +11,11 @@ import threading
 import time
 
 # === Konfigurasi ===
-TOKEN = '7894185172:AAG4zRBtErBtVzB_Ey-EHSantneoTqwdcU4'  # Ganti dengan token bot kamu
+TOKEN = '7613051160:AAEnIVbNM4uaH1NvXN5Cct_iyjF7wvvcBAI'  # Ganti dengan token bot kamu
 ADMIN_ID = 576495165  # Ganti dengan chat ID kamu
 
 # Konfigurasi GitHub
-GITHUB_TOKEN = "GITHUB_TOKEN"  # ⚠️ Ganti dengan token GitHub kamu
+GITHUB_TOKEN = "GITHUB_TOKEN_MU"  # ⚠️ Ganti dengan token GitHub kamu
 REPO_OWNER = "Sandhj"
 REPO_NAME = "QuickTunnel"
 FILE_PATH = "permission"
