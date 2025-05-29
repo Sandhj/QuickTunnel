@@ -19,7 +19,7 @@ pip3 install pyTelegramBotAPI
 cat <<EOL > run.sh
 #!/bin/bash
 source /opt/regisip/bot/bin/activate
-python3 /opt/regisip/regisip.py
+python3 /opt/regisip/regis.py
 EOL
 
 
