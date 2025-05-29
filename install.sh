@@ -124,7 +124,8 @@ echo $domain >> /etc/xray/domain
 
 ${CREDITS}
 # ==== Perbaharui System
-apt update -y && apt upgrade -y
+apt update -y
+apt upgrade -y
 
 ${CREDITS}
 # ==== Install SSH & Xray
@@ -165,16 +166,6 @@ chmod 644 /root/.profile
 CRON_JOB="*/5 * * * * /bin/bash /etc/xray/check-ip-limit.sh"
 (crontab -l 2>/dev/null; echo "$CRON_JOB") | crontab -
 
-# ============== END SCRIPT==================
-clear
-echo""
-TEXTEND="Script Already Installed On Your System" 
-for (( i=0; i<${#TEXT2}; i++ ))
-do
-    echo -n -e "${green}${TEXTEND:$i:1}${NC}"
-    sleep 0.1 #Delay Antar Huruf
-done
-sleep 2
 
 echo ""
 echo -e "┌─────────────────────────────────────┐"
@@ -192,7 +183,7 @@ echo -e "   EBSOCKET TLS  : 443"
 echo -e "   GRPC          : 443"
 echo -e "└─────────────────────────────────────┘"
 
-rm /root/*
+rm -rf /root/*
 
 echo "Tekan Enter Untuk Menuju Menu Utama(↩️)"
 read -s
