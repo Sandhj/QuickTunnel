@@ -9,7 +9,7 @@ wget -q https://raw.githubusercontent.com/Sandhj/QuickTunnel/main/bot/registrasi
 echo " SILAHKAN INPUT GITHUB TOKEN KAMU :"
 read -p " Token : " GITHUB
 
-sed -i "s/GITHUB_TOKEN/${GITHUB}/" /opt/regisip/regis.py
+sed -i "s/GITHUB_TOKEN_MU/${GITHUB}/" /opt/regisip/regis.py
 
 
 # Buat venv untuk Bot
