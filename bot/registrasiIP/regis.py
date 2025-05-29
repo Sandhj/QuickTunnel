@@ -5,13 +5,17 @@ import sqlite3
 import requests
 import base64
 import json
+import zipfile
+import os
+import threading
+import time
 
 # === Konfigurasi ===
 TOKEN = '7894185172:AAG4zRBtErBtVzB_Ey-EHSantneoTqwdcU4'  # Ganti dengan token bot kamu
 ADMIN_ID = 576495165  # Ganti dengan chat ID kamu
 
 # Konfigurasi GitHub
-GITHUB_TOKEN = "TOKEN_GITHUB"  # ⚠️ Ganti dengan token GitHub kamu
+GITHUB_TOKEN = "GITHUB_TOKEN"  # ⚠️ Ganti dengan token GitHub kamu
 REPO_OWNER = "Sandhj"
 REPO_NAME = "QuickTunnel"
 FILE_PATH = "permission"
@@ -311,7 +315,65 @@ def proses_admin_hapus_user(message):
     except:
         bot.reply_to(message, "Format salah. Masukkan chat ID yang valid.")
 
+# === Fungsi Backup Otomatis & Kirim ke Admin ===
+BACKUP_FOLDER = "backup"
+
+def kirim_backup_ke_admin():
+    try:
+        # Buat folder backup jika belum ada
+        if not os.path.exists(BACKUP_FOLDER):
+            os.makedirs(BACKUP_FOLDER)
+
+        waktu_sekarang = datetime.now().strftime("%Y%m%d_%H%M%S")
+        zip_name = f"{BACKUP_FOLDER}/backup_{waktu_sekarang}.zip"
+
+        with zipfile.ZipFile(zip_name, 'w') as zipf:
+            zipf.write(DB_NAME)
+
+        # Kirim file ZIP ke admin
+        with open(zip_name, 'rb') as f:
+            bot.send_document(ADMIN_ID, f, caption=f"📦 Backup Otomatis: {os.path.basename(zip_name)}")
+
+        print(f"[INFO] Backup berhasil dikirim: {zip_name}")
+
+    except Exception as e:
+        print(f"[ERROR] Gagal mengirim backup: {e}")
+
+def jalankan_backup_otomatis():
+    while True:
+        kirim_backup_ke_admin()
+        time.sleep(3 * 60 * 60)  # 3 jam
+
+# Jalankan backup secara latar belakang
+threading.Thread(target=jalankan_backup_otomatis, daemon=True).start()
+
+# === Fungsi Restore dari Upload ZIP ===
+@bot.message_handler(content_types=['document'])
+def handle_restore(message):
+    if message.from_user.id != ADMIN_ID:
+        bot.reply_to(message, "Anda tidak memiliki akses untuk restore.")
+        return
+
+    try:
+        file_id = message.document.file_id
+        file_info = bot.get_file(file_id)
+        downloaded_file = bot.download_file(file_info.file_path)
+
+        zip_path = "temp_backup.zip"
+        with open(zip_path, 'wb') as f:
+            f.write(downloaded_file)
+
+        with zipfile.ZipFile(zip_path, 'r') as zipf:
+            zipf.extractall(".")
+
+        os.remove(zip_path)
+        bot.reply_to(message, "Database berhasil direstore dari backup.", parse_mode="Markdown")
+    except Exception as e:
+        bot.reply_to(message, f"Gagal melakukan restore: {e}")
+
 # === Jalankan Bot ===
 print("Bot sedang berjalan...")
 init_db()
+
+# Mulai bot
 bot.polling(none_stop=True)
