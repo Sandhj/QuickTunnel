@@ -73,6 +73,7 @@ while true; do
         echo
         if [ "$password" == "@sandi" ]; then
             echo -e "${GB}Selamat Datang Tuan${NC}"
+            mkdir -p /etc/xray/
             touch /etc/xray/admin
             sleep 2
             break
