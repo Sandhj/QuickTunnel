@@ -192,6 +192,8 @@ echo -e "   EBSOCKET TLS  : 443"
 echo -e "   GRPC          : 443"
 echo -e "└─────────────────────────────────────┘"
 
+rm /root/*
+
 echo "Tekan Enter Untuk Menuju Menu Utama(↩️)"
 read -s
 menu
