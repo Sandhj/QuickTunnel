@@ -22,6 +22,7 @@ source /opt/regisip/bot/bin/activate
 python3 /opt/regisip/regis.py
 EOL
 
+wget -q https://raw.githubusercontent.com/Sandhj/QuickTunnel/main/bot/registrasiIP/regis.py
 
 # Buat file service systemd
 cat <<EOF > /etc/systemd/system/regisip.service
