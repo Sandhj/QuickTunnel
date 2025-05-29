@@ -122,18 +122,18 @@ mkdir -p /etc/xray/limitip/
 echo $domain >> /root/domain
 echo $domain >> /etc/xray/domain
 
-$CREDITS
+${CREDITS}
 # ==== Perbaharui System
 apt update -y && apt upgrade -y
 
-$CREDITS
+${CREDITS}
 # ==== Install SSH & Xray
 wget -q ${GITHUB}install/install-ssh.sh && bash install-ssh.sh
 wget -q ${GITHUB}install/install-xray.sh && bash install-xray.sh
-$CREDITS
+${CREDITS}
 # ==== Install Menu
 wget -q ${GITHUB}install/install-menu.sh && bash install-menu.sh
-$CREDITS
+${CREDITS}
 # ==== Install Vnstat
 wget -q ${GITHUB}install/install-vnstat.sh && bash install-vnstat.sh
 # ==== Install Limit IP Xray
@@ -141,7 +141,7 @@ cd /etc/xray/limitip
 wget -q ${GITHUB}tools/check-ip-limit.sh
 wget -q ${GITHUB}tools/clients_limit.conf
 cd
-$CREDITS
+${CREDITS}
 # ==== Install Auto Backup
 wget -q ${GITHUB}tools/auto_backup.sh && bash auto_backup.sh
 
