@@ -1,1 +1,43 @@
-y
+#!/bin/bash
+
+# Buat direktori proyek
+mkdir -p /opt/regisip
+cd /opt/regisip
+
+# Buat venv untuk Bot
+apt install python3.12-venv -y
+python3 -m venv bot
+source bot/bin/activate
+
+apt-get install -y python3-pip
+
+# Instal modul Python yang diperlukan
+pip3 install requests
+pip3 install schedule
+pip3 install pyTelegramBotAPI
+
+
+# Buat file service systemd
+cat <<EOF > /etc/systemd/system/regisip.service
+[Unit]
+Description=Backup and Restore Bot Service
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/bash /opt/regisip/run.sh
+WorkingDirectory=/opt/regisip
+StandardOutput=inherit
+StandardError=inherit
+Restart=always
+User=root
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+# Reload systemd dan mulai service
+systemctl daemon-reload
+systemctl enable regisip
+systemctl start regisip
+
+deactivate 
