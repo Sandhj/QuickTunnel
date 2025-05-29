@@ -132,7 +132,7 @@ def tampilkan_panel(chat_id, user_id):
 
     # Judul berdasarkan apakah user adalah admin
     if user_id == ADMIN_ID:
-        title = "🟢 PANEL MEMBER (ADMIN) SCRIPT"
+        title = "🟢 PANEL ADMIN SCRIPT"
     else:
         title = "🟢 PANEL MEMBER SCRIPT"
 
@@ -141,7 +141,7 @@ def tampilkan_panel(chat_id, user_id):
     panel_text += f"Username   : @{uname}\n"
     panel_text += f"Saldo      : Rp {balance:,}\n\n"
 
-    markup = types.InlineKeyboardMarkup(row_width=1)
+    markup = types.InlineKeyboardMarkup(row_width=2)
     markup.add(
         types.InlineKeyboardButton("REGIS IP", callback_data='regis_ip'),
         types.InlineKeyboardButton("CHANGE IP", callback_data='change_ip'),
@@ -182,10 +182,12 @@ def handle_query(call):
         markup = types.InlineKeyboardMarkup()
         markup.add(
             types.InlineKeyboardButton("Tambah Saldo", callback_data='admin_tambah_saldo'),
-            types.InlineKeyboardButton("Hapus User", callback_data='admin_hapus_user'),
-            types.InlineKeyboardButton("Lihat Semua User", callback_data='admin_lihat_semua')
+            types.InlineKeyboardButton("Hapus User", callback_data='admin_hapus_user')
         )
-        bot.send_message(chat_id, "MENU ADMIN:\nPilih aksi:", reply_markup=markup)
+        markup.add(
+            types.InlineKeyboardButton("List User", callback_data='admin_lihat_semua')
+        )
+        bot.send_message(chat_id, "🖥️ MENU ADMIN CONTROL :", reply_markup=markup)
 
     elif call.data == 'admin_tambah_saldo':
         msg = bot.send_message(chat_id, "Kirimkan chat ID dan jumlah saldo (contoh: 123456789 50000):")
