@@ -137,14 +137,13 @@ def tulis_permission(data):
         return False
 
 # === Fungsi Tampilkan Panel Pengguna ===
-def tampilkan_panel(chat_id, user_id):
+def tampilkan_panel(chat_id, user_id, message_id=None):
     user = bot.get_chat(user_id)
     username = user.username or "-"
     chatid = user.id
     add_or_update_user(chatid, username)
     data = get_user_data(chatid)
     chatid_db, uname, balance, status, expired = data
-
     now = datetime.now()
     if expired:
         exp_date = datetime.strptime(expired, "%Y-%m-%d %H:%M:%S")
@@ -156,24 +155,20 @@ def tampilkan_panel(chat_id, user_id):
         expired_str = f"({remaining_days} {'Days' if remaining_days != 1 else 'Day'} Left)"
     else:
         expired_str = ""
-
     # Judul berdasarkan apakah user adalah admin
     if user_id == ADMIN_ID:
         title = "🟢 PANEL ADMIN SCRIPT"
     else:
         title = "🟢 PANEL MEMBER SCRIPT"
-
     panel_text = f"{title}\n"
-    panel_text += f"ChatID     : `{chatid}`\n"  # Format ChatID sebagai kode untuk mudah dicopy
+    panel_text += f"ChatID     : `{chatid}`\n"
     panel_text += f"Username   : @{uname}\n"
-
     if status == "VIP":
         panel_text += f"Status     : {status} {expired_str}\n"
         panel_text += f"Saldo      : Unlimited\n"
     else:
         panel_text += f"Status     : {status} {expired_str}\n"
         panel_text += f"Saldo      : Rp {balance:,}\n"
-
     markup = types.InlineKeyboardMarkup(row_width=2)
     markup.add(
         types.InlineKeyboardButton("REGIS IP", callback_data='regis_ip'),
@@ -182,7 +177,20 @@ def tampilkan_panel(chat_id, user_id):
     )
     if user_id == ADMIN_ID:
         markup.add(types.InlineKeyboardButton("ADMIN", callback_data='admin_menu'))
-    bot.send_message(chat_id, panel_text, reply_markup=markup, parse_mode="Markdown")
+    
+    if message_id:
+        try:
+            bot.edit_message_text(
+                chat_id=chat_id,
+                message_id=message_id,
+                text=panel_text,
+                reply_markup=markup,
+                parse_mode="Markdown"
+            )
+        except Exception as e:
+            print(f"[ERROR] Tidak bisa edit pesan: {e}")
+    else:
+        bot.send_message(chat_id, panel_text, reply_markup=markup, parse_mode="Markdown")
 
 # === Handler untuk /start ===
 @bot.message_handler(commands=['start'])
@@ -207,6 +215,7 @@ def handle_query(call):
         if chat_id != ADMIN_ID:
             bot.answer_callback_query(call.id, "Akses ditolak! Anda bukan admin.", show_alert=True)
             return
+
         markup = types.InlineKeyboardMarkup()
         markup.add(
             types.InlineKeyboardButton("Tambah Saldo", callback_data='admin_tambah_saldo'),
@@ -218,7 +227,26 @@ def handle_query(call):
             types.InlineKeyboardButton("Hapus User", callback_data='admin_hapus_user'),
             types.InlineKeyboardButton("List User", callback_data='admin_lihat_semua')
         )
-        bot.send_message(chat_id, "🖥️ MENU ADMIN CONTROL :", reply_markup=markup)
+        markup.add(
+            types.InlineKeyboardButton("⬅️ Back", callback_data='back_to_panel')  # Tombol kembali
+        )
+
+        # Edit pesan lama menjadi menu admin
+        try:
+            bot.edit_message_text(
+                chat_id=chat_id,
+                message_id=call.message.message_id,
+                text="🖥️ MENU ADMIN CONTROL :",
+                reply_markup=markup
+            )
+        except Exception as e:
+            print(f"[ERROR] Tidak bisa edit pesan: {e}")
+    elif call.data == 'back_to_panel':
+        tampilkan_panel(chat_id, user_id)
+        try:
+            bot.delete_message(chat_id, call.message.message_id)  # Hapus menu admin
+        except:
+            pass
     elif call.data == 'admin_tambah_saldo':
         msg = bot.send_message(chat_id, "Kirimkan chat ID, jumlah saldo (contoh: 123456789 50000):")
         bot.register_next_step_handler(msg, proses_admin_tambah_saldo)
@@ -275,11 +303,12 @@ def proses_regis_ip(message):
                 message,
                 f"✅ Registrasi IP Succes\n"
                 f"Cost : Rp {cost:,}\n"
+                f"Os Support : Debian 12 & Ubuntu 24.04 LTS :\n"
                 f"Link Install :\n"
                 f"`bash <(curl -s https://raw.githubusercontent.com/Sandhj/QuickTunnel/main/install.sh)`",
                 parse_mode="Markdown"
             )
-        tampilkan_panel(message.chat.id, user_id)
+        
     except:
         bot.reply_to(message, "Format salah. Contoh: 192.168.1.10 30")
 
@@ -306,7 +335,7 @@ def proses_change_ip(message):
                 parse_mode="Markdown"
             )
            
-        tampilkan_panel(message.chat.id, message.from_user.id)
+        
     except:
         bot.reply_to(message, "Format salah. Contoh: 192.168.1.10 192.168.1.11")
 
@@ -354,7 +383,7 @@ def proses_renew_ip(message):
                 f"Biaya : Rp {cost:,}",
                 parse_mode="Markdown"
             )
-        tampilkan_panel(message.chat.id, user_id)
+        
     except:
         bot.reply_to(message, "Format salah. Contoh: 192.168.1.10 30")
 
@@ -379,7 +408,7 @@ def proses_admin_tambah_saldo(message):
                 parse_mode="Markdown"
         )
         
-        tampilkan_panel(message.chat.id, message.from_user.id)
+        
     except:
         bot.reply_to(message, "Format salah. Contoh: 123456789 50000")
 
@@ -398,12 +427,11 @@ def proses_admin_tambah_vip(message):
                 f"Telah Di Upgrade Menjadi VIP Selama 1 Bulan",
                 parse_mode="Markdown"
         )
-       
-        tampilkan_panel(message.chat.id, message.from_user.id)
+        
     except:
         bot.reply_to(message, "Format salah. Masukkan chat ID yang valid.")
 
-def proses_admin_tambah_Reseller(message):
+def proses_admin_tambah_reseller(message):
     try:
         chat_id_user = int(message.text.strip())
         user = get_user_data(chat_id_user)
@@ -418,8 +446,7 @@ def proses_admin_tambah_Reseller(message):
                 f"Telah Di Upgrade Menjadi Reseller Selama 1 Bulan",
                 parse_mode="Markdown"
         )
-       
-        tampilkan_panel(message.chat.id, message.from_user.id)
+        
     except:
         bot.reply_to(message, "Format salah. Masukkan chat ID yang valid.")
         
@@ -441,7 +468,7 @@ def proses_admin_reset_status(message):
         )
         
         bot.reply_to(message, f"Status user `{chat_id_user}` berhasil direset menjadi Biasa.", parse_mode="Markdown")
-        tampilkan_panel(message.chat.id, message.from_user.id)
+        
     except:
         bot.reply_to(message, "Format salah. Masukkan chat ID yang valid.")
 
