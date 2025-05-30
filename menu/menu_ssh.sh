@@ -12,7 +12,7 @@ echo -e "      2. Renew Account                   "
 echo -e "      3. Delete Account                  "
 echo -e "      4. List Account                    "
 echo -e "      5. Trial Account 1 Hari          "
-echo -e "      6. View SSH User Detail       "
+echo -e "      6. View SSH Detail Account      "
 echo -e "${BLUE}   └──────────────────────────────────────┘${NC}"
 echo -e ""
 read -p "Select Menu (0 Back to Menu) : " pilihan
