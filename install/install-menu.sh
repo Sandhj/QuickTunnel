@@ -14,6 +14,7 @@ ${GITHUB}/manager-ssh/renew-ssh.sh
 ${GITHUB}/manager-ssh/list-user-ssh.sh
 ${GITHUB}/manager-ssh/add-ssh.sh
 ${GITHUB}/manager-ssh/delete-ssh.sh
+${GITHUB}/manager-ssh/detail-ssh.sh
 
 # TROJAN
 ${GITHUB}/manager-trojan/trial-trojan.sh
@@ -21,6 +22,7 @@ ${GITHUB}/manager-trojan/renew-trojan.sh
 ${GITHUB}/manager-trojan/list-user-trojan.sh
 ${GITHUB}/manager-trojan/delete-trojan.sh
 ${GITHUB}/manager-trojan/add-trojan.sh
+${GITHUB}/manager-trojan/detail-trojan.sh
 
 # VLESS
 ${GITHUB}/manager-vless/trial-vless.sh
@@ -28,6 +30,7 @@ ${GITHUB}/manager-vless/renew-vless.sh
 ${GITHUB}/manager-vless/list-user-vless.sh
 ${GITHUB}/manager-vless/delete-vless.sh
 ${GITHUB}/manager-vless/add-vless.sh
+${GITHUB}/manager-vless/detail-vless.sh
 
 # VMESS
 ${GITHUB}/manager-vmess/trial-vmess.sh
@@ -35,6 +38,7 @@ ${GITHUB}/manager-vmess/renew-vmess.sh
 ${GITHUB}/manager-vmess/list-user-vmess.sh
 ${GITHUB}/manager-vmess/delete-vmess.sh
 ${GITHUB}/manager-vmess/add-vmess.sh
+${GITHUB}/manager-vmess/detail-vmess.sh
 
 # MENU
 ${GITHUB}/menu/menu
