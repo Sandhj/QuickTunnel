@@ -26,7 +26,7 @@ set_cron_reboot() {
     remove_old_cron
 
     # Tambahkan entri baru ke crontab
-    (crontab -l 2>/dev/null; echo "$minute $hour * * * /sbin/shutdown -r now # $CRON_ENTRY") | crontab -
+    (crontab -l 2>/dev/null; echo "$minute $hour * * * reboot # $CRON_ENTRY") | crontab -
 
     echo "✅ Reboot otomatis diatur pada pukul $hour:$minute setiap hari."
     sleep 2
