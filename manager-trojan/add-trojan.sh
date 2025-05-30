@@ -74,6 +74,26 @@ animate() {
 echo "Creating New Account..."
 animate
 
+# Simpan Data Akun
+rm -rf /opt/history/trojan-$user 
+
+cat > /opt/history/trojan-$user <<EOF
+✅ Account Trojan Berhasil Dibuat
+Username     : $user
+Expired      : $exp
+-----------------------------------------------
+UUID         : $NEW_UUID
+Host/SNI     : $HOST
+Port         : $PORT
+-----------------------------------------------
+1. WebSocket + TLS
+\$LINK_WS
+
+2. gRPC
+\$LINK_GRPC
+-----------------------------------------------
+EOF
+
 # Tampilkan hasil
 echo ""
 echo ""
