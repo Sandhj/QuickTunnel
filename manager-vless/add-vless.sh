@@ -67,6 +67,27 @@ animate() {
 echo "Creating New Account..."
 animate
 
+rm -rf /opt/history/vless-$user
+
+# Simpan Data akun
+cat > /opt/history/vless-$user <<EOF
+✅ Account VLess Berhasil Dibuat
+Username: $user
+Expired: $exp
+-----------------------------------------------
+UUID: $NEW_UUID
+Host: $HOST
+-----------------------------------------------
+1. WebSocket + TLS (Port 443)
+\$link_tls
+
+2. WebSocket (tanpa TLS, Port 80)
+\$link_ws
+
+3. gRPC (Port 443)
+\$link_grpc
+-----------------------------------------------
+EOF
 
 echo ""
 echo ""
