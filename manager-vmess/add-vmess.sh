@@ -109,6 +109,29 @@ animate() {
 echo "Creating New Account..."
 animate
 
+# Simpan Data Akun
+
+rm -rf /opt/history/vmess-$user
+
+cat > /opt/history/vmess-$user <<EOF
+✅ VMess Account Berhasil Dibuat
+ Username: $user
+ Expired : $exp
+-----------------------------------------------
+UUID: $NEW_UUID
+Host: $HOST
+-----------------------------------------------
+1. WebSocket + TLS (Port 443)
+vmess://\$link_tls
+
+2. WebSocket (tanpa TLS, Port 80)
+vmess://\$link_ws
+
+3. gRPC (Port 443)
+vmess://\$link_grpc
+-----------------------------------------------
+EOF
+
 # Tampilkan hasil
 echo ""
 echo ""
