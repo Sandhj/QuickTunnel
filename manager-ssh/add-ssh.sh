@@ -49,9 +49,9 @@ Websocket (TLS): 443
 BadVpn  : 7100-7900
 ------------------------------------
 Websocket :
-\$domain:80@\$Login:\$Pass
+$domain:80@$Login:$Pass
 Websocket TLS/SNI :
-\$domain:443@\$Login:\$Pass
+$domain:443@$Login:$Pass
 ------------------------------------
 EOF
 
