@@ -1,0 +1,52 @@
+#!/bin/bash
+
+# Header
+echo -e "┌──────────────────────────────────────┐"
+echo -e "│    .:: DETAIL SSH ACCOUNT ::.    │"
+echo -e "└──────────────────────────────────────┘"
+
+folder="/opt/history/"
+
+# Cek apakah folder ada
+if [ ! -d "$folder" ]; then
+    echo "Folder $folder tidak ditemukan!"
+    exit 1
+fi
+
+# Simpan file ke array
+files=("$folder"ssh-*)
+
+# Tampilkan daftar file tanpa awalan ssh-
+index=1
+file_list=()
+
+for file in "${files[@]}"; do
+    if [ -f "$file" ]; then
+        filename=$(basename "$file")
+        # Hilangkan awalan 'ssh-' dari tampilan
+        display_name="${filename#ssh-}"
+        echo "$index) $display_name"
+        file_list+=("$file")
+        ((index++))
+    fi
+done
+
+# Jika tidak ada file
+if [ "${#file_list[@]}" -eq 0 ]; then
+    echo "Tidak ada file ditemukan."
+    exit 0
+fi
+
+# Input pilihan user
+read -p "Masukkan nomor file untuk melihat isi (1-${#file_list[@]}): " pilihan
+
+# Validasi input
+if [[ "$pilihan" =~ ^[0-9]+$ ]] && [ "$pilihan" -ge 1 ] && [ "$pilihan" -le "${#file_list[@]}" ]; then
+    selected_file="${file_list[$((pilihan-1))]}"
+    echo ""
+    echo "Isi file: $selected_file"
+    echo "──────────────────────────────────────────────"
+    cat "$selected_file"
+else
+    echo "Pilihan tidak valid!"
+fi
