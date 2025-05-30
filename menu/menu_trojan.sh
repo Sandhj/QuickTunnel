@@ -12,6 +12,7 @@ echo -e "      2. Renew Account                   "
 echo -e "      3. Delete Account                  "
 echo -e "      4. List Account                    "
 echo -e "      5. Trial Account 1 Hari          "
+echo -e "      6. View Trojan Detail Account       "
 echo -e "${BLUE}   └──────────────────────────────────────┘${NC}"
 echo -e ""
 read -p "Select Menu (0 To Back Menu) : " pilihan
@@ -32,6 +33,9 @@ case $pilihan in
     5)
         trial-trojan.sh
         ;;
+    6)
+        detail-trojan.sh
+        ;;    
     0)
         menu
         ;;
