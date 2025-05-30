@@ -36,7 +36,8 @@ if [ "${#file_list[@]}" -eq 0 ]; then
     echo "Tidak ada file ditemukan."
     exit 0
 fi
-
+echo -e "└──────────────────────────────────────┘"
+echo""
 # Input pilihan user
 read -p "Select User : " pilihan
 
@@ -45,7 +46,7 @@ if [[ "$pilihan" =~ ^[0-9]+$ ]] && [ "$pilihan" -ge 1 ] && [ "$pilihan" -le "${#
     selected_file="${file_list[$((pilihan-1))]}"
     echo ""  
     cat "$selected_file"
-    echo -e "└──────────────────────────────────────┘"
+    
     
 else
     echo "Pilihan tidak valid!"
