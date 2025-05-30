@@ -293,7 +293,15 @@ def proses_change_ip(message):
             bot.reply_to(message, "IP lama tidak ditemukan.")
             return
         if tulis_permission(data):
-            bot.reply_to(message, f"IP `{old_ip}` berhasil diganti menjadi `{new_ip}`.", parse_mode="Markdown")
+            bot.reply_to(
+                message,
+                f"✅ Changed IP Succes\n"
+                f"IP Lama : `{old_ip}` \n"
+                f"IP Baru : `{new_ip}`\n"
+                f" Thanks Fo Using This Script",
+                parse_mode="Markdown"
+            )
+           
         tampilkan_panel(message.chat.id, message.from_user.id)
     except:
         bot.reply_to(message, "Format salah. Contoh: 192.168.1.10 192.168.1.11")
@@ -334,7 +342,14 @@ def proses_renew_ip(message):
             if status != 'VIP':
                 new_balance = current_balance - cost
                 update_balance(user_id, new_balance)
-            bot.reply_to(message, f"Tanggal IP `{ip}` diperbarui hingga `{exp_date}`. Biaya: Rp {cost:,}", parse_mode="Markdown")
+            bot.reply_to(
+                message,
+                f"✅ Renewed IP Succes\n"
+                f"Tanggal IP : `{ip}`\n"
+                f"diperbarui hingga : `{exp_date}`\n"
+                f"Biaya : Rp {cost:,}",
+                parse_mode="Markdown"
+            )
         tampilkan_panel(message.chat.id, user_id)
     except:
         bot.reply_to(message, "Format salah. Contoh: 192.168.1.10 30")
@@ -351,7 +366,15 @@ def proses_admin_tambah_saldo(message):
             return
         new_balance = user[2] + amount
         update_balance(chat_id_user, new_balance)
-        bot.reply_to(message, f"Saldo user `{chat_id_user}` ditambahkan sebesar Rp {amount:,}.", parse_mode="Markdown")
+        bot.reply_to(
+                message,
+                f"✅ Tambahan Saldo Succes\n"
+                f"User : `{chat_id_user}`\n"
+                f"Saldo : Rp {amount:,}\n"
+                f"Thanks For Using This Script",
+                parse_mode="Markdown"
+        )
+        
         tampilkan_panel(message.chat.id, message.from_user.id)
     except:
         bot.reply_to(message, "Format salah. Contoh: 123456789 50000")
@@ -364,7 +387,14 @@ def proses_admin_tambah_vip(message):
             bot.reply_to(message, "User tidak ditemukan.")
             return
         update_status(chat_id_user, "VIP")
-        bot.reply_to(message, f"User `{chat_id_user}` berhasil dijadikan VIP selama 1 bulan.", parse_mode="Markdown")
+        bot.reply_to(
+                message,
+                f"✅ Registrasi User VIP Succes\n"
+                f"User : `{chat_id_user}`\n"
+                f"Telah Di Upgrade Menjadi VIP Selama 1 Bulan",
+                parse_mode="Markdown"
+        )
+       
         tampilkan_panel(message.chat.id, message.from_user.id)
     except:
         bot.reply_to(message, "Format salah. Masukkan chat ID yang valid.")
@@ -377,6 +407,14 @@ def proses_admin_reset_status(message):
         c.execute("UPDATE users SET status='Biasa', status_expired=NULL WHERE chat_id=?", (chat_id_user,))
         conn.commit()
         conn.close()
+        bot.reply_to(
+                message,
+                f"✅ Reset User Status Succes\n"
+                f"User : `{chat_id_user}`\n"
+                f"Telah Di Downgrade Menjadi User Biasa",
+                parse_mode="Markdown"
+        )
+        
         bot.reply_to(message, f"Status user `{chat_id_user}` berhasil direset menjadi Biasa.", parse_mode="Markdown")
         tampilkan_panel(message.chat.id, message.from_user.id)
     except:
@@ -406,7 +444,7 @@ def kirim_backup_ke_admin():
         with zipfile.ZipFile(zip_name, 'w') as zipf:
             zipf.write(DB_NAME)
         with open(zip_name, 'rb') as f:
-            bot.send_document(ADMIN_ID, f, caption=f"📦 Backup Otomatis: {os.path.basename(zip_name)}")
+            bot.send_document(ADMIN_ID, f, caption=f"📦 Backup: {os.path.basename(zip_name)}")
         print(f"[INFO] Backup berhasil dikirim: {zip_name}")
     except Exception as e:
         print(f"[ERROR] Gagal mengirim backup: {e}")
