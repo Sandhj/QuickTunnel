@@ -25,7 +25,7 @@ for file in "${files[@]}"; do
         filename=$(basename "$file")
         # Hilangkan awalan 'ssh-' dari tampilan
         display_name="${filename#ssh-}"
-        echo "$index) $display_name"
+        echo "  $index. $display_name"
         file_list+=("$file")
         ((index++))
     fi
