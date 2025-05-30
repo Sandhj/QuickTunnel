@@ -1,5 +1,5 @@
 #!/bin/bash
-
+clear 
 # Header
 echo -e "┌──────────────────────────────────────┐"
 echo -e "│      .:: DETAIL SSH ACCOUNT ::.      │"
@@ -51,3 +51,7 @@ if [[ "$pilihan" =~ ^[0-9]+$ ]] && [ "$pilihan" -ge 1 ] && [ "$pilihan" -le "${#
 else
     echo "Pilihan tidak valid!"
 fi
+
+echo "Tekan Enter Untuk Menuju Menu Utama(↩️)"
+read -s
+menu
