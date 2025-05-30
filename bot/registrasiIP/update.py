@@ -11,11 +11,11 @@ import threading
 import time
 
 # === Konfigurasi ===
-TOKEN = '7894185172:AAG4zRBtErBtVzB_Ey-EHSantneoTqwdcU4'  # Ganti dengan token bot kamu
-ADMIN_ID = 576495165  # Ganti dengan chat ID admin kamu
+TOKEN = '7613051160:AAEnIVbNM4uaH1NvXN5Cct_iyjF7wvvcBAI'  # Ganti dengan token bot kamu
+ADMIN_ID = 576495165  # Ganti dengan chat ID kamu
 
 # Konfigurasi GitHub
-GITHUB_TOKEN = "Github"  # ⚠️ Ganti dengan token GitHub kamu
+GITHUB_TOKEN = "GITHUB_TOKEN_MU"  # ⚠️ Ganti dengan token GitHub kamu
 REPO_OWNER = "Sandhj"
 REPO_NAME = "QuickTunnel"
 FILE_PATH = "permission"
@@ -33,8 +33,8 @@ def init_db():
                  chat_id INTEGER PRIMARY KEY,
                  username TEXT,
                  balance INTEGER DEFAULT 0,
-                 status TEXT DEFAULT 'Member',
-                 status_expire TIMESTAMP)''')
+                 status TEXT DEFAULT "Biasa",
+                 status_expired TEXT DEFAULT NULL)''')  # Saldo default 0
     conn.commit()
     conn.close()
 
@@ -46,18 +46,12 @@ def get_user_data(chat_id):
     conn.close()
     return user
 
-def add_or_update_user(chat_id, username, balance=0, status="Member", status_expire=None):
-    now = datetime.now()
-    if status_expire is None and status != "Member":
-        status_expire = now + timedelta(days=30)
-    elif status == "Member":
-        status_expire = None
+def add_or_update_user(chat_id, username, balance=0):
     conn = sqlite3.connect(DB_NAME)
     c = conn.cursor()
-    c.execute("INSERT OR IGNORE INTO users (chat_id, username, balance, status, status_expire) VALUES (?, ?, ?, ?, ?)",
-              (chat_id, username, balance, status, status_expire))
-    c.execute("UPDATE users SET username=?, balance=?, status=?, status_expire=? WHERE chat_id=?",
-              (username, balance, status, status_expire, chat_id))
+    c.execute("INSERT OR IGNORE INTO users (chat_id, username, balance) VALUES (?, ?, ?)",
+              (chat_id, username, balance))
+    c.execute("UPDATE users SET username=? WHERE chat_id=?", (username, chat_id))
     conn.commit()
     conn.close()
 
@@ -69,30 +63,26 @@ def update_balance(chat_id, new_balance):
     conn.close()
 
 def update_status(chat_id, new_status, duration_days=30):
-    now = datetime.now()
-    if new_status == "Member":
-        expire = None
-    else:
-        expire = now + timedelta(days=duration_days)
+    expired_date = (datetime.now() + timedelta(days=duration_days)).strftime("%Y-%m-%d %H:%M:%S")
     conn = sqlite3.connect(DB_NAME)
     c = conn.cursor()
-    c.execute("UPDATE users SET status=?, status_expire=? WHERE chat_id=?", (new_status, expire, chat_id))
+    c.execute("UPDATE users SET status=?, status_expired=? WHERE chat_id=?", 
+              (new_status, expired_date, chat_id))
     conn.commit()
     conn.close()
 
-def reset_expired_status():
-    now = datetime.now()
+def check_and_reset_expired_statuses():
+    now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     conn = sqlite3.connect(DB_NAME)
     c = conn.cursor()
-    c.execute("UPDATE users SET status='Member', status_expire=NULL WHERE status != 'Member' AND status_expire <= ?", (now,))
+    c.execute("UPDATE users SET status='Biasa', status_expired=NULL WHERE status!='Biasa' AND status_expired < ?", (now,))
     conn.commit()
     conn.close()
-    print("[INFO] Semua status yang kadaluarsa telah direset ke Member.")
 
 def get_all_users():
     conn = sqlite3.connect(DB_NAME)
     c = conn.cursor()
-    c.execute("SELECT chat_id, username, balance, status, status_expire FROM users")
+    c.execute("SELECT chat_id, username, balance, status, status_expired FROM users")
     users = c.fetchall()
     conn.close()
     return users
@@ -127,11 +117,9 @@ def tulis_permission(data):
         "Authorization": f"token {GITHUB_TOKEN}",
         "Accept": "application/vnd.github.v3+json"
     }
-
     # Ambil SHA file lama
     res = requests.get(url, headers=headers)
     sha = res.json().get('sha') if res.status_code == 200 else None
-
     # Format konten baru
     content = '\n'.join([f"{ip} {date}" for ip, date in data])
     payload = {
@@ -141,7 +129,6 @@ def tulis_permission(data):
     }
     if sha:
         payload["sha"] = sha
-
     res = requests.put(url, headers=headers, data=json.dumps(payload))
     if res.status_code == 200:
         return True
@@ -155,41 +142,26 @@ def tampilkan_panel(chat_id, user_id):
     username = user.username or "-"
     chatid = user.id
     add_or_update_user(chatid, username)
-
     data = get_user_data(chatid)
-    chatid_db, uname, balance, status, expire = data
+    chatid_db, uname, balance, status, expired = data
 
-    # Reset status jika sudah lewat masa berlaku
-    now = datetime.now()
-    if expire and datetime.fromisoformat(expire) < now:
-        update_status(chatid, "Member")
-        data = get_user_data(chatid)
-        _, _, balance, status, expire = data
+    if expired:
+        expired_str = f"Sampai {expired}"
+    else:
+        expired_str = "-"
 
     # Judul berdasarkan apakah user adalah admin
     if user_id == ADMIN_ID:
-        title = "🟢 PANEL MEMBER (ADMIN) SCRIPT"
+        title = "🟢 PANEL ADMIN SCRIPT"
     else:
         title = "🟢 PANEL MEMBER SCRIPT"
-
     panel_text = f"{title}\n"
-    panel_text += f"ChatID     : `{chatid}`\n"
+    panel_text += f"ChatID     : `{chatid}`\n"  # Format ChatID sebagai kode untuk mudah dicopy
     panel_text += f"Username   : @{uname}\n"
-    panel_text += f"Status     : {status}\n"
+    panel_text += f"Status     : {status} {expired_str}\n"
+    panel_text += f"Saldo      : Rp {balance:,}\n"
 
-    if status == "VIP":
-        panel_text += f"Saldo      : Unlimited\n"
-    else:
-        panel_text += f"Saldo      : Rp {balance:,}\n"
-
-    if status != "Member":
-        try:
-            expire_str = datetime.fromisoformat(expire).strftime("%Y-%m-%d %H:%M")
-            panel_text += f"Masa Berlaku: {expire_str}\n"
-        except:
-            pass
-
-    markup = types.InlineKeyboardMarkup(row_width=1)
+    markup = types.InlineKeyboardMarkup(row_width=2)
     markup.add(
         types.InlineKeyboardButton("REGIS IP", callback_data='regis_ip'),
         types.InlineKeyboardButton("CHANGE IP", callback_data='change_ip'),
@@ -197,7 +169,6 @@ def tampilkan_panel(chat_id, user_id):
     )
     if user_id == ADMIN_ID:
         markup.add(types.InlineKeyboardButton("ADMIN", callback_data='admin_menu'))
-
     bot.send_message(chat_id, panel_text, reply_markup=markup, parse_mode="Markdown")
 
 # === Handler untuk /start ===
@@ -210,53 +181,44 @@ def send_welcome(message):
 def handle_query(call):
     chat_id = call.message.chat.id
     user_id = call.from_user.id
-
     if call.data == 'regis_ip':
         msg = bot.send_message(chat_id, "Kirimkan IP dan jumlah hari (contoh: 192.168.1.10 30):")
         bot.register_next_step_handler(msg, proses_regis_ip)
-
     elif call.data == 'change_ip':
         msg = bot.send_message(chat_id, "Kirimkan IP Lama dan IP Baru (contoh: 192.168.1.10 192.168.1.11):")
         bot.register_next_step_handler(msg, proses_change_ip)
-
     elif call.data == 'renew_ip':
         msg = bot.send_message(chat_id, "Kirimkan IP dan jumlah hari untuk perpanjang (contoh: 192.168.1.10 30):")
         bot.register_next_step_handler(msg, proses_renew_ip)
-
     elif call.data == 'admin_menu':
         if chat_id != ADMIN_ID:
             bot.answer_callback_query(call.id, "Akses ditolak! Anda bukan admin.", show_alert=True)
             return
         markup = types.InlineKeyboardMarkup()
         markup.add(
-            types.InlineKeyboardButton("Ubah Status", callback_data='admin_ubah_status'),
-            types.InlineKeyboardButton("Perpanjang Status", callback_data='admin_perpanjang_status'),
+            types.InlineKeyboardButton("Tambah Saldo", callback_data='admin_tambah_saldo'),
             types.InlineKeyboardButton("Reset Status", callback_data='admin_reset_status'),
-            types.InlineKeyboardButton("Lihat Semua User", callback_data='admin_lihat_semua')
+            types.InlineKeyboardButton("Hapus User", callback_data='admin_hapus_user')
         )
-        bot.send_message(chat_id, "MENU ADMIN:\nPilih aksi:", reply_markup=markup)
-
-    elif call.data == 'admin_ubah_status':
-        msg = bot.send_message(chat_id, "Kirimkan chat ID dan status baru (Member/Reseller/VIP), contoh: 123456789 Reseller")
-        bot.register_next_step_handler(msg, proses_admin_ubah_status)
-
-    elif call.data == 'admin_perpanjang_status':
-        msg = bot.send_message(chat_id, "Kirimkan chat ID dan jumlah hari untuk perpanjang, contoh: 123456789 30")
-        bot.register_next_step_handler(msg, proses_admin_perpanjang_status)
-
+        markup.add(
+            types.InlineKeyboardButton("List User", callback_data='admin_lihat_semua')
+        )
+        bot.send_message(chat_id, "🖥️ MENU ADMIN CONTROL :", reply_markup=markup)
+    elif call.data == 'admin_tambah_saldo':
+        msg = bot.send_message(chat_id, "Kirimkan chat ID, jumlah saldo dan pilih status (contoh: 123456789 50000 Reseller):")
+        bot.register_next_step_handler(msg, proses_admin_tambah_saldo)
     elif call.data == 'admin_reset_status':
-        msg = bot.send_message(chat_id, "Kirimkan chat ID user yang ingin direset:")
+        msg = bot.send_message(chat_id, "Kirimkan Chat ID user untuk reset status:")
         bot.register_next_step_handler(msg, proses_admin_reset_status)
-
+    elif call.data == 'admin_hapus_user':
+        msg = bot.send_message(chat_id, "Kirimkan chat ID user yang ingin dihapus:")
+        bot.register_next_step_handler(msg, proses_admin_hapus_user)
     elif call.data == 'admin_lihat_semua':
         users = get_all_users()
         if not users:
             bot.send_message(chat_id, "Belum ada user yang terdaftar.")
             return
-        list_users = ""
-        for uid, uname, bal, stat, exp in users:
-            exp_str = f"{datetime.fromisoformat(exp).strftime('%Y-%m-%d %H:%M')}" if exp else "-"
-            list_users += f"`{uid}` | @{uname} | {stat} | {exp_str}\n"
+        list_users = "\n".join([f"`{uid}` | @{uname} | Rp {bal:,} | {stat} {exp or ''}" for uid, uname, bal, stat, exp in users])
         bot.send_message(chat_id, f"Daftar User:\n{list_users}", parse_mode="Markdown")
 
 # === Proses Input ===
@@ -264,29 +226,38 @@ def proses_regis_ip(message):
     try:
         ip, days = message.text.strip().split()
         days = int(days)
-
         user_id = message.from_user.id
         user_data = get_user_data(user_id)
         current_balance = user_data[2]
         status = user_data[3]
 
-        harga_per_hari = 333 if status == "Member" else 250 if status == "Reseller" else 0
-        cost = days * harga_per_hari
+        if status == 'Biasa':
+            cost = days * 333
+        elif status == 'Reseller':
+            cost = days * 250
+        elif status == 'VIP':
+            cost = 0
 
-        if status != "VIP" and current_balance < cost:
+        if current_balance < cost and status != 'VIP':
             bot.reply_to(message, f"Saldo tidak mencukupi. Diperlukan: Rp {cost:,}")
             tampilkan_panel(message.chat.id, user_id)
             return
 
-        data = baca_permission()
         exp_date = (datetime.now() + timedelta(days=days)).strftime("%Y-%m-%d")
+        data = baca_permission()
         data.append((ip, exp_date))
-
         if tulis_permission(data):
-            if status != "VIP":
+            if status != 'VIP':
                 new_balance = current_balance - cost
                 update_balance(user_id, new_balance)
-            bot.reply_to(message, f"IP `{ip}` berhasil ditambahkan hingga `{exp_date}`. Biaya: Rp {cost:,}", parse_mode="Markdown")
+            bot.reply_to(
+                message,
+                f"✅ Registrasi IP Succes\n"
+                f"Cost : Rp {cost:,}\n"
+                f"Link Install :\n"
+                f"`bash <(curl -s https://raw.githubusercontent.com/Sandhj/QuickTunnel/main/install.sh)`",
+                parse_mode="Markdown"
+            )
         tampilkan_panel(message.chat.id, user_id)
     except:
         bot.reply_to(message, "Format salah. Contoh: 192.168.1.10 30")
@@ -314,34 +285,36 @@ def proses_renew_ip(message):
     try:
         ip, days = message.text.strip().split()
         days = int(days)
-
         user_id = message.from_user.id
         user_data = get_user_data(user_id)
         current_balance = user_data[2]
         status = user_data[3]
 
-        harga_per_hari = 333 if status == "Member" else 250 if status == "Reseller" else 0
-        cost = days * harga_per_hari
+        if status == 'Biasa':
+            cost = days * 333
+        elif status == 'Reseller':
+            cost = days * 250
+        elif status == 'VIP':
+            cost = 0
 
-        if status != "VIP" and current_balance < cost:
+        if current_balance < cost and status != 'VIP':
             bot.reply_to(message, f"Saldo tidak mencukupi. Diperlukan: Rp {cost:,}")
             tampilkan_panel(message.chat.id, user_id)
             return
 
+        exp_date = (datetime.now() + timedelta(days=days)).strftime("%Y-%m-%d")
         data = baca_permission()
         found = False
         for i, (ip_file, date) in enumerate(data):
             if ip_file == ip:
-                exp_date = (datetime.now() + timedelta(days=days)).strftime("%Y-%m-%d")
                 data[i] = (ip, exp_date)
                 found = True
                 break
         if not found:
             bot.reply_to(message, "IP tidak ditemukan dalam daftar.")
             return
-
         if tulis_permission(data):
-            if status != "VIP":
+            if status != 'VIP':
                 new_balance = current_balance - cost
                 update_balance(user_id, new_balance)
             bot.reply_to(message, f"Tanggal IP `{ip}` diperbarui hingga `{exp_date}`. Biaya: Rp {cost:,}", parse_mode="Markdown")
@@ -350,120 +323,108 @@ def proses_renew_ip(message):
         bot.reply_to(message, "Format salah. Contoh: 192.168.1.10 30")
 
 # === Fungsi Admin ===
-def proses_admin_ubah_status(message):
+def proses_admin_tambah_saldo(message):
     try:
-        chat_id_str, new_status = message.text.strip().split()
+        chat_id_str, amount_str, new_status = message.text.strip().split()
         chat_id_user = int(chat_id_str)
-
-        if new_status not in ['Member', 'Reseller', 'VIP']:
-            bot.reply_to(message, "Status tidak valid. Harus Member, Reseller, atau VIP.")
-            return
-
-        duration = 30  # Default 30 hari
-        update_status(chat_id_user, new_status, duration)
-        bot.reply_to(message, f"Status user `{chat_id_user}` diubah menjadi `{new_status}`.", parse_mode="Markdown")
-        tampilkan_panel(message.chat.id, message.from_user.id)
-    except:
-        bot.reply_to(message, "Format salah. Contoh: 123456789 Reseller")
-
-def proses_admin_perpanjang_status(message):
-    try:
-        chat_id_str, days_str = message.text.strip().split()
-        chat_id_user = int(chat_id_str)
-        days = int(days_str)
-
+        amount = int(amount_str)
         user = get_user_data(chat_id_user)
         if not user:
             bot.reply_to(message, "User tidak ditemukan.")
             return
-
-        current_status = user[3]
-        if current_status == 'Member':
-            bot.reply_to(message, "Tidak bisa perpanjang status Member.")
+        if new_status not in ["Biasa", "Reseller", "VIP"]:
+            bot.reply_to(message, "Status harus: Biasa, Reseller, atau VIP")
             return
-
-        current_expire = datetime.fromisoformat(user[4]) if user[4] else datetime.now()
-        new_expire = current_expire + timedelta(days=days)
-        update_status(chat_id_user, current_status, (new_expire - datetime.now()).days)
-
-        bot.reply_to(message, f"Masa berlaku user `{chat_id_user}` diperpanjang hingga `{new_expire.strftime('%Y-%m-%d %H:%M')}`.", parse_mode="Markdown")
+        if new_status == "Reseller" and amount < 50000:
+            bot.reply_to(message, "Minimal top up untuk Reseller adalah Rp 50.000")
+            return
+        if new_status == "VIP" and amount < 100000:
+            bot.reply_to(message, "Minimal top up untuk VIP adalah Rp 100.000")
+            return
+        new_balance = user[2] + amount
+        update_balance(chat_id_user, new_balance)
+        update_status(chat_id_user, new_status)
+        bot.reply_to(message, f"Saldo user `{chat_id_user}` ditambahkan sebesar Rp {amount:,}. Status: {new_status}", parse_mode="Markdown")
         tampilkan_panel(message.chat.id, message.from_user.id)
     except:
-        bot.reply_to(message, "Format salah. Contoh: 123456789 30")
+        bot.reply_to(message, "Format salah. Contoh: 123456789 50000 Reseller")
 
 def proses_admin_reset_status(message):
     try:
         chat_id_user = int(message.text.strip())
-        update_status(chat_id_user, "Member")
-        bot.reply_to(message, f"Status user `{chat_id_user}` direset ke `Member`.", parse_mode="Markdown")
+        conn = sqlite3.connect(DB_NAME)
+        c = conn.cursor()
+        c.execute("UPDATE users SET status='Biasa', status_expired=NULL WHERE chat_id=?", (chat_id_user,))
+        conn.commit()
+        conn.close()
+        bot.reply_to(message, f"Status user `{chat_id_user}` berhasil direset menjadi Biasa.", parse_mode="Markdown")
         tampilkan_panel(message.chat.id, message.from_user.id)
     except:
         bot.reply_to(message, "Format salah. Masukkan chat ID yang valid.")
 
-# === Fungsi Backup Otomatis & Kirim ke Admin ===
-BACKUP_FOLDER = "backup"
+def proses_admin_hapus_user(message):
+    try:
+        chat_id_user = int(message.text.strip())
+        conn = sqlite3.connect(DB_NAME)
+        c = conn.cursor()
+        c.execute("DELETE FROM users WHERE chat_id=?", (chat_id_user,))
+        conn.commit()
+        conn.close()
+        bot.reply_to(message, f"User `{chat_id_user}` berhasil dihapus dari database.", parse_mode="Markdown")
+        tampilkan_panel(message.chat.id, message.from_user.id)
+    except:
+        bot.reply_to(message, "Format salah. Masukkan chat ID yang valid.")
 
+# === Backup Otomatis ===
+BACKUP_FOLDER = "backup"
 def kirim_backup_ke_admin():
     try:
         if not os.path.exists(BACKUP_FOLDER):
             os.makedirs(BACKUP_FOLDER)
-
         waktu_sekarang = datetime.now().strftime("%Y%m%d_%H%M%S")
         zip_name = f"{BACKUP_FOLDER}/backup_{waktu_sekarang}.zip"
-
         with zipfile.ZipFile(zip_name, 'w') as zipf:
             zipf.write(DB_NAME)
-
         with open(zip_name, 'rb') as f:
             bot.send_document(ADMIN_ID, f, caption=f"📦 Backup Otomatis: {os.path.basename(zip_name)}")
-
         print(f"[INFO] Backup berhasil dikirim: {zip_name}")
-
     except Exception as e:
         print(f"[ERROR] Gagal mengirim backup: {e}")
 
 def jalankan_backup_otomatis():
     while True:
         kirim_backup_ke_admin()
-        time.sleep(3 * 60 * 60)  # 3 Jam
+        time.sleep(3 * 60 * 60)  # 3 jam
 
 threading.Thread(target=jalankan_backup_otomatis, daemon=True).start()
 
-# === Fungsi Restore dari Upload ZIP ===
+# === Restore dari Upload ZIP ===
 @bot.message_handler(content_types=['document'])
 def handle_restore(message):
     if message.from_user.id != ADMIN_ID:
         bot.reply_to(message, "Anda tidak memiliki akses untuk restore.")
         return
-
     try:
         file_id = message.document.file_id
         file_info = bot.get_file(file_id)
         downloaded_file = bot.download_file(file_info.file_path)
-
         zip_path = "temp_backup.zip"
         with open(zip_path, 'wb') as f:
             f.write(downloaded_file)
-
         with zipfile.ZipFile(zip_path, 'r') as zipf:
             zipf.extractall(".")
-
         os.remove(zip_path)
         bot.reply_to(message, "Database berhasil direstore dari backup.", parse_mode="Markdown")
     except Exception as e:
         bot.reply_to(message, f"Gagal melakukan restore: {e}")
 
-# === Fungsi Daily Check Status Expired ===
-def daily_status_check():
+# === Jadwal Pengecekan Expired ===
+def auto_check_expired():
     while True:
-        now = datetime.now()
-        next_run = (now + timedelta(days=1)).replace(hour=0, minute=0, second=0, microsecond=0)
-        time.sleep((next_run - now).total_seconds())
+        check_and_reset_expired_statuses()
+        time.sleep(3600)  # Setiap jam
 
-        reset_expired_status()
-        print("[INFO] Cek harian selesai.")
-
-threading.Thread(target=daily_status_check, daemon=True).start()
+threading.Thread(target=auto_check_expired, daemon=True).start()
 
 # === Jalankan Bot ===
 print("Bot sedang berjalan...")
