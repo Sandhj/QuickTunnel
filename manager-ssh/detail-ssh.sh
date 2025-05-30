@@ -2,7 +2,7 @@
 
 # Header
 echo -e "┌──────────────────────────────────────┐"
-echo -e "│    .:: DETAIL SSH ACCOUNT ::.    │"
+echo -e "│      .:: DETAIL SSH ACCOUNT ::.      │"
 echo -e "└──────────────────────────────────────┘"
 
 folder="/opt/history/"
@@ -38,15 +38,15 @@ if [ "${#file_list[@]}" -eq 0 ]; then
 fi
 
 # Input pilihan user
-read -p "Masukkan nomor file untuk melihat isi (1-${#file_list[@]}): " pilihan
+read -p "Select User : " pilihan
 
 # Validasi input
 if [[ "$pilihan" =~ ^[0-9]+$ ]] && [ "$pilihan" -ge 1 ] && [ "$pilihan" -le "${#file_list[@]}" ]; then
     selected_file="${file_list[$((pilihan-1))]}"
-    echo ""
-    echo "Isi file: $selected_file"
-    echo "──────────────────────────────────────────────"
+    echo ""  
     cat "$selected_file"
+    echo -e "└──────────────────────────────────────┘"
+    
 else
     echo "Pilihan tidak valid!"
 fi
