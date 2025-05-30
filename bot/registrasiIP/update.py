@@ -211,6 +211,7 @@ def handle_query(call):
         markup.add(
             types.InlineKeyboardButton("Tambah Saldo", callback_data='admin_tambah_saldo'),
             types.InlineKeyboardButton("Tambah VIP", callback_data='admin_tambah_vip'),
+            types.InlineKeyboardButton("Tambah Reseller", callback_data='admin_tambah_reseller'),
             types.InlineKeyboardButton("Reset Status", callback_data='admin_reset_status')
         )
         markup.add(
@@ -224,6 +225,9 @@ def handle_query(call):
     elif call.data == 'admin_tambah_vip':
         msg = bot.send_message(chat_id, "Kirimkan Chat ID user untuk jadikan VIP:")
         bot.register_next_step_handler(msg, proses_admin_tambah_vip)
+    elif call.data == 'admin_tambah_reseller':
+        msg = bot.send_message(chat_id, "Kirimkan Chat ID user untuk jadikan Reseller:")
+        bot.register_next_step_handler(msg, proses_admin_tambah_reseller)
     elif call.data == 'admin_reset_status':
         msg = bot.send_message(chat_id, "Kirimkan Chat ID user untuk reset status:")
         bot.register_next_step_handler(msg, proses_admin_reset_status)
@@ -398,6 +402,27 @@ def proses_admin_tambah_vip(message):
         tampilkan_panel(message.chat.id, message.from_user.id)
     except:
         bot.reply_to(message, "Format salah. Masukkan chat ID yang valid.")
+
+def proses_admin_tambah_Reseller(message):
+    try:
+        chat_id_user = int(message.text.strip())
+        user = get_user_data(chat_id_user)
+        if not user:
+            bot.reply_to(message, "User tidak ditemukan.")
+            return
+        update_status(chat_id_user, "Reseller")
+        bot.reply_to(
+                message,
+                f"✅ Registrasi User Reseller Succes\n"
+                f"User : `{chat_id_user}`\n"
+                f"Telah Di Upgrade Menjadi Reseller Selama 1 Bulan",
+                parse_mode="Markdown"
+        )
+       
+        tampilkan_panel(message.chat.id, message.from_user.id)
+    except:
+        bot.reply_to(message, "Format salah. Masukkan chat ID yang valid.")
+        
 
 def proses_admin_reset_status(message):
     try:
