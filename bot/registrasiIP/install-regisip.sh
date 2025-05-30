@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Hapus Direktori lama kalau ada
+rm -rf /opt/regisip
+
 # Buat direktori proyek
 mkdir -p /opt/regisip
 cd /opt/regisip
