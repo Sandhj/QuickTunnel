@@ -145,21 +145,34 @@ def tampilkan_panel(chat_id, user_id):
     data = get_user_data(chatid)
     chatid_db, uname, balance, status, expired = data
 
+    now = datetime.now()
     if expired:
-        expired_str = f"Sampai {expired}"
+        exp_date = datetime.strptime(expired, "%Y-%m-%d %H:%M:%S")
+        remaining_days = (exp_date - now).days
+        if remaining_days < 0:
+            status = "Biasa"
+            update_status(chatid, "Biasa", 0)  # Reset status
+            remaining_days = 0
+        expired_str = f"({remaining_days} {'Days' if remaining_days != 1 else 'Day'} Left)"
     else:
-        expired_str = "-"
+        expired_str = ""
 
     # Judul berdasarkan apakah user adalah admin
     if user_id == ADMIN_ID:
         title = "🟢 PANEL ADMIN SCRIPT"
     else:
         title = "🟢 PANEL MEMBER SCRIPT"
+
     panel_text = f"{title}\n"
     panel_text += f"ChatID     : `{chatid}`\n"  # Format ChatID sebagai kode untuk mudah dicopy
     panel_text += f"Username   : @{uname}\n"
-    panel_text += f"Status     : {status} {expired_str}\n"
-    panel_text += f"Saldo      : Rp {balance:,}\n"
+
+    if status == "VIP":
+        panel_text += f"Status     : {status} {expired_str}\n"
+        panel_text += f"Saldo      : Unlimited\n"
+    else:
+        panel_text += f"Status     : {status} {expired_str}\n"
+        panel_text += f"Saldo      : Rp {balance:,}\n"
 
     markup = types.InlineKeyboardMarkup(row_width=2)
     markup.add(
@@ -197,16 +210,20 @@ def handle_query(call):
         markup = types.InlineKeyboardMarkup()
         markup.add(
             types.InlineKeyboardButton("Tambah Saldo", callback_data='admin_tambah_saldo'),
-            types.InlineKeyboardButton("Reset Status", callback_data='admin_reset_status'),
-            types.InlineKeyboardButton("Hapus User", callback_data='admin_hapus_user')
+            types.InlineKeyboardButton("Tambah VIP", callback_data='admin_tambah_vip'),
+            types.InlineKeyboardButton("Reset Status", callback_data='admin_reset_status')
         )
         markup.add(
+            types.InlineKeyboardButton("Hapus User", callback_data='admin_hapus_user'),
             types.InlineKeyboardButton("List User", callback_data='admin_lihat_semua')
         )
         bot.send_message(chat_id, "🖥️ MENU ADMIN CONTROL :", reply_markup=markup)
     elif call.data == 'admin_tambah_saldo':
-        msg = bot.send_message(chat_id, "Kirimkan chat ID, jumlah saldo dan pilih status (contoh: 123456789 50000 Reseller):")
+        msg = bot.send_message(chat_id, "Kirimkan chat ID, jumlah saldo (contoh: 123456789 50000):")
         bot.register_next_step_handler(msg, proses_admin_tambah_saldo)
+    elif call.data == 'admin_tambah_vip':
+        msg = bot.send_message(chat_id, "Kirimkan Chat ID user untuk jadikan VIP:")
+        bot.register_next_step_handler(msg, proses_admin_tambah_vip)
     elif call.data == 'admin_reset_status':
         msg = bot.send_message(chat_id, "Kirimkan Chat ID user untuk reset status:")
         bot.register_next_step_handler(msg, proses_admin_reset_status)
@@ -235,10 +252,10 @@ def proses_regis_ip(message):
             cost = days * 333
         elif status == 'Reseller':
             cost = days * 250
-        elif status == 'VIP':
-            cost = 0
+        else:
+            cost = 0  # VIP
 
-        if current_balance < cost and status != 'VIP':
+        if status in ['Biasa', 'Reseller'] and current_balance < cost:
             bot.reply_to(message, f"Saldo tidak mencukupi. Diperlukan: Rp {cost:,}")
             tampilkan_panel(message.chat.id, user_id)
             return
@@ -294,10 +311,10 @@ def proses_renew_ip(message):
             cost = days * 333
         elif status == 'Reseller':
             cost = days * 250
-        elif status == 'VIP':
-            cost = 0
+        else:
+            cost = 0  # VIP
 
-        if current_balance < cost and status != 'VIP':
+        if status in ['Biasa', 'Reseller'] and current_balance < cost:
             bot.reply_to(message, f"Saldo tidak mencukupi. Diperlukan: Rp {cost:,}")
             tampilkan_panel(message.chat.id, user_id)
             return
@@ -325,29 +342,32 @@ def proses_renew_ip(message):
 # === Fungsi Admin ===
 def proses_admin_tambah_saldo(message):
     try:
-        chat_id_str, amount_str, new_status = message.text.strip().split()
+        chat_id_str, amount_str = message.text.strip().split()
         chat_id_user = int(chat_id_str)
         amount = int(amount_str)
         user = get_user_data(chat_id_user)
         if not user:
             bot.reply_to(message, "User tidak ditemukan.")
             return
-        if new_status not in ["Biasa", "Reseller", "VIP"]:
-            bot.reply_to(message, "Status harus: Biasa, Reseller, atau VIP")
-            return
-        if new_status == "Reseller" and amount < 50000:
-            bot.reply_to(message, "Minimal top up untuk Reseller adalah Rp 50.000")
-            return
-        if new_status == "VIP" and amount < 100000:
-            bot.reply_to(message, "Minimal top up untuk VIP adalah Rp 100.000")
-            return
         new_balance = user[2] + amount
         update_balance(chat_id_user, new_balance)
-        update_status(chat_id_user, new_status)
-        bot.reply_to(message, f"Saldo user `{chat_id_user}` ditambahkan sebesar Rp {amount:,}. Status: {new_status}", parse_mode="Markdown")
+        bot.reply_to(message, f"Saldo user `{chat_id_user}` ditambahkan sebesar Rp {amount:,}.", parse_mode="Markdown")
         tampilkan_panel(message.chat.id, message.from_user.id)
     except:
-        bot.reply_to(message, "Format salah. Contoh: 123456789 50000 Reseller")
+        bot.reply_to(message, "Format salah. Contoh: 123456789 50000")
+
+def proses_admin_tambah_vip(message):
+    try:
+        chat_id_user = int(message.text.strip())
+        user = get_user_data(chat_id_user)
+        if not user:
+            bot.reply_to(message, "User tidak ditemukan.")
+            return
+        update_status(chat_id_user, "VIP")
+        bot.reply_to(message, f"User `{chat_id_user}` berhasil dijadikan VIP selama 1 bulan.", parse_mode="Markdown")
+        tampilkan_panel(message.chat.id, message.from_user.id)
+    except:
+        bot.reply_to(message, "Format salah. Masukkan chat ID yang valid.")
 
 def proses_admin_reset_status(message):
     try:
