@@ -111,6 +111,11 @@ animate
 
 # Simpan Data Akun
 
+link1="vmess://${link_tls}"
+link2="vmess://${link_ws}"
+link3="vmess://${link_grpc}"
+
+
 rm -rf /opt/history/vmess-$user
 
 cat > /opt/history/vmess-$user <<EOF
@@ -122,13 +127,13 @@ UUID: $NEW_UUID
 Host: $HOST
 -----------------------------------------------
 1. WebSocket + TLS (Port 443)
-vmess://\$link_tls
+${link1}
 
 2. WebSocket (tanpa TLS, Port 80)
-vmess://\$link_ws
+${link2}
 
 3. gRPC (Port 443)
-vmess://\$link_grpc
+${link3}
 -----------------------------------------------
 EOF
 
