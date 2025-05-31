@@ -75,6 +75,8 @@ echo "Creating New Account..."
 animate
 
 # Simpan Data Akun
+link1="${LINK_WS}"
+link2="${LINK_GRPC}"
 rm -rf /opt/history/trojan-$user 
 
 cat > /opt/history/trojan-$user <<EOF
@@ -87,10 +89,10 @@ Host/SNI     : $HOST
 Port         : $PORT
 -----------------------------------------------
 1. WebSocket + TLS
-\$LINK_WS
+${link1}
 
 2. gRPC
-\$LINK_GRPC
+${link1}
 -----------------------------------------------
 EOF
 
