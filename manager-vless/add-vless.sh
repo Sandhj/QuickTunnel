@@ -70,6 +70,10 @@ animate
 rm -rf /opt/history/vless-$user
 
 # Simpan Data akun
+link1="${link_tls}"
+link2="${link_ws}"
+link3="${link_grpc}"
+
 cat > /opt/history/vless-$user <<EOF
 ✅ Account VLess Berhasil Dibuat
 Username: $user
@@ -79,13 +83,13 @@ UUID: $NEW_UUID
 Host: $HOST
 -----------------------------------------------
 1. WebSocket + TLS (Port 443)
-\$link_tls
+${link1}
 
 2. WebSocket (tanpa TLS, Port 80)
-\$link_ws
+${link2}
 
 3. gRPC (Port 443)
-\$link_grpc
+${link3}
 -----------------------------------------------
 EOF
 
