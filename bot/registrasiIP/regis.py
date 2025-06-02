@@ -171,12 +171,12 @@ def tampilkan_panel(chat_id, user_id, message_id=None):
         panel_text += f"Saldo      : Rp {balance:,}\n"
     markup = types.InlineKeyboardMarkup(row_width=2)
     markup.add(
-        types.InlineKeyboardButton("REGIS IP", callback_data='regis_ip'),
-        types.InlineKeyboardButton("CHANGE IP", callback_data='change_ip'),
-        types.InlineKeyboardButton("RENEW IP", callback_data='renew_ip')
+        types.InlineKeyboardButton("➕REGISTER IP", callback_data='regis_ip'),
+        types.InlineKeyboardButton("🔁CHANGE IP", callback_data='change_ip'),
+        types.InlineKeyboardButton("⏳RENEW IP", callback_data='renew_ip')
     )
     if user_id == ADMIN_ID:
-        markup.add(types.InlineKeyboardButton("ADMIN", callback_data='admin_menu'))
+        markup.add(types.InlineKeyboardButton("🔮ADMIN", callback_data='admin_menu'))
     
     if message_id:
         try:
@@ -218,14 +218,14 @@ def handle_query(call):
 
         markup = types.InlineKeyboardMarkup()
         markup.add(
-            types.InlineKeyboardButton("Tambah Saldo", callback_data='admin_tambah_saldo'),
-            types.InlineKeyboardButton("Tambah VIP", callback_data='admin_tambah_vip'),
-            types.InlineKeyboardButton("Tambah Reseller", callback_data='admin_tambah_reseller'),
-            types.InlineKeyboardButton("Reset Status", callback_data='admin_reset_status')
+            types.InlineKeyboardButton("💰Tambah Saldo", callback_data='admin_tambah_saldo'),
+            types.InlineKeyboardButton("👑Tambah VIP", callback_data='admin_tambah_vip'),
+            types.InlineKeyboardButton("💎Tambah Reseller", callback_data='admin_tambah_reseller'),
+            types.InlineKeyboardButton("⛔Reset Status", callback_data='admin_reset_status')
         )
         markup.add(
-            types.InlineKeyboardButton("Hapus User", callback_data='admin_hapus_user'),
-            types.InlineKeyboardButton("List User", callback_data='admin_lihat_semua')
+            types.InlineKeyboardButton("🗑️Hapus User", callback_data='admin_hapus_user'),
+            types.InlineKeyboardButton("🗂️List User", callback_data='admin_lihat_semua')
         )
         markup.add(
             types.InlineKeyboardButton("⬅️ Back", callback_data='back_to_panel')  # Tombol kembali
