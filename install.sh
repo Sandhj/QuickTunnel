@@ -119,7 +119,7 @@ echo ""
 read -p "Type Your Domain : " domain
 
 mkdir -p /etc/xray/limitip/
-mkdir -p /opt/history/
+mkdir -p /etc/xray/history/
 echo $domain >> /root/domain
 echo $domain >> /etc/xray/domain
 
