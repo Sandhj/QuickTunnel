@@ -34,9 +34,9 @@ echo "Creating New Account..."
 animate
 
 # Simpan Data User
-rm -rf /opt/history/ssh-$Login
+rm -rf /etc/xray/history/ssh-$Login
 
-cat > /opt/history/ssh-$Login <<EOF
+cat > /etc/xray/history/ssh-$Login <<EOF
 ✅ Akun SSH telah berhasil dibuat!
 ------------------------------------
 Username : $Login
