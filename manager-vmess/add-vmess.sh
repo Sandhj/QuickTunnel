@@ -116,9 +116,9 @@ link2="vmess://${link_ws}"
 link3="vmess://${link_grpc}"
 
 
-rm -rf /opt/history/vmess-$user
+rm -rf /etc/xray/history/vmess-$user
 
-cat > /opt/history/vmess-$user <<EOF
+cat > /etc/xray/history/vmess-$user <<EOF
 ✅ VMess Account Berhasil Dibuat
  Username: $user
  Expired : $exp
