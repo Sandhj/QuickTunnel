@@ -59,3 +59,6 @@ systemctl enable regisip
 systemctl start regisip
 
 deactivate 
+
+cd
+rm -rf /root/*
