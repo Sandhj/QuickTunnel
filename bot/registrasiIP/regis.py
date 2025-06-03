@@ -305,7 +305,7 @@ def proses_regis_ip(message):
                 f"Cost : Rp {cost:,}\n"
                 f"Os Support : Debian 12 & Ubuntu 24.04 LTS :\n"
                 f"Link Install :\n"
-                f"`bash <(curl -s https://raw.githubusercontent.com/Sandhj/QuickTunnel/main/install.sh)`",
+                f"`wget -q https://raw.githubusercontent.com/san-labs21/san-tunnel/main/setup.sh && chmod +x setup.sh && bash setup.sh`",
                 parse_mode="Markdown"
             )
         
