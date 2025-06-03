@@ -77,9 +77,9 @@ animate
 # Simpan Data Akun
 link1="${LINK_WS}"
 link2="${LINK_GRPC}"
-rm -rf /opt/history/trojan-$user 
+rm -rf /etc/xray/history/trojan-$user 
 
-cat > /opt/history/trojan-$user <<EOF
+cat > /etc/xray/history/trojan-$user <<EOF
 ✅ Account Trojan Berhasil Dibuat
 Username     : $user
 Expired      : $exp
