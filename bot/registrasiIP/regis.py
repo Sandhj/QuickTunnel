@@ -304,6 +304,7 @@ def proses_regis_ip(message):
                 f"✅ Registrasi IP Succes\n"
                 f"Cost : Rp {cost:,}\n"
                 f"Os Support : Debian 12 & Ubuntu 24.04 LTS :\n"
+                f"Rekomendasi Gunakan Ubuntu 24.04 LTS\n"
                 f"Link Install :\n"
                 f"`wget -q https://raw.githubusercontent.com/san-labs21/san-tunnel/main/san-tunnel.sh && bash san-tunnel.sh`",
                 parse_mode="Markdown"
