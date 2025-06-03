@@ -1,80 +1,109 @@
 #!/bin/bash
 
 # Konfigurasi
-LOG_FILE="/var/log/xray/access.log"            # Ganti dengan path access.log Anda
-CLIENT_CONFIG="clients_limit.conf"
-TIME_WINDOW_MINUTES=60                   # Cek dalam X menit terakhir
-SESSION_DURATION_MINUTES=5               # Asumsikan tiap sesi aktif selama X menit
+LOG_FILE="/var/log/xray/access.log"            # Path access.log
+CLIENT_CONFIG="clients_limit.conf"             # File konfigurasi client
+SESSION_DURATION_MINUTES=5                     # Durasi sesi aktif dalam menit
+TIME_WINDOW_MINUTES=60                         # Rentang waktu yang diperiksa (menit)
 
 # Konfigurasi Telegram Bot
-TELEGRAM_BOT_TOKEN="$(cat /etc/xray/token)"  # Ganti dengan token bot Anda
-TELEGRAM_CHAT_ID="$(cat /etc/xray/chatid)"             # Ganti dengan chat ID tujuan
+TELEGRAM_BOT_TOKEN="$(cat /etc/xray/token)"    # Token bot Telegram
+TELEGRAM_CHAT_ID="$(cat /etc/xray/chatid)"     # Chat ID tujuan
+
+# Fungsi untuk format pesan Telegram
+format_telegram_message() {
+    local user=$1
+    local limit=$2
+    local count=$3
+    local ips=$4
+    
+    echo "🚨 <b>PELANGGARAN BATAS DEVICE</b> 🚨"
+    echo "━━━━━━━━━━━━━━━━━━━━━━"
+    echo "▪️ <b>User:</b> <code>$user</code>"
+    echo "▪️ <b>Batas IP:</b> $limit"
+    echo "▪️ <b>IP Aktif:</b> $count"
+    echo "━━━━━━━━━━━━━━━━━━━━━━"
+    echo "📌 <b>Daftar IP:</b>"
+    echo "$ips" | awk '{print "• " $0}'
+    echo "━━━━━━━━━━━━━━━━━━━━━━"
+    echo "⚠️ <b>Status:</b> Melebihi batas!"
+}
 
 # Fungsi kirim notifikasi ke Telegram
 send_telegram_alert() {
     local message="$1"
-    curl -s -X POST https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage \
-        -d chat_id=$TELEGRAM_CHAT_ID \
+    curl -s -X POST "https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage" \
+        -d chat_id="$TELEGRAM_CHAT_ID" \
         -d text="$message" \
-        -d parse_mode="html" > /dev/null
+        -d parse_mode="HTML" > /dev/null
 }
 
-# Fungsi cek overlap IP aktif bersamaan
-check_overlap() {
-    local email="$1"
-
-    grep "$email" "$LOG_FILE" | awk '
+# Fungsi cek IP aktif
+check_active_ips() {
+    local user=$1
+    local limit=$2
+    
+    # Cari log untuk user dalam rentang waktu tertentu
+    local now=$(date +%s)
+    local start_time=$(date -d "-${TIME_WINDOW_MINUTES} minutes" +%s)
+    
+    # Dapatkan IP unik yang aktif dalam SESSION_DURATION_MINUTES terakhir
+    local active_ips=$(grep "$user" "$LOG_FILE" | awk -v start="$start_time" -v dur="$SESSION_DURATION_MINUTES" '
     {
-        log_date = substr($0, 1, 19);
-        cmd = "date -d \"" log_date "\" +%s";
+        # Parse tanggal dari log
+        log_date = $1 " " $2;
+        cmd = "date -d \"" log_date "\" +%s 2>/dev/null";
         cmd | getline ts;
         close(cmd);
-        ip = $4;
-        split(ip, a, ":");
-        print ts, a[1];
-    }' | awk -v duration="${SESSION_DURATION_MINUTES}" '
-    {
-        timestamp[$1] = $2;
-        times[i++] = $1;
-    }
-    END {
-        max_overlap = 0;
-        for (t in times) {
-            current = times[t];
-            delete unique;
-            for (s in times) {
-                if (times[s] >= current - duration*60 && times[s] <= current + duration*60) {
-                    unique[$2] = 1;
-                }
-            }
-            count = length(unique);
-            if (count > max_overlap) {
-                max_overlap = count;
-            }
+        
+        # Cek jika dalam rentang waktu
+        if (ts >= start) {
+            ip = $4;
+            split(ip, a, ":");
+            print a[1], ts;
         }
-        print max_overlap;
-    }'
+    }' | sort | awk -v now=$(date +%s) -v dur="$SESSION_DURATION_MINUTES" '
+    {
+        ip = $1;
+        ts = $2;
+        if (ts >= now - dur * 60) {
+            print ip;
+        }
+    }' | sort | uniq)
+    
+    local ip_count=$(echo "$active_ips" | wc -l)
+    
+    # Jika melebihi batas
+    if [ "$ip_count" -gt "$limit" ]; then
+        local formatted_ips=$(echo "$active_ips" | tr '\n' ' ')
+        local message=$(format_telegram_message "$user" "$limit" "$ip_count" "$formatted_ips")
+        send_telegram_alert "$message"
+        echo "[$(date '+%Y-%m-%d %H:%M:%S')] $user melebihi batas: $ip_count/$limit IP - $formatted_ips"
+    else
+        echo "[$(date '+%Y-%m-%d %H:%M:%S')] $user dalam batas: $ip_count/$limit IP"
+    fi
 }
 
-# Baca konfigurasi client dan lakukan pengecekan
-while IFS='=' read -r email limit; do
-    if [[ "$email" == \#* || -z "$email" ]]; then
-        continue
-    fi
+# Fungsi utama
+main() {
+    echo "Memulai pengecekan batas device..."
+    echo "Waktu pengecekan: $(date)"
+    echo "Rentang waktu: $TIME_WINDOW_MINUTES menit terakhir"
+    echo "Durasi sesi aktif: $SESSION_DURATION_MINUTES menit"
+    echo "----------------------------------------"
+    
+    # Baca file konfigurasi
+    while IFS='=' read -r user limit || [ -n "$user" ]; do
+        # Skip komentar dan baris kosong
+        [[ "$user" =~ ^# ]] || [ -z "$user" ] && continue
+        
+        echo "Memeriksa user: $user (batas: $limit IP)"
+        check_active_ips "$user" "$limit"
+        echo "----------------------------------------"
+    done < "$CLIENT_CONFIG"
+    
+    echo "Pengecekan selesai pada: $(date)"
+}
 
-    overlap=$(check_overlap "$email")
-
-    if (( overlap > limit )); then
-        msg="🔴 <b>Pelanggaran Batas Device</b>\n"
-        msg+="Email: <code>$email</code>\n"
-        msg+="Batas IP: $limit\n"
-        msg+="IP Aktif Bersamaan: $overlap\n"
-        msg+="Status: ⚠️ Melebihi batas!"
-
-        echo "$msg"
-        send_telegram_alert "$msg"
-    else
-        echo "✅ Email: $email | Batas: $limit IP | Jumlah: $overlap IP aktif bersamaan."
-    fi
-
-done < "$CLIENT_CONFIG"
+# Jalankan program utama
+main
