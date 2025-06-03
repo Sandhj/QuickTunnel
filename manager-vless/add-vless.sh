@@ -67,14 +67,14 @@ animate() {
 echo "Creating New Account..."
 animate
 
-rm -rf /opt/history/vless-$user
+rm -rf /etc/xray/history/vless-$user
 
 # Simpan Data akun
 link1="${link_tls}"
 link2="${link_ws}"
 link3="${link_grpc}"
 
-cat > /opt/history/vless-$user <<EOF
+cat > /etc/xray/history/vless-$user <<EOF
 ✅ Account VLess Berhasil Dibuat
 Username: $user
 Expired: $exp
