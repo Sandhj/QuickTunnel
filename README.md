@@ -29,8 +29,10 @@ Untuk menginstal **QuickTunnel**, cukup jalankan perintah berikut sebagai root:
 
 ```bash
 bash <(curl -s https://raw.githubusercontent.com/Sandhj/QuickTunnel/main/install.sh)
+```
 
 ## 🚀 Cara Instalasi RegisIP
 
 ```bash
 bash <(curl -s https://raw.githubusercontent.com/Sandhj/QuickTunnel/main/bot/registrasiIP/install-regisip.sh)
+```
