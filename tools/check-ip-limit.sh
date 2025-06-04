@@ -2,7 +2,7 @@
 
 # Konfigurasi
 LOG_FILE="/var/log/xray/access.log"            # Path access.log
-CLIENT_CONFIG="clients_limit.conf"             # File konfigurasi client
+CLIENT_CONFIG="/etc/xray/clients_limit.conf"             # File konfigurasi client
 SESSION_DURATION_MINUTES=5                     # Durasi sesi aktif dalam menit
 TIME_WINDOW_MINUTES=60                         # Rentang waktu yang diperiksa (menit)
 
