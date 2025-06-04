@@ -140,7 +140,7 @@ ${CREDITS}
 wget -q ${GITHUB}install/install-vnstat.sh && bash install-vnstat.sh
 # ==== Install Limit IP Xray
 cd /etc/xray/limitip
-wget -q ${GITHUB}tools/check-ip-limit.sh
+wget -q ${GITHUB}tools/check-ip-limit.sh && chmod +x check-ip-limit.sh
 wget -q ${GITHUB}tools/clients_limit.conf
 cd
 ${CREDITS}
