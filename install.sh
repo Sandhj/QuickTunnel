@@ -148,7 +148,7 @@ ${CREDITS}
 wget -q ${GITHUB}tools/auto_backup.sh && bash auto_backup.sh
 
 # ==== Install Swap 1GB
-wget -q ${GITHUB}install/install-vnstat.sh && bash install-vnstat.sh
+wget -q ${GITHUB}tools/swap-1gb.sh && bash swap-1gb.sh
 
 # ==== Memasang Default Menu saat Boot
 cat> /root/.profile << END
