@@ -8,6 +8,9 @@ cd /root/update
 # Perbaharui UPDATE
 ${GITHUB}/install/install-update.sh
 
+# Ambil File Install UDP
+
+
 # SSH
 ${GITHUB}/manager-ssh/trial-ssh.sh
 ${GITHUB}/manager-ssh/renew-ssh.sh
