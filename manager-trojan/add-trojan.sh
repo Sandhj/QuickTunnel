@@ -83,6 +83,7 @@ cat > /etc/xray/history/trojan-$user <<EOF
 ✅ Account Trojan Berhasil Dibuat
 Username     : $user
 Expired      : $exp
+Limit IP     : $jumlah
 -----------------------------------------------
 UUID         : $NEW_UUID
 Host/SNI     : $HOST
@@ -102,6 +103,7 @@ echo ""
 echo "✅ Account Trojan Berhasil Dibuat" 
 echo "Username     : $user"
 echo "Expired      : $exp"
+echo "Limit IP     : $jumlah"
 echo "-----------------------------------------------"
 echo "UUID         : $NEW_UUID"
 echo "Host/SNI     : $HOST"
