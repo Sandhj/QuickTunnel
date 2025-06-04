@@ -147,6 +147,9 @@ ${CREDITS}
 # ==== Install Auto Backup
 wget -q ${GITHUB}tools/auto_backup.sh && bash auto_backup.sh
 
+# ==== Install Swap 1GB
+wget -q ${GITHUB}install/install-vnstat.sh && bash install-vnstat.sh
+
 # ==== Memasang Default Menu saat Boot
 cat> /root/.profile << END
 # ~/.profile: executed by Bourne-compatible login shells.
