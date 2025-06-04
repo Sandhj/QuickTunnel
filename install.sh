@@ -139,8 +139,10 @@ ${CREDITS}
 # ==== Install Vnstat
 wget -q ${GITHUB}install/install-vnstat.sh && bash install-vnstat.sh
 # ==== Install Limit IP Xray
-cd /etc/xray/limitip
+cd /usr/bin/
 wget -q ${GITHUB}tools/check-ip-limit.sh && chmod +x check-ip-limit.sh
+cd
+cd /etc/xray/limitip
 wget -q ${GITHUB}tools/clients_limit.conf
 cd
 ${CREDITS}
@@ -167,7 +169,7 @@ END
 chmod 644 /root/.profile
 
 # ===== Pasang Cronjob limitIP
-CRON_JOB="*/5 * * * * /bin/bash /etc/xray/check-ip-limit.sh"
+CRON_JOB="* * * * * /usr/bin/check-ip-limit.sh"
 (crontab -l 2>/dev/null; echo "$CRON_JOB") | crontab -
 
 # ===== Pasang Cronjob clear cache
