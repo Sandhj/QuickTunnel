@@ -9,23 +9,6 @@ cd
 rm -rf /root/udp
 mkdir -p /root/udp
 
-# banner
-clear
-
-echo -e "          ░█─░█ ░█▀▀▄ ░█▀▀█ " | lolcat
-echo -e "          ░█─░█ ░█─░█ ░█▄▄█ " | lolcat
-echo -e "          ─▀▄▄▀ ░█▄▄▀ ░█─── " | lolcat
-echo ""
-echo ""
-echo ""
-sleep 5
-# change to time GMT+3:00
-
-echo "change to time GMT+3:00 Lithuania"
-ln -fs /usr/share/zoneinfo/Europe/Vilnius /etc/localtime
-
-
-
 # install udp-custom
 echo downloading udp-custom
 wget "https://github.com/Roslandas/UDP-Custom-Script/raw/main/udp-custom-linux-amd64" -O /root/udp/udp-custom
@@ -70,12 +53,7 @@ EOF
 fi
 
 clear
-echo '    Install Custom UDP Manager   ' | lolcat
 
-echo ''
-echo ''
-echo ''
-sleep 5
 cd $HOME
 mkdir /etc/Sslablk
 cd /etc/Sslablk
@@ -95,22 +73,8 @@ chmod +x menu
 cd /etc/Sslablk
 rm system.zip
 
-
-clear
-echo 'UDP Install Script By Project SSLAB LK Dev.Team'
-echo 'UDP Custom By ePro Dev. Team'
-echo ''
-echo ''
-echo ' Support US'
-echo "Github/noobconner21"
-echo "Telegram/SSLAB LK"
-sleep 5
-
 echo start service udp-custom
 systemctl start udp-custom &>/dev/null
 
 echo enable service udp-custom
 systemctl enable udp-custom &>/dev/null
-
-echo reboot
-reboot
