@@ -10,11 +10,9 @@ rm -rf /root/udp
 mkdir -p /root/udp
 
 # install udp-custom
-echo downloading udp-custom
 wget "https://raw.githubusercontent.com/Sandhj/QuickTunnel/main/udp/udp-custom-linux-amd64" -O /root/udp/udp-custom
 chmod +x /root/udp/udp-custom
 
-echo downloading default config
 wget "https://raw.githubusercontent.com/Sandhj/QuickTunnel/main/udp/config.json" -O /root/udp/config.json
 chmod 644 /root/udp/config.json
 
