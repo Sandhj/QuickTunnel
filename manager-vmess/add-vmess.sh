@@ -120,8 +120,9 @@ rm -rf /etc/xray/history/vmess-$user
 
 cat > /etc/xray/history/vmess-$user <<EOF
 ✅ VMess Account Berhasil Dibuat
- Username: $user
- Expired : $exp
+ Username     : $user
+ Expired      : $exp
+ Limit IP     : $jumlah
 -----------------------------------------------
 UUID: $NEW_UUID
 Host: $HOST
@@ -141,8 +142,9 @@ EOF
 echo ""
 echo ""
 echo "✅ VMess Account Berhasil Dibuat"
-echo " Username: $user"
-echo " Expired : $exp"
+echo " Username    : $user"
+echo " Expired     : $exp"
+echo "Limit IP     : $jumlah"
 echo "-----------------------------------------------"
 echo "UUID: $NEW_UUID"
 echo "Host: $HOST"
