@@ -170,6 +170,10 @@ chmod 644 /root/.profile
 CRON_JOB="*/5 * * * * /bin/bash /etc/xray/check-ip-limit.sh"
 (crontab -l 2>/dev/null; echo "$CRON_JOB") | crontab -
 
+# ===== Pasang Cronjob clear cache
+CRON_JOB="0 3 * * * /usr/bin/clear-cache.sh"
+(crontab -l 2>/dev/null; echo "$CRON_JOB") | crontab -
+
 # ==== Pasang auto Reboot
 (crontab -l 2>/dev/null; echo "0 23 * * * reboot # auto_reboot") | crontab -
     
