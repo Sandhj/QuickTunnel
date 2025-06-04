@@ -2,9 +2,9 @@
 
 # Konfigurasi
 LOG_FILE="/var/log/xray/access.log"            # Path access.log
-CLIENT_CONFIG="/etc/xray/clients_limit.conf"             # File konfigurasi client
-SESSION_DURATION_MINUTES=5                     # Durasi sesi aktif dalam menit
-TIME_WINDOW_MINUTES=60                         # Rentang waktu yang diperiksa (menit)
+CLIENT_CONFIG="/etc/xray/limitip/clients_limit.conf"             # File konfigurasi client
+INITIAL_LINES=1000                             # Jumlah baris awal yang diambil
+FILTERED_LINES=50                              # Jumlah baris terfilter yang diperiksa
 
 # Konfigurasi Telegram Bot
 TELEGRAM_BOT_TOKEN="$(cat /etc/xray/token)"    # Token bot Telegram
@@ -43,36 +43,16 @@ check_active_ips() {
     local user=$1
     local limit=$2
     
-    # Cari log untuk user dalam rentang waktu tertentu
-    local now=$(date +%s)
-    local start_time=$(date -d "-${TIME_WINDOW_MINUTES} minutes" +%s)
-    
-    # Dapatkan IP unik yang aktif (hanya IP setelah "from")
-    local active_ips=$(grep "$user" "$LOG_FILE" | awk -v start="$start_time" -v dur="$SESSION_DURATION_MINUTES" '
+    # Ambil 1000 baris terakhir, filter by user, ambil 50 baris terbaru
+    local active_ips=$(tail -n $INITIAL_LINES "$LOG_FILE" | grep "$user" | tail -n $FILTERED_LINES | awk '
     {
-        # Parse tanggal dari log
-        log_date = $1 " " $2;
-        cmd = "date -d \"" log_date "\" +%s 2>/dev/null";
-        cmd | getline ts;
-        close(cmd);
-        
-        # Cek jika dalam rentang waktu
-        if (ts >= start) {
-            # Ambil IP setelah "from"
-            for (i=1; i<=NF; i++) {
-                if ($i == "from") {
-                    split($(i+1), a, ":");
-                    print a[1], ts;
-                    break;
-                }
+        # Ambil IP setelah "from"
+        for (i=1; i<=NF; i++) {
+            if ($i == "from") {
+                split($(i+1), a, ":");
+                print a[1];
+                break;
             }
-        }
-    }' | sort | awk -v now=$(date +%s) -v dur="$SESSION_DURATION_MINUTES" '
-    {
-        ip = $1;
-        ts = $2;
-        if (ts >= now - dur * 60) {
-            print ip;
         }
     }' | sort | uniq)
     
@@ -93,8 +73,7 @@ check_active_ips() {
 main() {
     echo "Memulai pengecekan batas device..."
     echo "Waktu pengecekan: $(date)"
-    echo "Rentang waktu: $TIME_WINDOW_MINUTES menit terakhir"
-    echo "Durasi sesi aktif: $SESSION_DURATION_MINUTES menit"
+    echo "Memeriksa $FILTERED_LINES baris terfilter dari $INITIAL_LINES baris terakhir"
     echo "----------------------------------------"
     
     # Baca file konfigurasi
