@@ -9,7 +9,7 @@ cd /root/update
 ${GITHUB}/install/install-update.sh
 
 # Ambil File Install UDP
-
+${GITHUB}/install/install-udp.sh
 
 # SSH
 ${GITHUB}/manager-ssh/trial-ssh.sh
