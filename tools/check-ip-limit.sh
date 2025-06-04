@@ -4,7 +4,7 @@
 LOG_FILE="/var/log/xray/access.log"            # Path access.log
 CLIENT_CONFIG="/etc/xray/limitip/clients_limit.conf"             # File konfigurasi client
 INITIAL_LINES=1000                             # Jumlah baris awal yang diambil
-FILTERED_LINES=50                              # Jumlah baris terfilter yang diperiksa
+FILTERED_LINES=20                              # Jumlah baris terfilter yang diperiksa
 
 # Konfigurasi Telegram Bot
 TELEGRAM_BOT_TOKEN="$(cat /etc/xray/token)"    # Token bot Telegram
