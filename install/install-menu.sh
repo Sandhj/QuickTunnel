@@ -58,6 +58,7 @@ ${GITHUB}/tools/update-domain.sh
 ${GITHUB}/tools/set-local-time.sh
 ${GITHUB}/tools/set-reboot-time.sh
 ${GITHUB}/tools/status-service.sh
+${GITHUB}tools/clear-cache.sh
 
 # ==== BERI ISIN AKSES DAN KELUAR 
 chmod +x /root/update/*
