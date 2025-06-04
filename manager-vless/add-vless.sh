@@ -76,8 +76,9 @@ link3="${link_grpc}"
 
 cat > /etc/xray/history/vless-$user <<EOF
 ✅ Account VLess Berhasil Dibuat
-Username: $user
-Expired: $exp
+Username     : $user
+Expired      : $exp
+Limit IP     : $jumlah
 -----------------------------------------------
 UUID: $NEW_UUID
 Host: $HOST
@@ -97,8 +98,9 @@ echo ""
 echo ""
 # Tampilkan hasil
 echo "✅ Account VLess Berhasil Dibuat"
-echo "Username: $user"
-echo "Expired: $exp"
+echo "Username     : $user"
+echo "Expired      : $exp"
+echo "Limit IP     : $jumlah"
 echo "-----------------------------------------------"
 echo "UUID: $NEW_UUID"
 echo "Host: $HOST"
