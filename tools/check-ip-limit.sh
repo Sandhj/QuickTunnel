@@ -38,7 +38,7 @@ send_telegram_alert() {
         -d parse_mode="HTML" > /dev/null
 }
 
-# Fungsi cek IP aktif
+# Fungsi cek IP aktif (hanya ambil IP setelah "from")
 check_active_ips() {
     local user=$1
     local limit=$2
@@ -47,7 +47,7 @@ check_active_ips() {
     local now=$(date +%s)
     local start_time=$(date -d "-${TIME_WINDOW_MINUTES} minutes" +%s)
     
-    # Dapatkan IP unik yang aktif dalam SESSION_DURATION_MINUTES terakhir
+    # Dapatkan IP unik yang aktif (hanya IP setelah "from")
     local active_ips=$(grep "$user" "$LOG_FILE" | awk -v start="$start_time" -v dur="$SESSION_DURATION_MINUTES" '
     {
         # Parse tanggal dari log
@@ -58,9 +58,14 @@ check_active_ips() {
         
         # Cek jika dalam rentang waktu
         if (ts >= start) {
-            ip = $4;
-            split(ip, a, ":");
-            print a[1], ts;
+            # Ambil IP setelah "from"
+            for (i=1; i<=NF; i++) {
+                if ($i == "from") {
+                    split($(i+1), a, ":");
+                    print a[1], ts;
+                    break;
+                }
+            }
         }
     }' | sort | awk -v now=$(date +%s) -v dur="$SESSION_DURATION_MINUTES" '
     {
@@ -71,11 +76,11 @@ check_active_ips() {
         }
     }' | sort | uniq)
     
-    local ip_count=$(echo "$active_ips" | wc -l)
+    local ip_count=$(echo "$active_ips" | grep -v '^$' | wc -l)
     
     # Jika melebihi batas
     if [ "$ip_count" -gt "$limit" ]; then
-        local formatted_ips=$(echo "$active_ips" | tr '\n' ' ')
+        local formatted_ips=$(echo "$active_ips" | tr '\n' ' ' | sed 's/ $//')
         local message=$(format_telegram_message "$user" "$limit" "$ip_count" "$formatted_ips")
         send_telegram_alert "$message"
         echo "[$(date '+%Y-%m-%d %H:%M:%S')] $user melebihi batas: $ip_count/$limit IP - $formatted_ips"
