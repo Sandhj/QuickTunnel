@@ -169,7 +169,7 @@ END
 chmod 644 /root/.profile
 
 # ===== Pasang Cronjob limitIP
-CRON_JOB="* * * * * /usr/bin/check-ip-limit.sh"
+CRON_JOB="*/5 * * * * /usr/bin/check-ip-limit.sh"
 (crontab -l 2>/dev/null; echo "$CRON_JOB") | crontab -
 
 # ===== Pasang Cronjob clear cache
