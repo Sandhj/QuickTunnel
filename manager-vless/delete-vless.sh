@@ -63,6 +63,10 @@ fi
 # Backup file asli sebelum edit
 cp /etc/xray/config.json /etc/xray/config.json.bak
 
+# Hapus List limit
+FILE="/etc/xray/limitip/clients_limit.conf"
+grep -v "$user_to_delete" "$FILE" > "${FILE}.tmp" && mv "${FILE}.tmp" "$FILE"
+
 # Hapus baris "#? username" dan satu baris setelahnya
 sed -i "/#? $user_to_delete /{N;d;}" /etc/xray/config.json
 
