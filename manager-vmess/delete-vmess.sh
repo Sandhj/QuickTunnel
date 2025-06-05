@@ -63,7 +63,7 @@ fi
 cp /etc/xray/config.json /etc/xray/config.json.bak
 
 # Hapus List limit
-FILE="/etc/xray/limitip/clients-limit.conf"
+FILE="/etc/xray/limitip/clients_limit.conf"
 grep -v "$user_to_delete" "$FILE" > "${FILE}.tmp" && mv "${FILE}.tmp" "$FILE"
 
 
