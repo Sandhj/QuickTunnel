@@ -176,8 +176,11 @@ CRON_JOB="*/5 * * * * /usr/bin/check-ip-limit.sh"
 CRON_JOB="0 3 * * * /usr/bin/clear-cache.sh"
 (crontab -l 2>/dev/null; echo "$CRON_JOB") | crontab -
 
+# ==== Pasang auto Delete Expired
+(crontab -l 2>/dev/null; echo "0 23 * * * /usr/bin/expired.sh") | crontab -
+
 # ==== Pasang auto Reboot
-(crontab -l 2>/dev/null; echo "0 23 * * * reboot # auto_reboot") | crontab -
+(crontab -l 2>/dev/null; echo "0 5 * * * reboot # auto_reboot") | crontab -
     
 
 
