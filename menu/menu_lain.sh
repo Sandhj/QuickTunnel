@@ -13,7 +13,8 @@ echo -e "      3. Set Reboot Time        "
 echo -e "      4. Change Domain          "
 echo -e "      5. Update Domain          "
 echo -e "      6. Banner SSH             "
-echo -e "      7. Reboot Server          "
+echo -e "      7. Install UDP Custom          "
+echo -e "      8. Reboot "
 echo -e "${BLUE}   └──────────────────────────────────────┘${NC}"
 echo -e ""
 read -p "Select Menu (0 To Back Menu) : " pilihan
@@ -38,6 +39,9 @@ case $pilihan in
         nano /etc/issue.net
         ;;
     7)
+        install-udp
+        ;;
+    8)
         reboot
         ;;
     0)
