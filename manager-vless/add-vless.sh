@@ -36,7 +36,7 @@ NEW_ENTRY='{"id": "'"$NEW_UUID"'", "email": "'"$user"'"},'
 COMMENT_LINE="#? $user $exp"
 ESCAPED_ENTRY=$(echo "$COMMENT_LINE\n$NEW_ENTRY" | sed 's/[&/\]/\\&/g')
 
-# Sisipkan setelah baris yang mengandung "// VMESS" atau "// VMESS-GRPC"
+# Sisipkan setelah baris yang mengandung "// VLESS" atau "// VLESS-GRPC"
 sed -i "/\/\/ VLESS$/a $COMMENT_LINE\n$NEW_ENTRY" "$CONFIG_FILE"
 sed -i "/\/\/ VLESS-GRPC$/a $COMMENT_LINE\n$NEW_ENTRY" "$CONFIG_FILE"
 
