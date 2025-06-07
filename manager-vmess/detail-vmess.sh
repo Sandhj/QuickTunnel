@@ -54,6 +54,7 @@ else
     echo "Pilihan tidak valid!"
 fi
 
+echo ""
 echo "Tekan Enter Untuk Menuju Menu Utama(↩️)"
 read -s
 menu
