@@ -39,7 +39,7 @@ case $pilihan in
         nano /etc/issue.net
         ;;
     7)
-        install-udp
+        install-udp.sh
         ;;
     8)
         reboot
