@@ -131,7 +131,7 @@ apt upgrade -y
 ${CREDITS}
 # ==== Install SSH & Xray
 wget -q ${GITHUB}install/install-ssh.sh && bash install-ssh.sh
-wget -q ${GITHUB}install/install-xray.sh && bash install-xray.sh
+wget -q ${GITHUB}install/install-xray2.sh && bash install-xray2.sh
 ${CREDITS}
 # ==== Install Menu
 wget -q ${GITHUB}install/install-menu.sh && bash install-menu.sh
