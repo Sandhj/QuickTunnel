@@ -181,7 +181,9 @@ CRON_JOB="0 3 * * * /usr/bin/clear-cache.sh"
 
 # ==== Pasang auto Reboot
 (crontab -l 2>/dev/null; echo "0 5 * * * reboot # auto_reboot") | crontab -
-    
+
+# ==== Pasang Cek System
+(crontab -l 2>/dev/null; echo "0 23 * * * /usr/bin/expired.sh") | crontab -    
 
 
 echo ""
