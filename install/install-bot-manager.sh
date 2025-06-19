@@ -45,6 +45,29 @@ sed -i "s/TOKEN = 'token_tele'/TOKEN = '$NEW_TOKEN'/" /opt/botmanager/menu.py
 sed -i "s/AUTHORIZED_CHAT_ID = chat_id/AUTHORIZED_CHAT_ID = $NEW_CHAT_ID/" /opt/botmanager/menu.py
 sed -i "s/\['NAMA_SERVER'\]/\['$NEW_COMMAND'\]/" /opt/botmanager/menu.py
 
+
+# Buat file service systemd
+cat <<EOF > /etc/systemd/system/bot.service
+[Unit]
+Description=San Bot Manager
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/bash /opt/botmanager/run.sh
+WorkingDirectory=/opt/botmanager
+StandardOutput=inherit
+StandardError=inherit
+Restart=always
+User=root
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+# Reload systemd dan mulai service
+systemctl daemon-reload
+systemctl enable bot
+systemctl start bot
 echo "Tekan Enter Untuk Menuju Menu Utama(↩️)"
 read -s
 menu
