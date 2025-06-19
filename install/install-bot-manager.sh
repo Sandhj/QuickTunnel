@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# Minta input dari pengguna
+read -p "Masukkan Token : " NEW_TOKEN
+read -p "Masukkan ChatID : " NEW_CHAT_ID 
+read -p "Masukkan Perintah Menu ( Contoh : menu ): "NEW_COMMAND
+
 # Variabel
 URL="https://raw.githubusercontent.com/Sandhj/QuickTunnel/main/bot/san.zip"
 TARGET_DIR="/opt/botmanager"
@@ -36,20 +41,9 @@ done
 # Hapus file dan direktori sementara
 rm -rf "$TMP_DIR" "$ZIP_FILE"
 
-# Minta input dari pengguna
-read -p "Masukkan token : " new_token
-read -p "Masukkan chatID : " new_chatid
-read -p "Perintah Identitas (contoh : server1) : " NEW_NAME
-
-# Ganti nilai di file Python dengan perlindungan karakter khusus
-sed -i 's/^bot_token\s*=\s*".*"/bot_token = "'"$new_token"'"/' /opt/autobackup/auto.py
-sed -i 's/^chat_id\s*=\s*".*"/chat_id = "'"$new_chatid"'"/' /opt/autobackup/auto.py
-sed -i "s/NAME_SERVER/${NEW_NAME}/" /opt/autobackup/auto.py
-
-echo $new_token >> /etc/xray/token
-echo $new_chatid >> /etc/xray/chatid
-
-systemctl restart auto
+sed -i "s/TOKEN = 'token_tele'/TOKEN = '$NEW_TOKEN'/" /opt/botmanager/menu.py
+sed -i "s/AUTHORIZED_CHAT_ID = chat_id/AUTHORIZED_CHAT_ID = $NEW_CHAT_ID/" /opt/botmanager/menu.py
+sed -i "s/\['NAMA_SERVER'\]/\['$NEW_COMMAND'\]/" /opt/botmanager/menu.py
 
 echo " ✅ Autobackup Berhasil di Pasang. . .!"
 
