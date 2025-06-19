@@ -49,7 +49,8 @@ sed -i "s/\['NAMA_SERVER'\]/\['$NEW_COMMAND'\]/" /opt/botmanager/menu.py
 # Install Modul
 cd /opt
 source bot/bin/activate
-
+pip install pyTelegramBotAPI
+deactivate
 
 
 
