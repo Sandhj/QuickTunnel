@@ -18,7 +18,7 @@ case $pilihan in
         wget -q https://raw.githubusercontent.com/Sandhj/QuickTunnel/main/install/install-autobackup.sh && bash install-autobackup.sh
         ;;
     2)
-        install-bot-manager.sh
+        wget -q https://raw.githubusercontent.com/Sandhj/QuickTunnel/main/install/install-bot-manager.sh && bash install-bot-manager.sh
         ;;
     0)
         menu
