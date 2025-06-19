@@ -45,8 +45,6 @@ sed -i "s/TOKEN = 'token_tele'/TOKEN = '$NEW_TOKEN'/" /opt/botmanager/menu.py
 sed -i "s/AUTHORIZED_CHAT_ID = chat_id/AUTHORIZED_CHAT_ID = $NEW_CHAT_ID/" /opt/botmanager/menu.py
 sed -i "s/\['NAMA_SERVER'\]/\['$NEW_COMMAND'\]/" /opt/botmanager/menu.py
 
-echo " ✅ Autobackup Berhasil di Pasang. . .!"
-
 echo "Tekan Enter Untuk Menuju Menu Utama(↩️)"
 read -s
 menu
