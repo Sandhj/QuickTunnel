@@ -3,7 +3,7 @@
 # Minta input dari pengguna
 read -p "Masukkan Token : " NEW_TOKEN
 read -p "Masukkan ChatID : " NEW_CHAT_ID 
-read -p "Masukkan Perintah Menu ( Contoh : menu ): "NEW_COMMAND
+read -p "Masukkan Perintah Menu ( Contoh = menu ): " NEW_COMMAND
 
 # Variabel
 URL="https://raw.githubusercontent.com/Sandhj/QuickTunnel/main/bot/san.zip"
