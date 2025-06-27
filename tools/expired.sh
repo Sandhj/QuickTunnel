@@ -1,27 +1,10 @@
 #!/bin/bash
 
-#!/bin/bash
-
-# Script untuk manajemen config Xray otomatis:
-# 1. Hapus limit IP untuk user aktif
-# 2. Hapus user expired dari config.json
-# 3. Hapus history user expired
-
 CONFIG_FILE="/etc/xray/config.json"
 LIMIT_FILE="/etc/xray/limitip/clients_limit.conf"
 HISTORY_DIR="/etc/xray/history"
 TODAY=$(date +%Y-%m-%d)
 TEMP_FILE=$(mktemp)
-
-# Fungsi untuk membuat backup file
-backup_file() {
-    local file=$1
-    local backup="${file}.bak_$(date +%Y%m%d%H%M%S)"
-    if [ -f "$file" ]; then
-        cp "$file" "$backup"
-        echo "Backup created: $backup"
-    fi
-}
 
 # Periksa file config.json
 if [ ! -f "$CONFIG_FILE" ]; then
@@ -39,10 +22,6 @@ fi
 if [ ! -d "$HISTORY_DIR" ]; then
     echo "Warning: History directory $HISTORY_DIR not found!"
 fi
-
-# Buat backup file
-backup_file "$CONFIG_FILE"
-backup_file "$LIMIT_FILE"
 
 # Proses komentar untuk mencari user expired
 echo "Checking for expired users..."
