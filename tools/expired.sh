@@ -97,6 +97,156 @@ echo "- Deleted ${#expired_users[@]} expired users from config"
 echo "- Cleaned up history files for expired users"
 systemctl restart xray
 
+# ==== Delete VLESS
+# Proses komentar untuk mencari user expired
+echo "Checking for expired users..."
+
+# Gunakan temporary file untuk menyimpan username expired
+> "$TEMP_FILE"
+
+# Proses tanpa pipe untuk menjaga variabel
+while read -r line; do
+    if [[ "$line" == *"#?"* ]]; then
+        username=$(echo "$line" | awk '{print $2}')
+        exp_date=$(echo "$line" | awk '{print $3}')
+        
+        # Bandingkan tanggal dengan hari ini
+        if [[ "$exp_date" < "$TODAY" ]]; then
+            echo "EXPIRED: $username (expired on: $exp_date)"
+            echo "$username" >> "$TEMP_FILE"
+            
+            # Hapus dari limit file
+            sed -i "/^${username}=/d" "$LIMIT_FILE"
+        else
+            echo "ACTIVE : $username (expires on: $exp_date)"
+            # Hapus limit IP untuk user aktif
+            sed -i "/^${username}=/d" "$LIMIT_FILE"
+        fi
+    fi
+done < "$CONFIG_FILE"
+
+# Baca username expired dari temporary file
+expired_users=()
+if [ -s "$TEMP_FILE" ]; then
+    mapfile -t expired_users < "$TEMP_FILE"
+fi
+rm "$TEMP_FILE"
+
+# Fungsi untuk menghapus user dari config.json
+delete_from_config() {
+    local user=$1
+    # Cari baris komentar user dan hapus baris tersebut + 1 baris berikutnya
+    sed -i "/^[[:space:]]*#?[[:space:]]*.*$user[[:space:]]/,+1d" "$CONFIG_FILE"
+}
+
+# Fungsi untuk menghapus history user
+delete_history() {
+    local user=$1
+    local history_file="${HISTORY_DIR}/vless-${user}"
+    
+    if [ -f "$history_file" ]; then
+        echo "Deleting history file: $history_file"
+        rm -f "$history_file"
+    fi
+}
+
+# Hapus user expired dari config.json dan history
+if [ ${#expired_users[@]} -gt 0 ]; then
+    echo -e "\nRemoving expired users..."
+    # Hapus duplikat username
+    unique_users=($(printf "%s\n" "${expired_users[@]}" | sort -u))
+    
+    for user in "${unique_users[@]}"; do
+        echo "Processing expired user: $user"
+        delete_from_config "$user"
+        delete_history "$user"
+    done
+else
+    echo -e "\nNo expired users found."
+fi
+
+# Hitung total perubahan
+echo -e "\nOperation completed:"
+echo "- Removed IP limits for all users"
+echo "- Deleted ${#expired_users[@]} expired users from config"
+echo "- Cleaned up history files for expired users"
+systemctl restart xray
+
+# ==== Delete TROJAN 
+# Proses komentar untuk mencari user expired
+echo "Checking for expired users..."
+
+# Gunakan temporary file untuk menyimpan username expired
+> "$TEMP_FILE"
+
+# Proses tanpa pipe untuk menjaga variabel
+while read -r line; do
+    if [[ "$line" == *"#!"* ]]; then
+        username=$(echo "$line" | awk '{print $2}')
+        exp_date=$(echo "$line" | awk '{print $3}')
+        
+        # Bandingkan tanggal dengan hari ini
+        if [[ "$exp_date" < "$TODAY" ]]; then
+            echo "EXPIRED: $username (expired on: $exp_date)"
+            echo "$username" >> "$TEMP_FILE"
+            
+            # Hapus dari limit file
+            sed -i "/^${username}=/d" "$LIMIT_FILE"
+        else
+            echo "ACTIVE : $username (expires on: $exp_date)"
+            # Hapus limit IP untuk user aktif
+            sed -i "/^${username}=/d" "$LIMIT_FILE"
+        fi
+    fi
+done < "$CONFIG_FILE"
+
+# Baca username expired dari temporary file
+expired_users=()
+if [ -s "$TEMP_FILE" ]; then
+    mapfile -t expired_users < "$TEMP_FILE"
+fi
+rm "$TEMP_FILE"
+
+# Fungsi untuk menghapus user dari config.json
+delete_from_config() {
+    local user=$1
+    # Cari baris komentar user dan hapus baris tersebut + 1 baris berikutnya
+    sed -i "/^[[:space:]]*#![[:space:]]*.*$user[[:space:]]/,+1d" "$CONFIG_FILE"
+}
+
+# Fungsi untuk menghapus history user
+delete_history() {
+    local user=$1
+    local history_file="${HISTORY_DIR}/trojan-${user}"
+    
+    if [ -f "$history_file" ]; then
+        echo "Deleting history file: $history_file"
+        rm -f "$history_file"
+    fi
+}
+
+# Hapus user expired dari config.json dan history
+if [ ${#expired_users[@]} -gt 0 ]; then
+    echo -e "\nRemoving expired users..."
+    # Hapus duplikat username
+    unique_users=($(printf "%s\n" "${expired_users[@]}" | sort -u))
+    
+    for user in "${unique_users[@]}"; do
+        echo "Processing expired user: $user"
+        delete_from_config "$user"
+        delete_history "$user"
+    done
+else
+    echo -e "\nNo expired users found."
+fi
+
+# Hitung total perubahan
+echo -e "\nOperation completed:"
+echo "- Removed IP limits for all users"
+echo "- Deleted ${#expired_users[@]} expired users from config"
+echo "- Cleaned up history files for expired users"
+systemctl restart xray
+
 # ==== Expired SSH
 hapus_user_kadaluarsa() {
     echo "Memeriksa dan menghapus akun yang sudah kadaluarsa..."
